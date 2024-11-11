@@ -22,11 +22,10 @@ height = 1000
 [node name="Main" type="Node2D"]
 script = ExtResource("1_tiu0a")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
 script = ExtResource("2_4ys4d")
 
-[node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
+[node name="Background" type="Sprite2D" parent="Camera"]
 material = SubResource("ShaderMaterial_l484h")
-position = Vector2(-2, -2)
 texture = SubResource("GradientTexture2D_wmryg")
 script = ExtResource("4_73gsi")
