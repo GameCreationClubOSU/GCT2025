@@ -7,7 +7,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var width = get_viewport_rect().size.x
 	var height = get_viewport_rect().size.y
 	# Changing the height and width will regenerate the texture

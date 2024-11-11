@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 		velocity -= velocity.normalized() * velocity.length() * damping * delta
 		
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.is_pressed():

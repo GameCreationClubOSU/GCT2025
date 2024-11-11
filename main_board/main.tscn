@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bn87h0cnlci4m"]
+[gd_scene load_steps=9 format=3 uid="uid://bn87h0cnlci4m"]
 
 [ext_resource type="Shader" path="res://main_board/background/grid.gdshader" id="1_35pje"]
 [ext_resource type="Script" path="res://main_board/coordinator.gd" id="1_tiu0a"]
 [ext_resource type="Script" path="res://main_board/main_camera.gd" id="2_4ys4d"]
 [ext_resource type="Script" path="res://main_board/background/background_sprite.gd" id="4_73gsi"]
+[ext_resource type="Script" path="res://main_board/main_camera_debug.gd" id="5_i2y3i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l484h"]
 shader = ExtResource("1_35pje")
@@ -29,3 +30,7 @@ script = ExtResource("2_4ys4d")
 material = SubResource("ShaderMaterial_l484h")
 texture = SubResource("GradientTexture2D_wmryg")
 script = ExtResource("4_73gsi")
+
+[node name="CameraDebug" type="Node" parent="Camera"]
+script = ExtResource("5_i2y3i")
+menu_name = "Main Camera"
