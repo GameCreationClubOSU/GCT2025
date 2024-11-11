@@ -1,0 +1,32 @@
+[gd_scene load_steps=8 format=3 uid="uid://bn87h0cnlci4m"]
+
+[ext_resource type="Shader" path="res://main_board/background/grid.gdshader" id="1_35pje"]
+[ext_resource type="Script" path="res://main_board/coordinator.gd" id="1_tiu0a"]
+[ext_resource type="Script" path="res://main_board/main_camera.gd" id="2_4ys4d"]
+[ext_resource type="Script" path="res://main_board/background/background_sprite.gd" id="4_73gsi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l484h"]
+shader = ExtResource("1_35pje")
+shader_parameter/line_color = Color(0.448, 0.635733, 0.8, 1)
+shader_parameter/line_width = 0.008
+shader_parameter/grid_size = 100.0
+
+[sub_resource type="Gradient" id="Gradient_xfx7r"]
+colors = PackedColorArray(0, 0.301961, 0.560784, 1, 0, 0.301961, 0.560784, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wmryg"]
+gradient = SubResource("Gradient_xfx7r")
+width = 1000
+height = 1000
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_tiu0a")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_4ys4d")
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
+material = SubResource("ShaderMaterial_l484h")
+position = Vector2(-2, -2)
+texture = SubResource("GradientTexture2D_wmryg")
+script = ExtResource("4_73gsi")
