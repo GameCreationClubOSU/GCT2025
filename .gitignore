@@ -6,3 +6,8 @@
 .import/
 export.cfg
 export_presets.cfg
+
+# IDE ignores
+.idea/
+.vscode/
+.vs/
