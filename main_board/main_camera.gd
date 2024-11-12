@@ -1,16 +1,22 @@
+class_name MainCamera
 extends Camera2D
 ## Handles the camera on the main board. This includes the dragging.
 
 # Will need some way later to tell exactly how big the window is
 # and be able to focus accordingly.
 # If focus, then mouse movements disabled.
-var focus: Node2D 
+var focus: Node2D
 
 ## Damping on the velocity of the camera. 
 ## Higher values means camera will slow down faster.
 @export_range(0, 100) var damping: float = 10
+
 ## How fast the camera zooms in and out
-@export_range(0, 10) var zoom_speed: float = 1
+@export_category("Zoom")
+@export_range(0, 10) var zoom_speed: float = 5
+@export_range(0, 1) var min_zoom: float = 0.5
+@export_range(1, 10) var max_zoom: float = 2
+
 var velocity: Vector2 = Vector2.ZERO
 var dragging: bool = false
 ## Camera will try to keep global mouse position at this position.
@@ -18,7 +24,7 @@ var dragging: bool = false
 ## to board. Set when user starts dragging.
 var drag_start: Vector2 = Vector2.ZERO
 ## The value the zoom will approach over time.
-var zoom_target: Vector2 = Vector2.ONE
+var zoom_target: float = 1
 
 
 # Called when the node enters the scene tree for the first time.
@@ -42,7 +48,7 @@ func _process(delta: float) -> void:
 		velocity -= velocity.normalized() * velocity.length() * damping * delta
 		
 	# Zoom handling
-	zoom = zoom.move_toward(zoom_target, zoom.length() * zoom_speed * delta)
+	zoom = zoom.move_toward(Vector2(zoom_target, zoom_target), zoom.length() * zoom_speed * delta)
 		
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -55,6 +61,8 @@ func _unhandled_input(event: InputEvent) -> void:
 				dragging = false
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			zoom_target *= 1.1
+			zoom_target = clamp(zoom_target, min_zoom, max_zoom)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			zoom_target /= 1.1
+			zoom_target = clamp(zoom_target, min_zoom, max_zoom)
 			
