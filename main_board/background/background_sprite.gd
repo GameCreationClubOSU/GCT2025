@@ -8,11 +8,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	var width = get_viewport_rect().size.x
-	var height = get_viewport_rect().size.y
-	# Changing the height and width will regenerate the texture
-	# so only do it if necessary.
-	if width != texture.width:
-		texture.width = width
-	if height != texture.height: 
-		texture.height = height
+	var camera: Camera2D = get_parent() as Camera2D
+	
+	scale = get_viewport_rect().size / camera.zoom
+	

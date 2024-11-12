@@ -2,8 +2,10 @@ shader_type canvas_item;
 render_mode world_vertex_coords;
 
 uniform vec4 line_color : source_color;
-uniform float line_width : hint_range(0, 1) = 0.1;
-uniform float grid_size = 16.0;
+uniform float line0_width : hint_range(0, 0.5) = 0.1;
+uniform float line1_width : hint_range(0, 0.5) = 0.1;
+uniform float grid0_size = 16.0;
+uniform float grid1_size = 64.0;
 
 // VERTEX global in fragment refers to screen position
 // Even with render_mode world_vertex_coords.
@@ -15,11 +17,24 @@ void vertex() {
 	world_position = VERTEX;
 }
 
+float grid(float width, vec2 uv) {
+	vec2 uvDeriv = fwidth(uv);
+
+    vec2 drawWidth = clamp(vec2(width), uvDeriv, vec2(0.5));
+    vec2 gridUV = abs(fract(uv) * 2.0 - 1.0);
+	gridUV = vec2(1) - gridUV;
+
+    vec2 grid2 = smoothstep(drawWidth + uvDeriv, drawWidth - uvDeriv, gridUV);
+	//COLOR = vec4((drawWidth + lineAA).x * 5.0, 0.0, 0.0, 1.0);
+    grid2 *= clamp(width / drawWidth, 0.0, 1.0);
+    grid2 = mix(grid2, vec2(width), clamp(uvDeriv * 2.0 - 1.0, 0.0, 1.0));
+	
+	return mix(grid2.x, 1.0, grid2.y);
+}
+
 void fragment() {
-	// https://bgolus.medium.com/the-best-darn-grid-shader-yet-727f9278b9d8
-	vec2 lineAA = fwidth(world_position / grid_size);
-	vec2 gridUV = 1.0 - abs(fract(world_position / grid_size) * 2.0 - 1.0);
-	vec2 grid2 = smoothstep(line_width - lineAA, line_width + lineAA, gridUV);
-	float grid = 1.0 - grid2.x * grid2.y;
-	COLOR = mix(COLOR, line_color, grid);
+	vec2 uv0 = world_position / grid0_size;
+	vec2 uv1 = world_position / grid1_size;
+	
+	COLOR = mix(COLOR, line_color, max(grid(line0_width, uv0), grid(line1_width, uv1)));
 }

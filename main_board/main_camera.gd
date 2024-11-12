@@ -45,5 +45,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			if event.is_pressed():
 				dragging = true
 				drag_start = get_global_mouse_position()
-			if event.is_released():
+			elif event.is_released():
 				dragging = false
+		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			zoom *= 1.1
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			zoom /= 1.1
+			
