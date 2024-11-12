@@ -27,6 +27,7 @@ script = ExtResource("1_tiu0a")
 
 [node name="Camera" type="Camera2D" parent="."]
 script = ExtResource("2_4ys4d")
+zoom_speed = 2.496
 
 [node name="Background" type="Sprite2D" parent="Camera"]
 material = SubResource("ShaderMaterial_l484h")
