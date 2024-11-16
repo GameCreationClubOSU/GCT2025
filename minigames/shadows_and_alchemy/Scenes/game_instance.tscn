@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs3y73mpw4ul5"]
+
+[ext_resource type="Script" path="res://minigames/shadows_and_alchemy/Scripts/GameInstance.gd" id="1_m0dxs"]
+
+[node name="GameInstance" type="Node2D"]
+script = ExtResource("1_m0dxs")

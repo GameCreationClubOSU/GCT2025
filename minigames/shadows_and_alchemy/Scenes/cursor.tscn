@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct4842dqx4h5y"]
+
+[ext_resource type="Texture2D" uid="uid://iei68autkt8a" path="res://minigames/shadows_and_alchemy/Assets/Sprite Sheets/Cursor01.png" id="1_qt02e"]
+[ext_resource type="Script" path="res://minigames/shadows_and_alchemy/Scripts/Cursor.gd" id="2_efbfi"]
+
+[node name="Cursor" type="Sprite2D"]
+light_mask = 0
+z_index = 10
+texture_filter = 1
+texture = ExtResource("1_qt02e")
+script = ExtResource("2_efbfi")

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg4brwf71k5fr"]
+
+[ext_resource type="Texture2D" uid="uid://1hl43bwvp5d2" path="res://minigames/shadows_and_alchemy/Assets/Models/LightGradient.jpg" id="1_feyte"]
+[ext_resource type="Script" path="res://minigames/shadows_and_alchemy/Scripts/PointLight.gd" id="2_01a20"]
+[ext_resource type="Texture2D" uid="uid://j2ff0ygfwv7t" path="res://minigames/shadows_and_alchemy/Assets/Sprite Sheets/torch.png" id="3_l75my"]
+[ext_resource type="Texture2D" uid="uid://dn7ks4evty1ar" path="res://minigames/shadows_and_alchemy/Assets/Sprite Sheets/lightCircle.png" id="4_wy65f"]
+
+[node name="PointLight" type="PointLight2D"]
+shadow_enabled = true
+texture = ExtResource("1_feyte")
+texture_scale = 10.0
+script = ExtResource("2_01a20")
+number_of_casts = 180
+metadata/_edit_group_ = true
+
+[node name="TorchSprite" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("3_l75my")
+
+[node name="LightCircle" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4.69, 4.69)
+texture = ExtResource("4_wy65f")

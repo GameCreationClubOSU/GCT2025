@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://bapfbdmt8f57i"]
+
+[ext_resource type="PackedScene" uid="uid://dlpex6nvgv1vh" path="res://minigames/shadows_and_alchemy/Scenes/character_body_2d.tscn" id="1_1a7iy"]
+[ext_resource type="Script" path="res://minigames/shadows_and_alchemy/Scripts/World.gd" id="1_mnruk"]
+[ext_resource type="PackedScene" uid="uid://gr02qypdrbxr" path="res://minigames/shadows_and_alchemy/Scenes/block_counter.tscn" id="2_skaas"]
+[ext_resource type="TileSet" uid="uid://oa7i3cvh5j14" path="res://minigames/shadows_and_alchemy/Assets/Models/TileSet1.tres" id="3_0i1qn"]
+[ext_resource type="PackedScene" uid="uid://cd6223ni7feg3" path="res://minigames/shadows_and_alchemy/Scenes/gold_ingot.tscn" id="4_85c1p"]
+[ext_resource type="Script" path="res://minigames/shadows_and_alchemy/Scripts/TileMapHandler.gd" id="5_vi5tk"]
+[ext_resource type="PackedScene" uid="uid://bbqhxnj3jle17" path="res://minigames/shadows_and_alchemy/Scenes/door.tscn" id="6_tr584"]
+[ext_resource type="PackedScene" uid="uid://c20eq3kf71cxx" path="res://minigames/shadows_and_alchemy/Scenes/button.tscn" id="7_vdwbf"]
+[ext_resource type="PackedScene" uid="uid://bg4brwf71k5fr" path="res://minigames/shadows_and_alchemy/Scenes/point_light.tscn" id="8_6py40"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_mnruk")
+
+[node name="BlockCounter" parent="." instance=ExtResource("2_skaas")]
+max_blocks = 2
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("3_0i1qn")
+rendering_quadrant_size = 32
+format = 2
+layer_0/tile_data = PackedInt32Array(262141, 262146, 0, 327678, 65538, 0, 327676, 196610, 2, 262142, 65538, 2, 327679, 65538, 0, 327677, 65538, 0, 262143, 65538, 2, 262144, 262146, 2, 196608, 262146, 0, 262145, 262146, 2, 196609, 65538, 2, 262146, 262146, 2, 196610, 65538, 2, 262147, 327682, 2, 262140, 196610, 0, 196611, 327682, 0, 262148, 196608, 2, 262149, 262144, 2, 262150, 262144, 2, 196612, 196608, 0, 262151, 262144, 2, 196613, 262144, 0, 262152, 262144, 2, 196614, 262144, 0, 196616, 262144, 0, 196615, 262144, 0, 262153, 262144, 2, 262154, 262144, 2, 196618, 262144, 0, 196617, 262144, 0, 262155, 262144, 2, 262156, 262144, 2, 262157, 262144, 2, 196619, 262144, 0, 196621, 262144, 0, 196620, 262144, 0, 262158, 327680, 2, 196622, 327680, 0, 327672, 196610, 2, 262137, 327682, 0, 262136, 196610, 0, 327673, 327682, 2, 4, 196608, 2, -65532, 196608, 1, -65531, 327680, 1, 5, 327680, 2, -131067, 327680, 1, -196603, 327680, 1, -131068, 196608, 1, -196604, 196608, 1, -262140, 196608, 1, -262139, 327680, 1, -327675, 327680, 1, -327676, 196608, 1, -393212, 196608, 1, -393211, 458752, 1, -458747, 458752, 1, -524283, 458752, 1, -524284, 196608, 1, -458748, 196608, 1, -589820, 196608, 1, -589819, 0, 2, -131055, 262146, 0, -131056, 262146, 0, -65519, 262146, 2, -65521, 196610, 2, -65518, 262146, 2, -65520, 262146, 2, -131054, 262146, 0, -65517, 327682, 2, -131057, 196610, 0, -131053, 327682, 0, -65516, 196608, 2, -65515, 262144, 2, -65514, 262144, 2, -131052, 196608, 0, -65513, 262144, 2, -131051, 65536, 2, -65512, 262144, 2, -131050, 65536, 2, -65511, 262144, 2, -131049, 65536, 2, -65510, 262144, 2, -131048, 65536, 2, -65509, 262144, 2, -131047, 65536, 2, -65508, 262144, 2, -131046, 65536, 2, -65507, 262144, 2, -131045, 65536, 2, -65506, 327680, 2, -131044, 65536, 2, -131042, 327680, 0, -131043, 262144, 0, -524264, 196610, 1, -589800, 196610, 1, -655336, 196610, 1, -720872, 196610, 1, -786408, 196610, 1, -851944, 196610, 1, -393210, 262146, 2, -393209, 262146, 2, -393208, 262146, 2, -393207, 262146, 2, -458743, 327680, 1, -524279, 327680, 1, -589815, 327680, 0, -589817, 262144, 0, -589816, 262144, 0, -524282, 458752, 1, -524281, 458752, 1, -524280, 458752, 1, -589818, 262144, 0, -655355, 327680, 1, -720892, 196608, 1, -786428, 196608, 0, -786427, 327680, 0, -720891, 327680, 1, -655356, 196608, 1)
+script = ExtResource("5_vi5tk")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_1a7iy")]
+unique_name_in_owner = true
+
+[node name="GoldIngot" parent="." instance=ExtResource("4_85c1p")]
+position = Vector2(976, -96)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -192.0
+offset_top = -48.0
+offset_right = 111.0
+offset_bottom = 1.0
+text = "You can now have
+2 blocks in the world"
+
+[node name="Button" parent="." instance=ExtResource("7_vdwbf")]
+position = Vector2(-208, 80)
+
+[node name="Door" parent="Button" instance=ExtResource("6_tr584")]
+position = Vector2(352, -16)
+
+[node name="PointLight" parent="." instance=ExtResource("8_6py40")]
+position = Vector2(41, -4)
+
+[node name="PointLight2" parent="." instance=ExtResource("8_6py40")]
+position = Vector2(449, -55)
+
+[node name="Button2" parent="." instance=ExtResource("7_vdwbf")]
+position = Vector2(256, -208)
+
+[node name="Door" parent="Button2" instance=ExtResource("6_tr584")]
+position = Vector2(560, 16)
+
+[node name="PointLight3" parent="." instance=ExtResource("8_6py40")]
+position = Vector2(253, -418)
+
+[node name="PointLight5" parent="." instance=ExtResource("8_6py40")]
+position = Vector2(816, -240)

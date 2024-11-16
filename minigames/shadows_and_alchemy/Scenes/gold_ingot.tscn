@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cd6223ni7feg3"]
+
+[ext_resource type="Texture2D" uid="uid://berjnr5jfesti" path="res://Assets/Sprite Sheets/GoldIngot.png" id="1_yg05f"]
+
+[sub_resource type="GDScript" id="GDScript_1mdlv"]
+script/source = "extends Area2D
+
+
+func _on_body_entered(body):
+	if body is Player:
+		GameInstance.load_next_level()
+	pass # Replace with function body.
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2riop"]
+size = Vector2(32, 20)
+
+[node name="GoldIngot" type="Area2D"]
+script = SubResource("GDScript_1mdlv")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2riop")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_yg05f")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

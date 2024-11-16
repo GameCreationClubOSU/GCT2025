@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbqhxnj3jle17"]
+
+[ext_resource type="Script" path="res://minigames/shadows_and_alchemy/Scripts/Door.gd" id="1_jcbmp"]
+[ext_resource type="Texture2D" uid="uid://blng0fny0tai7" path="res://minigames/shadows_and_alchemy/Assets/Sprite Sheets/Door01.png" id="2_xturc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_crljf"]
+size = Vector2(31, 64)
+
+[node name="Door" type="StaticBody2D"]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_jcbmp")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_crljf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_xturc")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtdano8cskvl3"]
+
+[ext_resource type="Texture2D" uid="uid://clmi6sw8ly1wa" path="res://Assets/Sprite Sheets/clearBlock.png" id="1_52o10"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0mbr"]
+size = Vector2(64, 64)
+
+[node name="clear_block" type="RigidBody2D"]
+collision_layer = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 0
+texture_filter = 1
+texture = ExtResource("1_52o10")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_v0mbr")

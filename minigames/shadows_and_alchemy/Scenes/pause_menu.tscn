@@ -1,0 +1,76 @@
+[gd_scene load_steps=2 format=3 uid="uid://dldhq4qylklhl"]
+
+[ext_resource type="Script" path="res://minigames/shadows_and_alchemy/Scripts/pause_menu.gd" id="1_wdbna"]
+
+[node name="PauseMenu" type="Control"]
+light_mask = 0
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wdbna")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 499.0
+offset_top = 276.0
+offset_right = 643.0
+offset_bottom = 396.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Potion1" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Potion 1"
+
+[node name="Potion1Display" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AddLead1" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Add Lead"
+
+[node name="AddTin1" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Add Tin
+"
+
+[node name="Reset1" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Reset"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Potion2" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Potion 2"
+
+[node name="Potion2Display" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="AddLead2" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Add Lead"
+
+[node name="AddTin2" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Add Tin"
+
+[node name="Reset2" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Reset"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/AddLead1" to="." method="_on_add_lead_1_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/AddTin1" to="." method="_on_add_tin_1_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Reset1" to="." method="_on_reset_1_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/AddLead2" to="." method="_on_add_lead_2_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/AddTin2" to="." method="_on_add_tin_2_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/Reset2" to="." method="_on_reset_2_pressed"]

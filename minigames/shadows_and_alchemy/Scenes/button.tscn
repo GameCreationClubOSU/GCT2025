@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c20eq3kf71cxx"]
+
+[ext_resource type="Script" path="res://minigames/shadows_and_alchemy/Scripts/Button.gd" id="1_3fnk4"]
+[ext_resource type="Texture2D" uid="uid://djnpkis0j01tb" path="res://minigames/shadows_and_alchemy/Assets/Sprite Sheets/Button01.png" id="2_bnkxk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8olac"]
+size = Vector2(32, 16)
+
+[node name="Button" type="Area2D"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_3fnk4")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_bnkxk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_8olac")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
