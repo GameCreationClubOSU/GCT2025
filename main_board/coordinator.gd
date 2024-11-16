@@ -3,7 +3,7 @@ extends Node2D
 # The Coordinator is the top-level manager for the main board.
 # Also stores the game state.
 
-@export var camera: Camera2D
+@export var camera: MainCamera
 
 var focus: Minigame: 
 	set(value):
@@ -25,13 +25,8 @@ func find_minigames() -> Array[Minigame]:
 	
 	return found_minigames
 	
-## Gets the minigame object that is under the player's mouse. 
-## Returns null if there are none.
-func minigame_under_mouse() -> Minigame:
-	return null
-	
 func minigame_clicked(minigame: Minigame) -> void:
-	print("Hello")
+	focus = minigame
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

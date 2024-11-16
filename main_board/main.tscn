@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bn87h0cnlci4m"]
+[gd_scene load_steps=11 format=3 uid="uid://bn87h0cnlci4m"]
 
 [ext_resource type="Shader" path="res://main_board/background/grid.gdshader" id="1_35pje"]
 [ext_resource type="Script" path="res://main_board/coordinator.gd" id="1_tiu0a"]
 [ext_resource type="Script" path="res://main_board/main_camera.gd" id="2_4ys4d"]
 [ext_resource type="Script" path="res://main_board/background/background_sprite.gd" id="4_73gsi"]
 [ext_resource type="Script" path="res://main_board/main_camera_debug.gd" id="5_i2y3i"]
+[ext_resource type="Script" path="res://minigames/minigame.gd" id="6_c5ove"]
 [ext_resource type="PackedScene" uid="uid://bmdmdfqnoygj7" path="res://minigames/example/example_scene.tscn" id="6_cvyn5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l484h"]
@@ -23,8 +24,9 @@ colors = PackedColorArray(0, 0.301961, 0.560784, 1, 0, 0.301961, 0.560784, 1)
 gradient = SubResource("Gradient_oc1u4")
 width = 1
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("camera")]
 script = ExtResource("1_tiu0a")
+camera = NodePath("Camera")
 
 [node name="Camera" type="Camera2D" parent="."]
 script = ExtResource("2_4ys4d")
@@ -43,6 +45,7 @@ menu_name = "Main Camera"
 offset_right = 200.0
 offset_bottom = 40.0
 stretch = true
+script = ExtResource("6_c5ove")
 
 [node name="ExampleMinigame" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false

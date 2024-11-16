@@ -2,7 +2,7 @@ class_name MainCamera
 extends Camera2D
 ## Handles the camera on the main board. This includes the dragging.
 
-var focus: Camera2D:
+var focus: Minigame:
 	set(value):
 		focus = value
 		dragging = false
@@ -10,6 +10,7 @@ var focus: Camera2D:
 ## Damping on the velocity of the camera. 
 ## Higher values means camera will slow down faster.
 @export_range(0, 100) var damping: float = 10
+@export_range(0, 100) var focus_damping: float = 10
 
 ## How fast the camera zooms in and out
 @export_category("Zoom")
@@ -39,17 +40,17 @@ func handle_drag(delta: float) -> void:
 		# Displacement usually current - previous, but we're moving the camera
 		# backwards so that the mouse position doesn't change relative to world
 		velocity = (drag_start - mouse_current) / delta
-		position += (drag_start - mouse_current)
 	else:
-		position += velocity * delta
 		velocity -= velocity.normalized() * velocity.length() * damping * delta
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if focus:
-		velocity = (focus.global_position - global_position) / delta
+		velocity = (focus.global_position - global_position) / delta / focus_damping
 	else:
 		handle_drag(delta)
+
+	position += velocity * delta
 	
 	# Zoom handling
 	zoom = zoom.move_toward(Vector2(zoom_target, zoom_target), zoom.length() * zoom_speed * delta)
