@@ -6,8 +6,8 @@
 [ext_resource type="Script" path="res://main_board/background/background_sprite.gd" id="4_73gsi"]
 [ext_resource type="Script" path="res://main_board/main_camera_debug.gd" id="5_i2y3i"]
 [ext_resource type="Script" path="res://minigames/minigame.gd" id="6_c5ove"]
-[ext_resource type="PackedScene" uid="uid://bmdmdfqnoygj7" path="res://minigames/example/example_scene.tscn" id="6_cvyn5"]
 [ext_resource type="Texture2D" uid="uid://deb4jro1js2bc" path="res://minigames/frame/frame.png" id="6_yyjr3"]
+[ext_resource type="PackedScene" uid="uid://cevarsuekkm8a" path="res://minigames/shadows_and_alchemy/Scenes/Level.tscn" id="8_26bcy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l484h"]
 shader = ExtResource("1_35pje")
@@ -45,9 +45,9 @@ menu_name = "Main Camera"
 
 [node name="Frame" type="NinePatchRect" parent="."]
 offset_left = -4.0
-offset_top = -26.0
-offset_right = 125.0
-offset_bottom = 101.0
+offset_top = -25.0
+offset_right = 1156.0
+offset_bottom = 652.0
 texture = ExtResource("6_yyjr3")
 draw_center = false
 patch_margin_left = 10
@@ -55,19 +55,19 @@ patch_margin_top = 26
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Frame"]
+[node name="ShadowsAndAlchemy" type="SubViewportContainer" parent="Frame"]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 25.0
-offset_right = 126.0
-offset_bottom = 124.0
+offset_right = 1156.0
+offset_bottom = 674.0
 stretch = true
 script = ExtResource("6_c5ove")
 
-[node name="SubViewport" type="SubViewport" parent="Frame/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="Frame/ShadowsAndAlchemy"]
 disable_3d = true
 handle_input_locally = false
-size = Vector2i(123, 99)
+size = Vector2i(1153, 649)
 render_target_update_mode = 4
 
-[node name="ExampleScene" parent="Frame/SubViewportContainer/SubViewport" instance=ExtResource("6_cvyn5")]
+[node name="World" parent="Frame/ShadowsAndAlchemy/SubViewport" instance=ExtResource("8_26bcy")]
