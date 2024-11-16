@@ -2,10 +2,10 @@ class_name MainCamera
 extends Camera2D
 ## Handles the camera on the main board. This includes the dragging.
 
-# Will need some way later to tell exactly how big the window is
-# and be able to focus accordingly.
-# If focus, then mouse movements disabled.
-var focus: Node2D
+var focus: Camera2D:
+	set(value):
+		focus = value
+		dragging = false
 
 ## Damping on the velocity of the camera. 
 ## Higher values means camera will slow down faster.
@@ -31,10 +31,7 @@ var zoom_target: float = 1
 func _ready() -> void:
 	pass
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-		
+func handle_drag(delta: float) -> void:
 	if dragging:
 		var mouse_current: Vector2 = get_global_mouse_position()
 		
@@ -47,6 +44,13 @@ func _process(delta: float) -> void:
 		position += velocity * delta
 		velocity -= velocity.normalized() * velocity.length() * damping * delta
 		
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if focus:
+		velocity = (focus.global_position - global_position) / delta
+	else:
+		handle_drag(delta)
+	
 	# Zoom handling
 	zoom = zoom.move_toward(Vector2(zoom_target, zoom_target), zoom.length() * zoom_speed * delta)
 		

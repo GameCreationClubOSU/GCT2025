@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmdmdfqnoygj7"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3s5op"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pfvwv"]
+noise = SubResource("FastNoiseLite_3s5op")
+
+[node name="ExampleScene" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(263, 94)
+texture = SubResource("NoiseTexture2D_pfvwv")
+
+[node name="Camera2D" type="Camera2D" parent="."]

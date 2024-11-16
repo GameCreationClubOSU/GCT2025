@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bn87h0cnlci4m"]
+[gd_scene load_steps=10 format=3 uid="uid://bn87h0cnlci4m"]
 
 [ext_resource type="Shader" path="res://main_board/background/grid.gdshader" id="1_35pje"]
 [ext_resource type="Script" path="res://main_board/coordinator.gd" id="1_tiu0a"]
 [ext_resource type="Script" path="res://main_board/main_camera.gd" id="2_4ys4d"]
 [ext_resource type="Script" path="res://main_board/background/background_sprite.gd" id="4_73gsi"]
 [ext_resource type="Script" path="res://main_board/main_camera_debug.gd" id="5_i2y3i"]
+[ext_resource type="PackedScene" uid="uid://bmdmdfqnoygj7" path="res://minigames/example/example_scene.tscn" id="6_cvyn5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l484h"]
 shader = ExtResource("1_35pje")
@@ -37,3 +38,15 @@ script = ExtResource("4_73gsi")
 [node name="CameraDebug" type="Node" parent="Camera"]
 script = ExtResource("5_i2y3i")
 menu_name = "Main Camera"
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 200.0
+offset_bottom = 40.0
+stretch = true
+
+[node name="ExampleMinigame" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(200, 40)
+render_target_update_mode = 4
+
+[node name="ExampleScene" parent="SubViewportContainer/ExampleMinigame" instance=ExtResource("6_cvyn5")]
