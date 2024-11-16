@@ -8,13 +8,13 @@ extends Node2D
 var focus: Minigame: 
 	set(value):
 		if is_instance_valid(focus):		
-			focus.process_mode = PROCESS_MODE_DISABLED
+			focus.enabled = false
 			
 		focus = value
 		camera.focus = value
 		
 		if is_instance_valid(focus):
-			focus.process_mode = PROCESS_MODE_INHERIT
+			focus.enabled = true
 
 			
 
@@ -26,7 +26,10 @@ func find_minigames() -> Array[Minigame]:
 	var found_minigames: Array[Minigame]
 	for node in nodes:
 		if node is Minigame:
-			found_minigames.append(node as Minigame)
+			var minigame := node as Minigame
+			if minigame != focus:
+				minigame.enabled = false
+			found_minigames.append(minigame)
 		else:
 			push_warning("Node in minigames group is not a minigame object!")
 			node.remove_from_group("minigames")
