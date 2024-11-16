@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bn87h0cnlci4m"]
+[gd_scene load_steps=12 format=3 uid="uid://bn87h0cnlci4m"]
 
 [ext_resource type="Shader" path="res://main_board/background/grid.gdshader" id="1_35pje"]
 [ext_resource type="Script" path="res://main_board/coordinator.gd" id="1_tiu0a"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://main_board/main_camera_debug.gd" id="5_i2y3i"]
 [ext_resource type="Script" path="res://minigames/minigame.gd" id="6_c5ove"]
 [ext_resource type="PackedScene" uid="uid://bmdmdfqnoygj7" path="res://minigames/example/example_scene.tscn" id="6_cvyn5"]
+[ext_resource type="Texture2D" uid="uid://deb4jro1js2bc" path="res://minigames/frame/frame.png" id="6_yyjr3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l484h"]
 shader = ExtResource("1_35pje")
@@ -30,6 +31,7 @@ camera = NodePath("Camera")
 
 [node name="Camera" type="Camera2D" parent="."]
 script = ExtResource("2_4ys4d")
+focus_zoom_multiplier = 0.929
 
 [node name="Background" type="Sprite2D" parent="Camera"]
 material = SubResource("ShaderMaterial_l484h")
@@ -41,15 +43,29 @@ script = ExtResource("4_73gsi")
 script = ExtResource("5_i2y3i")
 menu_name = "Main Camera"
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-offset_right = 200.0
-offset_bottom = 40.0
+[node name="Frame" type="NinePatchRect" parent="."]
+offset_left = -4.0
+offset_top = -26.0
+offset_right = 125.0
+offset_bottom = 101.0
+texture = ExtResource("6_yyjr3")
+draw_center = false
+patch_margin_left = 10
+patch_margin_top = 26
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Frame"]
+offset_left = 3.0
+offset_top = 25.0
+offset_right = 126.0
+offset_bottom = 124.0
 stretch = true
 script = ExtResource("6_c5ove")
 
-[node name="ExampleMinigame" type="SubViewport" parent="SubViewportContainer"]
+[node name="ExampleMinigame" type="SubViewport" parent="Frame/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(200, 40)
+size = Vector2i(123, 99)
 render_target_update_mode = 4
 
-[node name="ExampleScene" parent="SubViewportContainer/ExampleMinigame" instance=ExtResource("6_cvyn5")]
+[node name="ExampleScene" parent="Frame/SubViewportContainer/ExampleMinigame" instance=ExtResource("6_cvyn5")]

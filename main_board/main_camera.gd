@@ -17,6 +17,7 @@ var focus: Minigame:
 @export_range(0, 10) var zoom_speed: float = 5
 @export_range(0, 1) var min_zoom: float = 0.5
 @export_range(1, 10) var max_zoom: float = 2
+@export_range(0.5, 2.0) var focus_zoom_multiplier: float = 1
 
 var velocity: Vector2 = Vector2.ZERO
 var dragging: bool = false
@@ -45,8 +46,13 @@ func handle_drag(delta: float) -> void:
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if focus:
-		velocity = (focus.global_position - global_position) / delta / focus_damping
+	if is_instance_valid(focus):
+		var focus_center: Vector2 = focus.global_position + focus.size / 2
+		velocity = (focus_center - global_position) / delta / focus_damping
+
+		# Handling zoom
+		var z: Vector2 = get_viewport_rect().size / focus.size
+		zoom_target = min(z.x, z.y) * focus_zoom_multiplier
 	else:
 		handle_drag(delta)
 
@@ -57,6 +63,12 @@ func _process(delta: float) -> void:
 		
 
 func _unhandled_input(event: InputEvent) -> void:
+	# Main board camera should _not_ move while focused on a minigame
+	# We don't want the camera to start wandering away while player is playing.
+	if is_instance_valid(focus):
+		return
+	
+	# TODO: Sink input
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.is_pressed():
