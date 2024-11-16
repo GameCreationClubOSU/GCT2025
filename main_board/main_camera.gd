@@ -5,6 +5,10 @@ extends Camera2D
 var focus: Minigame:
 	set(value):
 		focus = value
+		if not value:
+			# Visual indicator that we've unfocused.
+			zoom_target *= 0.6
+		
 		dragging = false
 
 ## Damping on the velocity of the camera. 
