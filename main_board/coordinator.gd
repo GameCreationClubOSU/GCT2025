@@ -44,7 +44,9 @@ func _process(_delta: float) -> void:
 	
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
+	if event.is_action_pressed("exit_minigame"):
+		focus = null	
+	elif event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.is_pressed():
 				pass
