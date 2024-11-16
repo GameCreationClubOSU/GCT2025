@@ -68,7 +68,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if is_instance_valid(focus):
 		return
 	
-	# TODO: Sink input
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.is_pressed():
@@ -76,10 +75,14 @@ func _unhandled_input(event: InputEvent) -> void:
 				drag_start = get_global_mouse_position()
 			elif event.is_released():
 				dragging = false
+			
+			get_viewport().set_input_as_handled()
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			zoom_target *= 1.1
 			zoom_target = clamp(zoom_target, min_zoom, max_zoom)
+			get_viewport().set_input_as_handled()
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			zoom_target /= 1.1
 			zoom_target = clamp(zoom_target, min_zoom, max_zoom)
+			get_viewport().set_input_as_handled()
 			

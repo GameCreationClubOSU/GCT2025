@@ -7,8 +7,16 @@ extends Node2D
 
 var focus: Minigame: 
 	set(value):
+		if is_instance_valid(focus):		
+			focus.process_mode = PROCESS_MODE_DISABLED
+			
 		focus = value
 		camera.focus = value
+		
+		if is_instance_valid(focus):
+			focus.process_mode = PROCESS_MODE_INHERIT
+
+			
 
 var minigames: Array[Minigame]
 
