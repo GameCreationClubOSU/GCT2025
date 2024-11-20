@@ -16,6 +16,8 @@ var focus: Minigame:
 @export_range(0, 100) var damping: float = 10
 @export_range(0, 100) var focus_damping: float = 10
 
+@export_range(0, 1000) var move_speed: float = 500
+
 ## How fast the camera zooms in and out
 @export_category("Zoom")
 @export_range(0, 10) var zoom_speed: float = 5
@@ -38,15 +40,12 @@ func _ready() -> void:
 	pass
 
 func handle_drag(delta: float) -> void:
-	if dragging:
-		var mouse_current: Vector2 = get_global_mouse_position()
-		
-		# Good old displacement / time
-		# Displacement usually current - previous, but we're moving the camera
-		# backwards so that the mouse position doesn't change relative to world
-		velocity = (drag_start - mouse_current) / delta
-	else:
-		velocity -= velocity.normalized() * velocity.length() * damping * delta
+	var mouse_current: Vector2 = get_global_mouse_position()
+	
+	# Good old displacement / time
+	# Displacement usually current - previous, but we're moving the camera
+	# backwards so that the mouse position doesn't change relative to world
+	velocity = (drag_start - mouse_current) / delta
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -58,7 +57,12 @@ func _process(delta: float) -> void:
 		var z: Vector2 = get_viewport_rect().size / focus.size
 		zoom_target = min(z.x, z.y) * focus_zoom_multiplier
 	else:
-		handle_drag(delta)
+		if dragging:
+			handle_drag(delta)
+		elif InputUtil.movement_vector().length_squared() > 0.01:
+			velocity = InputUtil.movement_vector() * move_speed / zoom_target
+		else:
+			velocity -= velocity.normalized() * velocity.length() * damping * delta
 
 	position += velocity * delta
 	
