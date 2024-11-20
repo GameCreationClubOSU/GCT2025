@@ -7,13 +7,24 @@ var minigames: Array[Minigame] = []:
 	set(value):
 		push_error("Attempted to set value of minigames field in MinigameManager directly!")
 
+## Gets the local minigame root for the node given.
+## For mode nodes, proper usage is [code]MinigameManager.get_root(self)[/code]
+## The root is the viewport node just above all the other content nodes.
+## Returns null if node is not in a minigame.
+func get_root_of(node: Node) -> SubViewport:
+	for minigame in minigames:
+		if minigame.is_ancestor_of(node):
+			return minigame.viewport
+			
+	return null
+
 ## Finds all the minigames in the scene and adds them to minigames array.
 func find_minigames():
-	var nodes = get_tree().get_nodes_in_group("minigames")
+	var nodes: Array[Node] = get_tree().get_nodes_in_group("minigames")
 	for node in nodes:
 		if node is Minigame:
-			if node not in minigames:
-				var minigame := node as Minigame
+			var minigame := node as Minigame
+			if minigame not in minigames:
 				minigame.clicked.connect(minigame_clicked.emit)
 				minigames.append(minigame)
 		else:
