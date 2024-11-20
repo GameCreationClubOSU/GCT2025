@@ -55,7 +55,7 @@ patch_margin_top = 26
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Frame"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Frame" groups=["minigames"]]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 25.0

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 DebugMenuUI="*res://debug/debug_menu_ui.tscn"
 ImGuiRoot="*res://addons/imgui-godot/data/ImGuiRoot.tscn"
+MinigameManager="*res://minigames/minigame_manager.gd"
 
 [dotnet]
 
