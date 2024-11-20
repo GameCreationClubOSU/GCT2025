@@ -39,9 +39,6 @@ func _physics_process(delta):
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-	if Input.is_action_just_pressed("reset"):
-		GameInstance.load_current_level()
-		pass
 		
 	get_local_potions()
 	if Input.is_action_just_pressed("throw_potion1") && $Timer.time_left <= 0 && Engine.time_scale == 1 && local_potion1 != null:

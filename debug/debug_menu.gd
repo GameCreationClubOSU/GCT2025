@@ -24,6 +24,7 @@ func _process(_delta: float) -> void:
 			modules.append(node)
 		
 	for module in modules:
+		# TODO: Check if module is even processing. Debug modules in disabled minigames should not be rendered.
 		if module.enabled:
 			module.render_debug()
 			
