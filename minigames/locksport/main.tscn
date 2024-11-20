@@ -1,0 +1,183 @@
+[gd_scene load_steps=7 format=3 uid="uid://dp5rt3m1qgpgk"]
+
+[ext_resource type="Script" path="res://minigames/locksport/lock_plug.gd" id="1_n1h8i"]
+[ext_resource type="Script" path="res://minigames/locksport/pick.gd" id="2_ojqgl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvpdd"]
+size = Vector2(32, 120)
+
+[sub_resource type="Curve" id="Curve_kwpiu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.00659, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wvxvd"]
+size = Vector2(23, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uyohk"]
+size = Vector2(74, 76)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Body" type="StaticBody2D" parent="."]
+
+[node name="Body" type="Polygon2D" parent="Body"]
+color = Color(0.45, 0.45, 0.45, 1)
+polygon = PackedVector2Array(0, -20, 0, -300, 560, -300, 560, -20, 480, -20, 480, -140, 400, -140, 400, -20, 320, -20, 320, -140, 240, -140, 240, -20, 160, -20, 160, -140, 80, -140, 80, -20)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Body"]
+polygon = PackedVector2Array(0, -21, 0, -300, 560, -300, 560, -21, 480, -21, 480, -140, 400, -140, 400, -21, 320, -21, 320, -140, 240, -140, 240, -21, 160, -21, 160, -140, 80, -140, 80, -21)
+
+[node name="Backstop" type="StaticBody2D" parent="."]
+position = Vector2(560, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Backstop"]
+position = Vector2(16, 140)
+shape = SubResource("RectangleShape2D_wvpdd")
+
+[node name="Plug" type="RigidBody2D" parent="."]
+input_pickable = true
+mass = 200.0
+gravity_scale = 0.0
+lock_rotation = true
+angular_damp_mode = 1
+angular_damp = 100.0
+script = ExtResource("1_n1h8i")
+
+[node name="Foot1" type="Polygon2D" parent="Plug"]
+color = Color(0.9, 0.8244, 0.522, 1)
+polygon = PackedVector2Array(0, -20, 80, -20, 80, 70, 90, 80, 0, 80)
+
+[node name="Foot2" type="Polygon2D" parent="Plug"]
+color = Color(0.9, 0.8244, 0.522, 1)
+polygon = PackedVector2Array(160, -20, 240, -20, 240, 70, 250, 80, 150, 80, 160, 70)
+
+[node name="Foot4" type="Polygon2D" parent="Plug"]
+position = Vector2(480, 0)
+color = Color(0.9, 0.8244, 0.522, 1)
+polygon = PackedVector2Array(0, -20, 80, -20, 80, 80, -10, 80, 0, 70)
+
+[node name="Floor" type="Polygon2D" parent="Plug"]
+position = Vector2(0, -10)
+color = Color(0.9, 0.8244, 0.522, 1)
+polygon = PackedVector2Array(0, 160, 560, 160, 560, 200, 0, 200)
+
+[node name="Foot3" type="Polygon2D" parent="Plug"]
+position = Vector2(160, 0)
+color = Color(0.9, 0.8244, 0.522, 1)
+polygon = PackedVector2Array(160, -20, 240, -20, 240, 70, 250, 80, 150, 80, 160, 70)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Plug"]
+polygon = PackedVector2Array(80, -20, 80, 70, 90, 80, 0, 80, 0, -20)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Plug"]
+polygon = PackedVector2Array(160, -20, 160, 70, 150, 80, 250, 80, 240, 70, 240, -20)
+
+[node name="DragDisplay" type="Line2D" parent="Plug"]
+points = PackedVector2Array(-105, 61, -65, 18)
+width_curve = SubResource("Curve_kwpiu")
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Plug"]
+polygon = PackedVector2Array(320, -20, 320, 70, 310, 80, 410, 80, 400, 70, 400, -20)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Plug"]
+polygon = PackedVector2Array(480, -20, 560, -20, 560, 80, 470, 80, 480, 70)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="Plug"]
+position = Vector2(0, -10)
+polygon = PackedVector2Array(0, 160, 560, 160, 560, 241, 531, 241, 531, 200, 0, 200)
+
+[node name="Backstop2" type="StaticBody2D" parent="."]
+position = Vector2(387, 35)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Backstop2"]
+position = Vector2(55, 176)
+shape = SubResource("RectangleShape2D_wvxvd")
+
+[node name="Pin" type="RigidBody2D" parent="."]
+position = Vector2(120, 30)
+mass = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pin"]
+shape = SubResource("RectangleShape2D_uyohk")
+
+[node name="Polygon2D" type="Polygon2D" parent="Pin"]
+polygon = PackedVector2Array(-38, -38, 38, -38, 38, 38, -38, 38)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+input_pickable = true
+mass = 5.0
+center_of_mass_mode = 1
+center_of_mass = Vector2(-100, 100)
+linear_damp = 5.0
+angular_damp = 5.0
+script = ExtResource("2_ojqgl")
+
+[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D"]
+position = Vector2(356, 122)
+polygon = PackedVector2Array(-557, -36, 58, -11, 69, -42, 84, -35, 72, 9, -560, -11)
+
+[node name="DragDisplay" type="Line2D" parent="RigidBody2D"]
+points = PackedVector2Array(-105, 61, -65, 18)
+width_curve = SubResource("Curve_kwpiu")
+default_color = Color(1, 0.6, 0.6, 1)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+polygon = PackedVector2Array(-201, 86, 414, 111, 425, 80, 440, 87, 428, 131, -204, 111)
+
+[node name="Marker2D" type="Marker2D" parent="RigidBody2D"]
+position = Vector2(-98, 102)
+
+[node name="Pin2" type="RigidBody2D" parent="."]
+position = Vector2(120, -49)
+mass = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pin2"]
+shape = SubResource("RectangleShape2D_uyohk")
+
+[node name="Polygon2D" type="Polygon2D" parent="Pin2"]
+color = Color(1, 0.7, 0.7, 1)
+polygon = PackedVector2Array(-37, -38, 37, -38, 37, 38, -37, 38)
+
+[node name="Pin3" type="RigidBody2D" parent="."]
+position = Vector2(280, 29)
+mass = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pin3"]
+shape = SubResource("RectangleShape2D_uyohk")
+
+[node name="Polygon2D" type="Polygon2D" parent="Pin3"]
+polygon = PackedVector2Array(-37, -38, 37, -38, 37, 38, -37, 38)
+
+[node name="Pin4" type="RigidBody2D" parent="."]
+position = Vector2(280, -50)
+mass = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pin4"]
+shape = SubResource("RectangleShape2D_uyohk")
+
+[node name="Polygon2D" type="Polygon2D" parent="Pin4"]
+color = Color(1, 0.701961, 0.701961, 1)
+polygon = PackedVector2Array(-37, -38, 37, -38, 37, 38, -37, 38)
+
+[node name="Pin5" type="RigidBody2D" parent="."]
+position = Vector2(440, 25)
+mass = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pin5"]
+shape = SubResource("RectangleShape2D_uyohk")
+
+[node name="Polygon2D" type="Polygon2D" parent="Pin5"]
+polygon = PackedVector2Array(-37, -38, 38, -38, 38, 38, -37, 38)
+
+[node name="Pin6" type="RigidBody2D" parent="."]
+position = Vector2(440, -54)
+mass = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pin6"]
+shape = SubResource("RectangleShape2D_uyohk")
+
+[node name="Polygon2D" type="Polygon2D" parent="Pin6"]
+color = Color(1, 0.701961, 0.701961, 1)
+polygon = PackedVector2Array(-38, -38, 38, -38, 38, 38, -38, 38)
