@@ -33,12 +33,14 @@ camera = NodePath("Camera")
 [node name="Camera" type="Camera2D" parent="."]
 script = ExtResource("2_4ys4d")
 focus_zoom_multiplier = 0.929
+metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="Camera"]
 material = SubResource("ShaderMaterial_l484h")
 scale = Vector2(2000, 2000)
 texture = SubResource("GradientTexture1D_gdvj4")
 script = ExtResource("4_73gsi")
+metadata/_edit_lock_ = true
 
 [node name="CameraDebug" type="Node" parent="Camera"]
 script = ExtResource("5_i2y3i")
@@ -49,6 +51,7 @@ offset_left = -1.0
 offset_right = 1152.0
 offset_bottom = 649.0
 stretch = true
+script = ExtResource("6_c5ove")
 
 [node name="SubViewport" type="SubViewport" parent="ShadowsAndAlchemy"]
 process_mode = 4
@@ -63,17 +66,17 @@ render_target_update_mode = 4
 layout_mode = 2
 texture = ExtResource("6_yyjr3")
 draw_center = false
-patch_margin_left = 10
-patch_margin_top = 26
-patch_margin_right = 10
-patch_margin_bottom = 10
+patch_margin_left = 3
+patch_margin_top = 25
+patch_margin_right = 3
+patch_margin_bottom = 3
 metadata/_edit_lock_ = true
 
 [node name="Locksport" type="SubViewportContainer" parent="."]
 offset_left = -740.0
 offset_top = -898.0
-offset_right = 413.0
-offset_bottom = -249.0
+offset_right = 354.0
+offset_bottom = -286.0
 stretch = true
 script = ExtResource("6_c5ove")
 
@@ -82,7 +85,7 @@ process_mode = 4
 disable_3d = true
 handle_input_locally = false
 physics_object_picking = true
-size = Vector2i(1153, 649)
+size = Vector2i(1094, 612)
 render_target_update_mode = 4
 
 [node name="Node2D" parent="Locksport/SubViewport" instance=ExtResource("9_ci15t")]
@@ -91,8 +94,8 @@ render_target_update_mode = 4
 layout_mode = 2
 texture = ExtResource("6_yyjr3")
 draw_center = false
-patch_margin_left = 10
-patch_margin_top = 26
-patch_margin_right = 10
-patch_margin_bottom = 10
+patch_margin_left = 3
+patch_margin_top = 25
+patch_margin_right = 3
+patch_margin_bottom = 3
 metadata/_edit_lock_ = true
