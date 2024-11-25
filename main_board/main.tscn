@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://main_board/background/background_sprite.gd" id="4_73gsi"]
 [ext_resource type="Script" path="res://main_board/main_camera_debug.gd" id="5_i2y3i"]
 [ext_resource type="Script" path="res://minigames/minigame.gd" id="6_c5ove"]
-[ext_resource type="PackedScene" uid="uid://bmdmdfqnoygj7" path="res://minigames/example/example_scene.tscn" id="6_cvyn5"]
 [ext_resource type="Texture2D" uid="uid://deb4jro1js2bc" path="res://minigames/frame/frame.png" id="6_yyjr3"]
 [ext_resource type="PackedScene" uid="uid://cevarsuekkm8a" path="res://minigames/shadows_and_alchemy/Scenes/Level.tscn" id="8_26bcy"]
 [ext_resource type="PackedScene" uid="uid://dp5rt3m1qgpgk" path="res://minigames/locksport/main.tscn" id="9_ci15t"]
@@ -34,74 +33,66 @@ camera = NodePath("Camera")
 [node name="Camera" type="Camera2D" parent="."]
 script = ExtResource("2_4ys4d")
 focus_zoom_multiplier = 0.929
-metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="Camera"]
 material = SubResource("ShaderMaterial_l484h")
 scale = Vector2(2000, 2000)
 texture = SubResource("GradientTexture1D_gdvj4")
 script = ExtResource("4_73gsi")
-metadata/_edit_lock_ = true
 
 [node name="CameraDebug" type="Node" parent="Camera"]
 script = ExtResource("5_i2y3i")
 menu_name = "Main Camera"
 
-[node name="Frame" type="NinePatchRect" parent="."]
-offset_left = -4.0
-offset_top = -25.0
-offset_right = 1156.0
-offset_bottom = 652.0
-texture = ExtResource("6_yyjr3")
-draw_center = false
-patch_margin_left = 10
-patch_margin_top = 26
-patch_margin_right = 10
-patch_margin_bottom = 10
-
-[node name="ShadowsAndAlchemy" type="SubViewportContainer" parent="Frame" groups=["minigames"]]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 25.0
-offset_right = 1156.0
-offset_bottom = 674.0
+[node name="ShadowsAndAlchemy" type="SubViewportContainer" parent="."]
+offset_left = -1.0
+offset_right = 1152.0
+offset_bottom = 649.0
 stretch = true
-script = ExtResource("6_c5ove")
 
-[node name="SubViewport" type="SubViewport" parent="Frame/ShadowsAndAlchemy"]
+[node name="SubViewport" type="SubViewport" parent="ShadowsAndAlchemy"]
+process_mode = 4
 disable_3d = true
 handle_input_locally = false
 size = Vector2i(1153, 649)
 render_target_update_mode = 4
 
-[node name="World" parent="Frame/ShadowsAndAlchemy/SubViewport" instance=ExtResource("8_26bcy")]
+[node name="World" parent="ShadowsAndAlchemy/SubViewport" instance=ExtResource("8_26bcy")]
 
-[node name="Frame2" type="NinePatchRect" parent="."]
-offset_left = -743.0
-offset_top = -923.0
-offset_right = 417.0
-offset_bottom = -246.0
+[node name="Frame" type="NinePatchRect" parent="ShadowsAndAlchemy"]
+layout_mode = 2
 texture = ExtResource("6_yyjr3")
 draw_center = false
 patch_margin_left = 10
 patch_margin_top = 26
 patch_margin_right = 10
 patch_margin_bottom = 10
+metadata/_edit_lock_ = true
 
-[node name="Locksport" type="SubViewportContainer" parent="Frame2" groups=["minigames"]]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 25.0
-offset_right = 1156.0
-offset_bottom = 674.0
+[node name="Locksport" type="SubViewportContainer" parent="."]
+offset_left = -740.0
+offset_top = -898.0
+offset_right = 413.0
+offset_bottom = -249.0
 stretch = true
 script = ExtResource("6_c5ove")
 
-[node name="SubViewport" type="SubViewport" parent="Frame2/Locksport"]
+[node name="SubViewport" type="SubViewport" parent="Locksport"]
+process_mode = 4
 disable_3d = true
 handle_input_locally = false
 physics_object_picking = true
 size = Vector2i(1153, 649)
 render_target_update_mode = 4
 
-[node name="Node2D" parent="Frame2/Locksport/SubViewport" instance=ExtResource("9_ci15t")]
+[node name="Node2D" parent="Locksport/SubViewport" instance=ExtResource("9_ci15t")]
+
+[node name="Frame" type="NinePatchRect" parent="Locksport"]
+layout_mode = 2
+texture = ExtResource("6_yyjr3")
+draw_center = false
+patch_margin_left = 10
+patch_margin_top = 26
+patch_margin_right = 10
+patch_margin_bottom = 10
+metadata/_edit_lock_ = true
