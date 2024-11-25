@@ -4,10 +4,13 @@ extends Camera2D
 
 var focus: Minigame:
 	set(value):
-		focus = value
-		if not value:
+		# Also check that the focus exists before doing the unfocus action.
+		# Otherwise spamming unfocus will keep zooming out.
+		if focus and not value:
 			# Visual indicator that we've unfocused.
 			zoom_target *= 0.6
+			
+		focus = value
 		
 		dragging = false
 

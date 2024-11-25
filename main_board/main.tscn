@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://main_board/background/background_sprite.gd" id="4_73gsi"]
 [ext_resource type="Script" path="res://main_board/main_camera_debug.gd" id="5_i2y3i"]
 [ext_resource type="Script" path="res://minigames/minigame.gd" id="6_c5ove"]
+[ext_resource type="PackedScene" uid="uid://bmdmdfqnoygj7" path="res://minigames/example/example_scene.tscn" id="6_cvyn5"]
 [ext_resource type="Texture2D" uid="uid://deb4jro1js2bc" path="res://minigames/frame/frame.png" id="6_yyjr3"]
 [ext_resource type="PackedScene" uid="uid://cevarsuekkm8a" path="res://minigames/shadows_and_alchemy/Scenes/Level.tscn" id="8_26bcy"]
 [ext_resource type="PackedScene" uid="uid://dp5rt3m1qgpgk" path="res://minigames/locksport/main.tscn" id="9_ci15t"]
@@ -33,12 +34,14 @@ camera = NodePath("Camera")
 [node name="Camera" type="Camera2D" parent="."]
 script = ExtResource("2_4ys4d")
 focus_zoom_multiplier = 0.929
+metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="Camera"]
 material = SubResource("ShaderMaterial_l484h")
 scale = Vector2(2000, 2000)
 texture = SubResource("GradientTexture1D_gdvj4")
 script = ExtResource("4_73gsi")
+metadata/_edit_lock_ = true
 
 [node name="CameraDebug" type="Node" parent="Camera"]
 script = ExtResource("5_i2y3i")
