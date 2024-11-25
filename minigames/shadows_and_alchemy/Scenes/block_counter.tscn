@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://gr02qypdrbxr"]
-
-[ext_resource type="Script" path="res://minigames/shadows_and_alchemy/Scripts/BlockCounter.gd" id="1_10iei"]
-
-[node name="BlockCounter" type="Node"]
-script = ExtResource("1_10iei")

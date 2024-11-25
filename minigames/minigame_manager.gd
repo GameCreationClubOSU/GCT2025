@@ -33,6 +33,19 @@ func find_minigames():
 			push_warning("Node in minigames group is not a minigame object!")
 			node.remove_from_group("minigames")
 
+## Registers a minigame to the manager.
+func register_minigame(minigame: Minigame):
+	if not is_instance_valid(minigame):
+		push_warning("Attempted to register invalid instance to Minigame manager!")
+		return
+	if minigame in minigames:
+		push_warning("Attempted to register minigame [%s] that was already registered!" % minigame.name)
+		return
+		
+	minigame.enabled = false
+	minigame.clicked.connect(minigame_clicked.emit)
+	minigames.append(minigame)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# May want to do this on some kind of schedule if 
@@ -42,5 +55,5 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass

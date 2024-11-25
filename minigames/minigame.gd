@@ -28,18 +28,19 @@ func adjust_frame() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	add_to_group("minigames")
-	enabled = false # Minigames off by default. 
+	MinigameManager.register_minigame(self)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if Engine.is_editor_hint():
-		adjust_frame()
+func _process(_delta: float) -> void:
+	adjust_frame()
 
 func _gui_input(event: InputEvent) -> void:
 	if Engine.is_editor_hint():
 		return
 		
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		# Make sure the clicked signal only fires when the minigame is not enabled.
+		# Events need to pass down to the subviewport.
+		if not enabled and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			clicked.emit(self)
+			get_viewport().set_input_as_handled()

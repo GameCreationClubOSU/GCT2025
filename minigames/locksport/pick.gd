@@ -32,7 +32,6 @@ func _physics_process(_delta: float) -> void:
 	
 func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		print("hi")
 		if event.is_pressed():
 			drag_lock = false
 			mouse_start = get_local_mouse_position();

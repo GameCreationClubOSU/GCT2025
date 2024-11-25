@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bn87h0cnlci4m"]
+[gd_scene load_steps=12 format=3 uid="uid://bn87h0cnlci4m"]
 
 [ext_resource type="Shader" path="res://main_board/background/grid.gdshader" id="1_35pje"]
 [ext_resource type="Script" path="res://main_board/coordinator.gd" id="1_tiu0a"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://main_board/main_camera_debug.gd" id="5_i2y3i"]
 [ext_resource type="Script" path="res://minigames/minigame.gd" id="6_c5ove"]
 [ext_resource type="Texture2D" uid="uid://deb4jro1js2bc" path="res://minigames/frame/frame.png" id="6_yyjr3"]
-[ext_resource type="PackedScene" uid="uid://cevarsuekkm8a" path="res://minigames/shadows_and_alchemy/Scenes/Level.tscn" id="8_26bcy"]
 [ext_resource type="PackedScene" uid="uid://dp5rt3m1qgpgk" path="res://minigames/locksport/main.tscn" id="9_ci15t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l484h"]
@@ -46,37 +45,11 @@ metadata/_edit_lock_ = true
 script = ExtResource("5_i2y3i")
 menu_name = "Main Camera"
 
-[node name="ShadowsAndAlchemy" type="SubViewportContainer" parent="."]
-offset_left = -1.0
-offset_right = 1152.0
-offset_bottom = 649.0
-stretch = true
-script = ExtResource("6_c5ove")
-
-[node name="SubViewport" type="SubViewport" parent="ShadowsAndAlchemy"]
-process_mode = 4
-disable_3d = true
-handle_input_locally = false
-size = Vector2i(1153, 649)
-render_target_update_mode = 4
-
-[node name="World" parent="ShadowsAndAlchemy/SubViewport" instance=ExtResource("8_26bcy")]
-
-[node name="Frame" type="NinePatchRect" parent="ShadowsAndAlchemy"]
-layout_mode = 2
-texture = ExtResource("6_yyjr3")
-draw_center = false
-patch_margin_left = 3
-patch_margin_top = 25
-patch_margin_right = 3
-patch_margin_bottom = 3
-metadata/_edit_lock_ = true
-
 [node name="Locksport" type="SubViewportContainer" parent="."]
-offset_left = -740.0
-offset_top = -898.0
-offset_right = 354.0
-offset_bottom = -286.0
+offset_left = -529.0
+offset_top = -330.0
+offset_right = 649.0
+offset_bottom = 426.0
 stretch = true
 script = ExtResource("6_c5ove")
 
@@ -85,8 +58,7 @@ process_mode = 4
 disable_3d = true
 handle_input_locally = false
 physics_object_picking = true
-size = Vector2i(1094, 612)
-render_target_update_mode = 4
+size = Vector2i(1178, 756)
 
 [node name="Node2D" parent="Locksport/SubViewport" instance=ExtResource("9_ci15t")]
 
