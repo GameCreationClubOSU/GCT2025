@@ -43,31 +43,27 @@ script = ExtResource("4_73gsi")
 script = ExtResource("5_i2y3i")
 menu_name = "Main Camera"
 
-[node name="Frame" type="NinePatchRect" parent="."]
-offset_left = -4.0
-offset_top = -26.0
-offset_right = 125.0
-offset_bottom = 101.0
-texture = ExtResource("6_yyjr3")
-draw_center = false
-patch_margin_left = 10
-patch_margin_top = 26
-patch_margin_right = 10
-patch_margin_bottom = 10
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Frame" groups=["minigames"]]
-layout_mode = 0
-offset_left = 3.0
-offset_top = 25.0
-offset_right = 126.0
-offset_bottom = 124.0
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." groups=["minigames"]]
+offset_left = 11.0
+offset_top = -18.0
+offset_right = 216.0
+offset_bottom = 145.0
 stretch = true
 script = ExtResource("6_c5ove")
 
-[node name="SubViewport" type="SubViewport" parent="Frame/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 disable_3d = true
 handle_input_locally = false
-size = Vector2i(123, 99)
+size = Vector2i(205, 163)
 render_target_update_mode = 4
 
-[node name="ExampleScene" parent="Frame/SubViewportContainer/SubViewport" instance=ExtResource("6_cvyn5")]
+[node name="ExampleScene" parent="SubViewportContainer/SubViewport" instance=ExtResource("6_cvyn5")]
+
+[node name="Frame" type="NinePatchRect" parent="SubViewportContainer"]
+layout_mode = 2
+texture = ExtResource("6_yyjr3")
+patch_margin_left = 3
+patch_margin_top = 26
+patch_margin_right = 3
+patch_margin_bottom = 3
+metadata/_edit_lock_ = true
