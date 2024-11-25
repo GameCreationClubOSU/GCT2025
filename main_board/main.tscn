@@ -32,12 +32,14 @@ camera = NodePath("Camera")
 [node name="Camera" type="Camera2D" parent="."]
 script = ExtResource("2_4ys4d")
 focus_zoom_multiplier = 0.929
+metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="Camera"]
 material = SubResource("ShaderMaterial_l484h")
 scale = Vector2(2000, 2000)
 texture = SubResource("GradientTexture1D_gdvj4")
 script = ExtResource("4_73gsi")
+metadata/_edit_lock_ = true
 
 [node name="CameraDebug" type="Node" parent="Camera"]
 script = ExtResource("5_i2y3i")
