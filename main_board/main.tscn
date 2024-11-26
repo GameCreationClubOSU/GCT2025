@@ -46,19 +46,23 @@ script = ExtResource("5_i2y3i")
 menu_name = "Main Camera"
 
 [node name="Locksport" type="SubViewportContainer" parent="."]
-offset_left = -529.0
-offset_top = -330.0
-offset_right = 649.0
-offset_bottom = 426.0
+offset_left = -884.0
+offset_top = -455.0
+offset_right = -16.0
+offset_bottom = 124.0
 stretch = true
 script = ExtResource("6_c5ove")
+viewport_scale = 2.0
 
 [node name="SubViewport" type="SubViewport" parent="Locksport"]
 process_mode = 4
 disable_3d = true
 handle_input_locally = false
 physics_object_picking = true
-size = Vector2i(1178, 756)
+size = Vector2i(868, 579)
+size_2d_override = Vector2i(1736, 1158)
+size_2d_override_stretch = true
+render_target_update_mode = 4
 
 [node name="Node2D" parent="Locksport/SubViewport" instance=ExtResource("9_ci15t")]
 
