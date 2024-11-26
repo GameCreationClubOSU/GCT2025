@@ -18,15 +18,16 @@ var focus: Minigame:
 ## Higher values means camera will slow down faster.
 @export_range(0, 100) var damping: float = 10
 @export_range(0, 100) var focus_damping: float = 10
-
 @export_range(0, 1000) var move_speed: float = 500
 
-## How fast the camera zooms in and out
 @export_category("Zoom")
+## How fast the camera zooms in and out
 @export_range(0, 10) var zoom_speed: float = 5
 @export_range(0, 1) var min_zoom: float = 0.5
 @export_range(1, 10) var max_zoom: float = 2
 @export_range(0.5, 2.0) var focus_zoom_multiplier: float = 1
+## The value the zoom will approach over time.
+@export_range(0.01, 10) var zoom_target: float = 1
 
 var velocity: Vector2 = Vector2.ZERO
 var dragging: bool = false
@@ -34,8 +35,6 @@ var dragging: bool = false
 ## I.e. camera will move so that the cursor looks like it doesn't move relative
 ## to board. Set when user starts dragging.
 var drag_start: Vector2 = Vector2.ZERO
-## The value the zoom will approach over time.
-var zoom_target: float = 1
 
 
 # Called when the node enters the scene tree for the first time.

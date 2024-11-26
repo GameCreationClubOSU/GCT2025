@@ -30,8 +30,11 @@ script = ExtResource("1_tiu0a")
 camera = NodePath("Camera")
 
 [node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
 script = ExtResource("2_4ys4d")
-focus_zoom_multiplier = 0.929
+min_zoom = 0.25
+focus_zoom_multiplier = 0.8
+zoom_target = 0.5
 metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="Camera"]
@@ -48,19 +51,18 @@ menu_name = "Main Camera"
 [node name="Locksport" type="SubViewportContainer" parent="."]
 offset_left = -884.0
 offset_top = -455.0
-offset_right = -16.0
-offset_bottom = 124.0
+offset_right = -14.0
+offset_bottom = 70.0
 stretch = true
 script = ExtResource("6_c5ove")
-viewport_scale = 2.0
 
 [node name="SubViewport" type="SubViewport" parent="Locksport"]
 process_mode = 4
 disable_3d = true
 handle_input_locally = false
 physics_object_picking = true
-size = Vector2i(868, 579)
-size_2d_override = Vector2i(1736, 1158)
+size = Vector2i(870, 525)
+size_2d_override = Vector2i(870, 525)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
