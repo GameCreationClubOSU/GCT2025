@@ -35,7 +35,8 @@ func adjust_viewport() -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	MinigameManager.register_minigame(self)
+	if not Engine.is_editor_hint():
+		MinigameManager.register_minigame(self)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
