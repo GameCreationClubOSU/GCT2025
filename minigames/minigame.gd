@@ -75,9 +75,9 @@ func _gui_input(event: InputEvent) -> void:
 		# Events need to pass down to the subviewport.
 		if not enabled and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			clicked.emit(self)
-			get_viewport().set_input_as_handled()
-			
-func _unhandled_input(event: InputEvent) -> void:
-	if auto_reset and enabled and event.is_action_pressed("reset"):
+			accept_event()
+	elif auto_reset and enabled and event.is_action_pressed("reset"):
+		print("hello")
 		reload_scene()
 		get_viewport().set_input_as_handled()
+			
