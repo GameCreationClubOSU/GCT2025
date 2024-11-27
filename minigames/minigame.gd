@@ -17,7 +17,9 @@ var enabled: bool = false:
 	set(value):
 		enabled = value
 		viewport.process_mode = PROCESS_MODE_INHERIT if enabled else PROCESS_MODE_DISABLED
-
+		# TODO: This should probably save the value first. Not every scene needs object picking.
+		viewport.physics_object_picking = enabled
+		
 func adjust_frame() -> void:
 	if not is_instance_valid(_frame):
 		_frame = get_node_or_null("Frame") as NinePatchRect
