@@ -7,6 +7,16 @@ signal clicked(minigame: Minigame)
 ## Scale of the scene inside the viewport.
 ## Adjusting the scale of the container has a similar effect, but this value won't distort the frame.
 @export_range(0.01, 10) var viewport_scale: float = 1
+## Scene that will be rendered inside the viewport.
+@export var scene: PackedScene:
+	set(value):
+		# @export variables call the setter before viewport is loaded
+		# Await ready to make sure that viewport isn't null.
+		if not is_node_ready():
+			await ready
+		scene = value
+		reload_scene()
+@export var auto_reset: bool = true
 
 ## This reference is used for automatically resizing the frame and not for external use.
 var _frame: NinePatchRect = get_node_or_null("Frame") as NinePatchRect
@@ -34,11 +44,22 @@ func adjust_frame() -> void:
 			
 func adjust_viewport() -> void:
 	viewport.size_2d_override = size * viewport_scale
+	
+func reload_scene() -> void:
+	# Clear out all child nodes in viewport before adding more
+	for child in viewport.get_children():
+		viewport.remove_child(child)
+		child.queue_free()
+		
+	if is_instance_valid(scene) and scene.can_instantiate():
+		var new_child: Node = scene.instantiate()
+		viewport.add_child(new_child)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if not Engine.is_editor_hint():
 		MinigameManager.register_minigame(self)
+		reload_scene()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -55,3 +76,8 @@ func _gui_input(event: InputEvent) -> void:
 		if not enabled and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			clicked.emit(self)
 			get_viewport().set_input_as_handled()
+			
+func _unhandled_input(event: InputEvent) -> void:
+	if auto_reset and enabled and event.is_action_pressed("reset"):
+		reload_scene()
+		get_viewport().set_input_as_handled()

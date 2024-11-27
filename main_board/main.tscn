@@ -1,12 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bn87h0cnlci4m"]
+[gd_scene load_steps=11 format=3 uid="uid://bn87h0cnlci4m"]
 
 [ext_resource type="Shader" path="res://main_board/background/grid.gdshader" id="1_35pje"]
 [ext_resource type="Script" path="res://main_board/coordinator.gd" id="1_tiu0a"]
 [ext_resource type="Script" path="res://main_board/main_camera.gd" id="2_4ys4d"]
 [ext_resource type="Script" path="res://main_board/background/background_sprite.gd" id="4_73gsi"]
 [ext_resource type="Script" path="res://main_board/main_camera_debug.gd" id="5_i2y3i"]
-[ext_resource type="Script" path="res://minigames/minigame.gd" id="6_c5ove"]
-[ext_resource type="Texture2D" uid="uid://deb4jro1js2bc" path="res://minigames/frame/frame.png" id="6_yyjr3"]
+[ext_resource type="PackedScene" uid="uid://lakrhf27383e" path="res://minigames/minigame_frame.tscn" id="6_jt8y7"]
 [ext_resource type="PackedScene" uid="uid://dp5rt3m1qgpgk" path="res://minigames/locksport/main.tscn" id="9_ci15t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l484h"]
@@ -48,32 +47,9 @@ metadata/_edit_lock_ = true
 script = ExtResource("5_i2y3i")
 menu_name = "Main Camera"
 
-[node name="Locksport" type="SubViewportContainer" parent="."]
-offset_left = -884.0
-offset_top = -455.0
-offset_right = -14.0
-offset_bottom = 70.0
-stretch = true
-script = ExtResource("6_c5ove")
-
-[node name="SubViewport" type="SubViewport" parent="Locksport"]
-process_mode = 4
-disable_3d = true
-handle_input_locally = false
-physics_object_picking = true
-size = Vector2i(870, 525)
-size_2d_override = Vector2i(870, 525)
-size_2d_override_stretch = true
-render_target_update_mode = 4
-
-[node name="Node2D" parent="Locksport/SubViewport" instance=ExtResource("9_ci15t")]
-
-[node name="Frame" type="NinePatchRect" parent="Locksport"]
-layout_mode = 2
-texture = ExtResource("6_yyjr3")
-draw_center = false
-patch_margin_left = 3
-patch_margin_top = 25
-patch_margin_right = 3
-patch_margin_bottom = 3
-metadata/_edit_lock_ = true
+[node name="Locksport" parent="." instance=ExtResource("6_jt8y7")]
+offset_left = -1166.0
+offset_top = -716.0
+offset_right = 114.0
+offset_bottom = 4.0
+scene = ExtResource("9_ci15t")
