@@ -3,6 +3,7 @@ extends DebugModule
 func render_debug() -> void:
 	var enabled_ref := [enabled]
 	if ImGui.Begin(menu_name, enabled_ref):
+		enabled = enabled_ref[0]
 		var parent: Node = get_parent()
 		if parent is not CollageCamera:
 			ImGui.Text("Parent is not a CollageCamera!")
@@ -14,7 +15,6 @@ func render_debug() -> void:
 		ImGui.Text("Focus: %s" % DebugUtil.node_name(camera.focus)) 
 
 		ImGui.SeparatorText("Movement")
-		enabled = enabled_ref[0]
 		var world_position: Array[Variant] = [camera.global_position]
 		if DebugComponents.InputVector2("World Position", world_position):
 			camera.global_position = world_position[0]

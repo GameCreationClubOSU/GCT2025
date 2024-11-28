@@ -45,7 +45,10 @@ func register_miniframe(miniframe: Miniframe) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	# MinigameManager is an Autoload, so it's debug module has to be loaded in code.
+	var debug_module := MinigameManagerDebug.new()
+	debug_module.menu_name = "Minigame Manager"
+	add_child(debug_module)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
