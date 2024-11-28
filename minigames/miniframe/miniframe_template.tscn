@@ -4,10 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://deb4jro1js2bc" path="res://minigames/miniframe/frame.png" id="2_cr4mo"]
 
 [node name="Miniframe" type="SubViewportContainer"]
-offset_left = -884.0
-offset_top = -455.0
-offset_right = -71.0
-offset_bottom = 9.0
+offset_right = 813.0
+offset_bottom = 464.0
 stretch = true
 script = ExtResource("1_q347j")
 
