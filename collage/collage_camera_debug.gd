@@ -3,10 +3,15 @@ extends DebugModule
 func render_debug() -> void:
 	var enabled_ref := [enabled]
 	if ImGui.Begin(menu_name, enabled_ref):
-		var camera: Node = get_parent()
+		var parent: Node = get_parent()
+		if parent is not CollageCamera:
+			ImGui.Text("Parent is not a CollageCamera!")
+			ImGui.End()
+			return
+		var camera: CollageCamera = parent as CollageCamera
 		
 		ImGui.SeparatorText("Basic")
-		ImGui.Text("Focus: %s" % (camera.focus.name if is_instance_valid(camera.focus) else "null")) 
+		ImGui.Text("Focus: %s" % DebugUtil.node_name(camera.focus)) 
 
 		ImGui.SeparatorText("Movement")
 		enabled = enabled_ref[0]

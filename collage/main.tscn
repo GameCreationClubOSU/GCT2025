@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bn87h0cnlci4m"]
+[gd_scene load_steps=12 format=3 uid="uid://bn87h0cnlci4m"]
 
 [ext_resource type="Shader" path="res://collage/background/grid.gdshader" id="1_35pje"]
 [ext_resource type="Script" path="res://collage/coordinator.gd" id="1_tiu0a"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://collage/background/background_sprite.gd" id="4_73gsi"]
 [ext_resource type="Script" path="res://collage/collage_camera_debug.gd" id="5_i2y3i"]
 [ext_resource type="PackedScene" uid="uid://lakrhf27383e" path="res://minigames/miniframe/miniframe_template.tscn" id="6_jt8y7"]
+[ext_resource type="Script" path="res://collage/coordinator_debug.gd" id="8_ygc3o"]
 [ext_resource type="PackedScene" uid="uid://dp5rt3m1qgpgk" path="res://minigames/locksport/main.tscn" id="9_ci15t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l484h"]
@@ -53,3 +54,7 @@ offset_top = -716.0
 offset_right = 114.0
 offset_bottom = 4.0
 scene = ExtResource("9_ci15t")
+
+[node name="CoordinatorDebug" type="Node" parent="."]
+script = ExtResource("8_ygc3o")
+menu_name = "Coordinator"
