@@ -1,3 +1,4 @@
+class_name Coordinator
 extends Node2D
 
 # The Coordinator is the top-level manager for the main board.
@@ -7,7 +8,7 @@ extends Node2D
 
 var focus: Minigame: 
 	set(value):
-		if is_instance_valid(focus):		
+		if is_instance_valid(focus):
 			focus.enabled = false
 			
 		focus = value

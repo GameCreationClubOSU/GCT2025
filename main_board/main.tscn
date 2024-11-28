@@ -24,7 +24,7 @@ colors = PackedColorArray(0, 0.301961, 0.560784, 1, 0, 0.301961, 0.560784, 1)
 gradient = SubResource("Gradient_oc1u4")
 width = 1
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("camera")]
+[node name="Collage" type="Node2D" node_paths=PackedStringArray("camera")]
 script = ExtResource("1_tiu0a")
 camera = NodePath("Camera")
 
