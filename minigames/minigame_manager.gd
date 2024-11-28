@@ -1,11 +1,12 @@
 extends Node
 
-## Emitted when a minigame was clicked. Provides the minigame object that was clicked.
-signal minigame_clicked(minigame)
+## Emitted when a minigame was clicked. 
+## Provides the miniframe object around the minigame that was clicked.
+signal miniframe_clicked(miniframe: Miniframe)
 
-var minigames: Array[Minigame] = []:
+var miniframes: Array[Miniframe] = []:
 	set(value):
-		push_error("Attempted to set value of minigames field in MinigameManager directly!")
+		push_error("Attempted to set value of miniframes field in MinigameManager directly!")
 
 func in_collage() -> bool:
 	var main_node = get_node_or_null("/root/Collage")
@@ -22,25 +23,25 @@ func get_root_of(node: Node) -> Node:
 		return get_tree().root
 	
 	# Normal case	
-	for minigame in minigames:
-		if minigame.is_ancestor_of(node):
-			return minigame.viewport
+	for miniframe in miniframes:
+		if miniframe.is_ancestor_of(node):
+			return miniframe.viewport
 			
 	push_error("get_root_of has been called from a node that isn't in a minigame!")
 	return null
 
-## Registers a minigame to the manager.
-func register_minigame(minigame: Minigame) -> void:
-	if not is_instance_valid(minigame):
+## Registers a miniframe to the manager.
+func register_miniframe(miniframe: Miniframe) -> void:
+	if not is_instance_valid(miniframe):
 		push_warning("Attempted to register invalid instance to Minigame manager!")
 		return
-	if minigame in minigames:
-		push_warning("Attempted to register minigame [%s] that was already registered!" % minigame.name)
+	if miniframe in miniframes:
+		push_warning("Attempted to register miniframe [%s] that was already registered!" % miniframe.name)
 		return
 		
-	minigame.enabled = false # Don't want minigames running untile they're focused.
-	minigame.clicked.connect(minigame_clicked.emit)
-	minigames.append(minigame)
+	miniframe.enabled = false # Don't want minigames running until they're focused.
+	miniframe.clicked.connect(miniframe_clicked.emit)
+	miniframes.append(miniframe)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -49,6 +50,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	# Clean up any minigames that have become invalid.
-	for minigame in minigames:
-		if not is_instance_valid(minigame):
-			minigames.erase(minigame)
+	for miniframe in miniframes:
+		if not is_instance_valid(miniframe):
+			miniframes.erase(miniframe)

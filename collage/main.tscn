@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://bn87h0cnlci4m"]
 
-[ext_resource type="Shader" path="res://main_board/background/grid.gdshader" id="1_35pje"]
-[ext_resource type="Script" path="res://main_board/coordinator.gd" id="1_tiu0a"]
-[ext_resource type="Script" path="res://main_board/main_camera.gd" id="2_4ys4d"]
-[ext_resource type="Script" path="res://main_board/background/background_sprite.gd" id="4_73gsi"]
-[ext_resource type="Script" path="res://main_board/main_camera_debug.gd" id="5_i2y3i"]
-[ext_resource type="PackedScene" uid="uid://lakrhf27383e" path="res://minigames/minigame_frame.tscn" id="6_jt8y7"]
+[ext_resource type="Shader" path="res://collage/background/grid.gdshader" id="1_35pje"]
+[ext_resource type="Script" path="res://collage/coordinator.gd" id="1_tiu0a"]
+[ext_resource type="Script" path="res://collage/collage_camera.gd" id="2_4ys4d"]
+[ext_resource type="Script" path="res://collage/background/background_sprite.gd" id="4_73gsi"]
+[ext_resource type="Script" path="res://collage/collage_camera_debug.gd" id="5_i2y3i"]
+[ext_resource type="PackedScene" uid="uid://lakrhf27383e" path="res://minigames/miniframe/miniframe_template.tscn" id="6_jt8y7"]
 [ext_resource type="PackedScene" uid="uid://dp5rt3m1qgpgk" path="res://minigames/locksport/main.tscn" id="9_ci15t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l484h"]
@@ -45,7 +45,7 @@ metadata/_edit_lock_ = true
 
 [node name="CameraDebug" type="Node" parent="Camera"]
 script = ExtResource("5_i2y3i")
-menu_name = "Main Camera"
+menu_name = "Collage Camera"
 
 [node name="Locksport" parent="." instance=ExtResource("6_jt8y7")]
 offset_left = -1166.0

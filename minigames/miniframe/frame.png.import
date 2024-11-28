@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://deb4jro1js2bc"
-path="res://.godot/imported/frame.png-5e6e20fcb67d4432371906cfb3322c9e.ctex"
+path="res://.godot/imported/frame.png-f25fb7b98b8a4793e73ec3030f484d51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://minigames/frame/frame.png"
-dest_files=["res://.godot/imported/frame.png-5e6e20fcb67d4432371906cfb3322c9e.ctex"]
+source_file="res://minigames/miniframe/frame.png"
+dest_files=["res://.godot/imported/frame.png-f25fb7b98b8a4793e73ec3030f484d51.ctex"]
 
 [params]
 

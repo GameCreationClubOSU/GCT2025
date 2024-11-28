@@ -1,8 +1,8 @@
-class_name MainCamera
+class_name CollageCamera
 extends Camera2D
 ## Handles the camera on the main board. This includes the dragging.
 
-var focus: Minigame:
+var focus: Miniframe:
 	set(value):
 		# Also check that the focus exists before doing the unfocus action.
 		# Otherwise spamming unfocus will keep zooming out.

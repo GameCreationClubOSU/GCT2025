@@ -4,9 +4,9 @@ extends Node2D
 # The Coordinator is the top-level manager for the main board.
 # Also stores the game state.
 
-@export var camera: MainCamera
+@export var camera: CollageCamera
 
-var focus: Minigame: 
+var focus: Miniframe: 
 	set(value):
 		if is_instance_valid(focus):
 			focus.enabled = false
@@ -19,7 +19,7 @@ var focus: Minigame:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	MinigameManager.minigame_clicked.connect(func(minigame): focus = minigame)
+	MinigameManager.miniframe_clicked.connect(func(miniframe): focus = miniframe)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

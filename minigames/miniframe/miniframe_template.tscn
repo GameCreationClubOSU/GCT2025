@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://lakrhf27383e"]
 
-[ext_resource type="Script" path="res://minigames/minigame.gd" id="1_q347j"]
-[ext_resource type="Texture2D" uid="uid://deb4jro1js2bc" path="res://minigames/frame/frame.png" id="2_cr4mo"]
+[ext_resource type="Script" path="res://minigames/miniframe/miniframe.gd" id="1_q347j"]
+[ext_resource type="Texture2D" uid="uid://deb4jro1js2bc" path="res://minigames/miniframe/frame.png" id="2_cr4mo"]
 
-[node name="Locksport" type="SubViewportContainer"]
+[node name="Miniframe" type="SubViewportContainer"]
 offset_left = -884.0
 offset_top = -455.0
 offset_right = -71.0
@@ -16,7 +16,7 @@ process_mode = 4
 disable_3d = true
 handle_input_locally = false
 physics_object_picking = true
-size = Vector2i(813, 512)
+size = Vector2i(813, 464)
 size_2d_override = Vector2i(813, 464)
 size_2d_override_stretch = true
 render_target_update_mode = 4
