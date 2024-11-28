@@ -77,7 +77,6 @@ func _gui_input(event: InputEvent) -> void:
 			clicked.emit(self)
 			accept_event()
 	elif auto_reset and enabled and event.is_action_pressed("reset"):
-		print("hello")
 		reload_scene()
 		get_viewport().set_input_as_handled()
 			
