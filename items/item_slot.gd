@@ -5,13 +5,13 @@ extends Resource
 ## Everything that needs store objects should use this class, including temporary stores of items.
 ## ItemSlots should be stable and should live as long as their parent objects.
 ## That means do not clear out ItemSlots by creating new ones, use clear method instead.
-## Changing a ItemSlot's items should be done with internal methods. 
-## Replacing the items should use [method Swap] with a temporary ItemSlot.
+## Changing a ItemSlot's items should be done with methods.
 ## DO NOT USE _amount and _item_type directly unless you know what you're doing.
 ##
 ## Further details:
 ## Generally, this class tries to be as fool-proof as possible (if user sticks to
-## established methods and properties.) General guarantees are as follows:
+## established methods and properties.) Methods have lots of checks. 
+## General guarantees are as follows:
 ## - Amount is always >= 0
 ## - If either _item_type is null or _amount == 0, the ItemSlot is considered empty.
 ## - Empty slots have amount == 0 and item_type == null. 
@@ -67,6 +67,43 @@ func is_full() -> bool:
 func get_texture() -> Texture2D:
 	return item_type.texture if is_instance_valid(item_type) else null
 	
+## Adds [param addend] to the existing stack. 
+## Use a negative [param addend] to remove items.
+## Will not add more than max_stack of item_type.
+## If slot is empty, nothing happens.
+## Returns amount added.
+func add(addend: int):
+	if is_empty():
+		return 0
+		
+	var amount_before: int = _amount
+	_amount = clampi(_amount + addend, 0, _item_type.max_stack)
+	emit_changed()
+	return _amount - amount_before
+	
+## Adds [param addend] number of items of the given [param type] to the slot.
+## If the adding item cannot be stacked with the current amount, no items
+## will be added.
+## Returns amount added.
+func add_item(type: ItemType, addend: int):
+	if not is_instance_valid(type):
+		push_warning("Tried to add invalid item type to ItemSlot!")
+		return 0
+	if not is_empty() and _item_type != type: # Conflicting types
+		return 0
+		
+	if is_empty():
+		_item_type = type
+		 # If _item_type is invalid, slot counts as empty but _amount isn't necessarily 0
+		_amount = 0
+	
+	# Can't just use [method add] because that method has an empty check.
+	# This method can add items to an emtp
+	var amount_before: int = _amount
+	_amount = clampi(_amount + addend, 0, _item_type.max_stack)
+	emit_changed()
+	return _amount - amount_before
+	
 ## Moves items from [param other] onto self. Returns the amount transferred.
 ##
 ## If [param max_amount] is >= 0, method will try to move that amount. 
@@ -105,6 +142,15 @@ func transfer_from(other: ItemSlot, max_amount: int) -> int:
 		
 	emit_changed()
 	return transferred
+	
+## Replaces the item_stack with the parameters
+func replace(new_type: ItemType, new_amount: int) -> void:
+	if not is_instance_valid(new_type):
+		push_error("Attempted to replace ItemSlot's items with invalid type!")
+		return
+		
+	_item_type = new_type
+	_amount = clampi(new_amount, 0, _item_type.max_stack)
 	
 ## Moves as many items as possible from [param other] onto self. 
 ## Returns the amount transferred. 
