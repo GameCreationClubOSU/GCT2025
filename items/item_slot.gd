@@ -49,10 +49,18 @@ extends Resource
 
 ## Internal backing field for amount. Do not manipulate directly unless you
 ## know what you're doing!
-var _amount: int = 1
+var _amount: int = 0
 ## Internal backing field for item_type. Do not manipulate directly unless you
 ## know what you're doing!
 var _item_type: ItemType = null
+
+func _init(item_type: ItemType = null, amount: int = 0) -> void:
+	if is_instance_valid(item_type):
+		_item_type = item_type
+		_amount = clampi(_amount, 0, _item_type.max_stack)
+	else:
+		_amount = 0
+		_item_type = null
 
 ## Returns true if the slot is empty, false otherwise.
 func is_empty() -> bool:
