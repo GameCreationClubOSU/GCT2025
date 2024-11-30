@@ -1,16 +1,16 @@
 class_name ItemSlot
 extends Resource
-
 ## A unit of inventory storage.
-## Everything that needs store objects should use this class, including temporary stores of items.
-## ItemSlots should be stable and should live as long as their parent objects.
+## Everything that needs to store objects should use this class, including temporary stores of items.
+## Most ItemSlots should be stable and should live as long as their parent objects.
 ## That means do not clear out ItemSlots by creating new ones, use clear method instead.
-## Changing a ItemSlot's items should be done with methods.
+## Changing a ItemSlot's items should be done with methods. 
+## Try to avoid setting amount and item_type directly. Use the given methods instead.
 ## DO NOT USE _amount and _item_type directly unless you know what you're doing.
 ##
 ## Further details:
 ## Generally, this class tries to be as fool-proof as possible (if user sticks to
-## established methods and properties.) Methods have lots of checks. 
+## established methods and properties.) Methods have lots of checks, sometimes redundant. 
 ## General guarantees are as follows:
 ## - Amount is always >= 0
 ## - If either _item_type is null or _amount == 0, the ItemSlot is considered empty.
@@ -19,6 +19,7 @@ extends Resource
 ## - Changes to slot should emit a changed signal.
 
 ## The amount of items in the slot.
+## Prefer [method add] and [method add_item] over setting this directly.
 @export var amount: int:
 	get:
 		return _amount if is_instance_valid(_item_type) else 0
@@ -98,7 +99,7 @@ func add_item(type: ItemType, addend: int):
 		_amount = 0
 	
 	# Can't just use [method add] because that method has an empty check.
-	# This method can add items to an emtp
+	# This method can add items to an empty ItemSlot
 	var amount_before: int = _amount
 	_amount = clampi(_amount + addend, 0, _item_type.max_stack)
 	emit_changed()
@@ -106,16 +107,17 @@ func add_item(type: ItemType, addend: int):
 	
 ## Moves items from [param other] onto self. Returns the amount transferred.
 ##
-## If [param max_amount] is >= 0, method will try to move that amount. 
+## If [param max_amount] is > 0, method will try to move that amount. 
+## Negative [param max_amount] will act as though max_amount == 0
 func transfer_from(other: ItemSlot, max_amount: int) -> int:
-	# Method uses backing fields instead of properties for performance.
+	# There's a lot of weird edge cases with this method.
 	# Be careful editing this method if you don't know what you're doing.
 	
 	# Guard clauses. These won't change the object 
 	# so they don't need to emit_changed and can return directly.
 	if (other.is_empty()):
 		return 0
-	if (max_amount != null and max_amount <= 0):
+	if (max_amount <= 0):
 		return 0
 	if (other == self):
 		return 0
