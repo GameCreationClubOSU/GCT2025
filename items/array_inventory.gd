@@ -27,20 +27,6 @@ extends Node
 
 var slots: Array[ItemSlot] = []
 
-func resize(new_size: int) -> void:
-	if new_size <= 0:
-		push_error("Cannot set inventory size <= 0!")
-		return
-			
-	var old_size: int = slots.size()
-	slots.resize(new_size)
-	if new_size > old_size:
-		for i in range(old_size, new_size):
-			slots[i] = ItemSlot.new()
-	# If new_size is smaller (i.e. the inventory is shrinking) resize will
-	# remove the old slots. No further action needed.
-		
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	slots.resize(size)
@@ -55,3 +41,17 @@ func _ready() -> void:
 				push_warning("Item descriptor is overwriting items in slot!")
 			slot.item_type = descriptor.item_type
 			slot.amount = descriptor.amount
+
+
+func resize(new_size: int) -> void:
+	if new_size <= 0:
+		push_error("Cannot set inventory size <= 0!")
+		return
+			
+	var old_size: int = slots.size()
+	slots.resize(new_size)
+	if new_size > old_size:
+		for i in range(old_size, new_size):
+			slots[i] = ItemSlot.new()
+	# If new_size is smaller (i.e. the inventory is shrinking) resize will
+	# remove the old slots. No further action needed.
