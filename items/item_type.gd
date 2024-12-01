@@ -22,4 +22,4 @@ extends Resource
 @export var texture: Texture2D
 
 ## Max size of a stack of this item.
-@export var max_stack: int
+@export_range(0, 100, 1, "or_greater") var max_stack: int = 10

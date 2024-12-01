@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlradsyxrqlep"]
+
+[ext_resource type="Script" path="res://items/ui/item_slot_display.gd" id="1_5a4k7"]
+[ext_resource type="Texture2D" uid="uid://c8gxhgkqu6qt0" path="res://items/default_items/key/key.png" id="2_1kqg8"]
+
+[node name="ItemSlotDisplay" type="Panel" node_paths=PackedStringArray("_item_texture", "_amount_label")]
+custom_minimum_size = Vector2(72, 72)
+offset_right = 72.0
+offset_bottom = 72.0
+script = ExtResource("1_5a4k7")
+_item_texture = NodePath("MarginContainer/ItemDisplay")
+_amount_label = NodePath("MarginContainer/ItemDisplay/AmountLabel")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ItemDisplay" type="TextureRect" parent="MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_1kqg8")
+stretch_mode = 5
+
+[node name="AmountLabel" type="Label" parent="MarginContainer/ItemDisplay"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "1"
+horizontal_alignment = 2

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemType" load_steps=3 format=3 uid="uid://kpkd0k7agsm0"]
+
+[ext_resource type="Script" path="res://items/item_type.gd" id="1_6km1f"]
+[ext_resource type="Texture2D" uid="uid://c8gxhgkqu6qt0" path="res://items/default_items/key/key.png" id="2_gd54m"]
+
+[resource]
+script = ExtResource("1_6km1f")
+item_id = "key"
+name = "Key"
+description = ""
+texture = ExtResource("2_gd54m")
+max_stack = 10
