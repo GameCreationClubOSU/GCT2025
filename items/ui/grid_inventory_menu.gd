@@ -46,16 +46,17 @@ func _gui_input(event: InputEvent) -> void:
 func bind_to_inventory(new_inventory: ArrayInventory) -> void:
 	if not is_instance_valid(new_inventory):
 		push_error("Attempted to bind inventory display to invalid inventory!")
+		return
 	
 	# Unbind current inventory.
 	# If no inventory is bound, method shouldn't error.
 	unbind()
 	
 	_inventory = new_inventory
-	_inventory_name_label.text = _inventory.name
+	_inventory_name_label.text = _inventory.inventory_name
 	resize()
 	
-	var rows := ceili(_inventory.size / columns)
+	var rows := ceili(_inventory.size / float(columns))
 	_slot_displays.resize(_inventory.size)
 	for row in rows:
 		for column in columns:
@@ -84,7 +85,7 @@ func unbind() -> void:
 func resize() -> void:
 	# Calculating the total size of the grid element.
 	var size_offset := size - _slot_container.size
-	var rows := ceili(_inventory.size / columns)
+	var rows := ceili(_inventory.size / float(columns))
 	var grid_size := Vector2(columns, rows)
 	grid_size *= _slot_size
 	

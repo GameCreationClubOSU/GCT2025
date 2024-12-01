@@ -5,11 +5,6 @@ extends Node
 ## available as [member slots]. 
 
 @export var size: int = 5:
-	get:
-		if is_node_ready():
-			return slots.size()
-		else:
-			return size
 	set(value):
 		if value <= 0:
 			push_error("Cannot set inventory size <= 0!")

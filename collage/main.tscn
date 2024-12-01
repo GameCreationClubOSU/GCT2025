@@ -1,12 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://bn87h0cnlci4m"]
+[gd_scene load_steps=13 format=3 uid="uid://bn87h0cnlci4m"]
 
 [ext_resource type="Shader" path="res://collage/background/grid.gdshader" id="1_35pje"]
-[ext_resource type="Script" path="res://collage/coordinator.gd" id="1_tiu0a"]
+[ext_resource type="Script" path="res://collage/collage.gd" id="1_tiu0a"]
 [ext_resource type="Script" path="res://collage/collage_camera.gd" id="2_4ys4d"]
 [ext_resource type="Script" path="res://collage/background/background_sprite.gd" id="4_73gsi"]
 [ext_resource type="Script" path="res://collage/collage_camera_debug.gd" id="5_i2y3i"]
 [ext_resource type="PackedScene" uid="uid://lakrhf27383e" path="res://minigames/miniframe/miniframe_template.tscn" id="6_jt8y7"]
-[ext_resource type="Script" path="res://collage/coordinator_debug.gd" id="8_ygc3o"]
+[ext_resource type="PackedScene" uid="uid://bhwy2tsn5yfm3" path="res://items/ui/grid_inventory_menu.tscn" id="6_t6oy5"]
+[ext_resource type="Script" path="res://collage/collage_debug.gd" id="8_ygc3o"]
 [ext_resource type="PackedScene" uid="uid://dp5rt3m1qgpgk" path="res://minigames/locksport/main.tscn" id="9_ci15t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l484h"]
@@ -25,9 +26,10 @@ colors = PackedColorArray(0, 0.301961, 0.560784, 1, 0, 0.301961, 0.560784, 1)
 gradient = SubResource("Gradient_oc1u4")
 width = 1
 
-[node name="Collage" type="Node2D" node_paths=PackedStringArray("camera")]
+[node name="Collage" type="Node2D" node_paths=PackedStringArray("camera", "inventory_menu")]
 script = ExtResource("1_tiu0a")
 camera = NodePath("Camera")
+inventory_menu = NodePath("DetachedUI/GridInventoryMenu")
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
@@ -49,12 +51,22 @@ script = ExtResource("5_i2y3i")
 menu_name = "Collage Camera"
 
 [node name="Locksport" parent="." instance=ExtResource("6_jt8y7")]
-offset_left = -1166.0
-offset_top = -716.0
-offset_right = 114.0
-offset_bottom = 4.0
+offset_left = 128.0
+offset_top = -773.0
+offset_right = 1408.0
+offset_bottom = -53.0
 scene = ExtResource("9_ci15t")
 
-[node name="CoordinatorDebug" type="Node" parent="."]
+[node name="CollageDebug" type="Node" parent="."]
 script = ExtResource("8_ygc3o")
-menu_name = "Coordinator"
+menu_name = "Collage"
+
+[node name="DetachedUI" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="GridInventoryMenu" parent="DetachedUI" instance=ExtResource("6_t6oy5")]
+z_index = 100
+offset_left = 31.0
+offset_top = 29.0
+offset_right = 331.0
+offset_bottom = 229.0

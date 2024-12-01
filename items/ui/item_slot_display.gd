@@ -26,7 +26,7 @@ func update_display() -> void:
 	if is_instance_valid(slot) and not slot.is_empty():
 		texture = slot.get_texture()
 		# If the max stack is only one, just show the icon and not the number.
-		amount_text = slot.amount if slot.item_type.max_stack > 1 else ""
+		amount_text = str(slot.amount) if slot.item_type.max_stack > 1 else ""
 		tooltip_text = slot.item_type.name + "\n" + slot.item_type.description
 		
 	if is_instance_valid(_item_texture):

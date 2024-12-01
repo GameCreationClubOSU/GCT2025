@@ -19,9 +19,8 @@ config/icon="res://icon.svg"
 
 DebugMenuUI="*res://debug/debug_menu_ui.tscn"
 ImGuiRoot="*res://addons/imgui-godot/data/ImGuiRoot.tscn"
-MinigameManager="*res://minigames/minigame_manager.gd"
 InputUtil="*res://util/input_util.gd"
-CollageInventory="*res://items/inventories/array_inventory.gd"
+Coordinator="*res://coordinator/coordinator.tscn"
 
 [dotnet]
 
