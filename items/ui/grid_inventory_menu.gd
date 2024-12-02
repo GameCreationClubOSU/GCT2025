@@ -10,12 +10,14 @@ signal slot_clicked(event: InputEventMouseButton, slot: ItemSlotDisplay, slot_in
 @export var _inventory_name_label: Label
 @export var _slot_size: Vector2 = Vector2(72, 72) 
 
-var inventory: ArrayInventory = null:
+@export var inventory: ArrayInventory = null:
 	get:
 		return _inventory
 	set(value):
 		if is_instance_valid(value):
-			pass
+			bind_to_inventory(value)
+		else:
+			unbind()
 
 var _inventory: ArrayInventory = null
 var _dragging: bool = false
@@ -24,7 +26,8 @@ var _slot_displays: Array[ItemSlotDisplay] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	if is_instance_valid(_inventory):
+		bind_to_inventory(_inventory)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
