@@ -54,10 +54,10 @@ var _amount: int = 0
 ## know what you're doing!
 var _item_type: ItemType = null
 
-func _init(item_type: ItemType = null, amount: int = 0) -> void:
-	if is_instance_valid(item_type):
-		_item_type = item_type
-		_amount = clampi(_amount, 0, _item_type.max_stack)
+func _init(new_item_type: ItemType = null, new_amount: int = 0) -> void:
+	if is_instance_valid(new_item_type):
+		_item_type = new_item_type
+		_amount = clampi(new_amount, 0, _item_type.max_stack)
 	else:
 		_amount = 0
 		_item_type = null
