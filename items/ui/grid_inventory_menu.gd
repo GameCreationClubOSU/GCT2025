@@ -9,6 +9,11 @@ signal slot_interacted(event: InputEvent, slot: ItemSlotDisplay, slot_index: int
 @export var _slot_container: GridContainer
 @export var _inventory_name_label: Label
 @export var _slot_size: Vector2 = Vector2(72, 72) 
+@export var draggable: bool = true:
+	set(value):
+		draggable = value
+		if not value:
+			_dragging = false
 
 @export var inventory: ArrayInventory = null:
 	get:
@@ -41,11 +46,12 @@ func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		var mouse_event: InputEventMouseButton = event
 		if mouse_event.button_index == MOUSE_BUTTON_LEFT:
-			if mouse_event.pressed:
-				_dragging = true
-				_drag_offset = get_global_mouse_position() - position
-			else:
-				_dragging = false
+			if draggable:
+				if mouse_event.pressed:
+					_dragging = true
+					_drag_offset = get_global_mouse_position() - position
+				else:
+					_dragging = false
 			accept_event()
 		
 ## Binds this display to [param new_inventory]
