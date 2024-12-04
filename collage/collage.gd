@@ -4,11 +4,12 @@ extends Node2D
 
 ## The camera for the collage scene
 @export var camera: CollageCamera
-## The inventory menu for the Cooridinator nventory.
+## The inventory menu for the Cooridinator inventory.
 ## The reason this is in here and not coordinator is because each minigame
 ## should be able to run in its own scene. This doesn't need to be accessible
 ## from those individual scenes.
 @export var inventory_menu: GridInventoryMenu
+@export var selection_slot: SelectionSlot
 
 var focus: Miniframe: 
 	set(value):
@@ -17,6 +18,7 @@ var focus: Miniframe:
 			
 		focus = value
 		camera.focus = value
+		selection_slot.visible = not is_instance_valid(value)
 		
 		if is_instance_valid(focus):
 			focus.enabled = true

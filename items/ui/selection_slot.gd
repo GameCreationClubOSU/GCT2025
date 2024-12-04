@@ -1,3 +1,4 @@
+class_name SelectionSlot
 extends ItemSlotDisplay
 ## This is an independent slot that acts as the item selector for the player.
 ## Handles the click interactions with slots.
