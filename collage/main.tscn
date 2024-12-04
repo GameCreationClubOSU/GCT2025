@@ -54,12 +54,13 @@ amount = 16
 [node name="Collage" type="Node2D" node_paths=PackedStringArray("camera", "inventory_menu")]
 script = ExtResource("1_tiu0a")
 camera = NodePath("Camera")
-inventory_menu = NodePath("DetachedUI/GridInventoryMenu")
+inventory_menu = NodePath("DetachedUI/CollageInventoryMenu")
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
 script = ExtResource("2_4ys4d")
 min_zoom = 0.25
+max_zoom = 4.0
 focus_zoom_multiplier = 0.8
 zoom_target = 0.5
 metadata/_edit_lock_ = true
@@ -89,12 +90,13 @@ menu_name = "Collage"
 [node name="DetachedUI" type="CanvasLayer" parent="."]
 layer = 10
 
-[node name="GridInventoryMenu" parent="DetachedUI" instance=ExtResource("6_t6oy5")]
+[node name="CollageInventoryMenu" parent="DetachedUI" instance=ExtResource("6_t6oy5")]
 z_index = 100
 offset_left = 31.0
 offset_top = 29.0
 offset_right = 331.0
 offset_bottom = 229.0
+columns = 5
 
 [node name="SelectionSlot" parent="DetachedUI" instance=ExtResource("12_527j7")]
 top_level = true
