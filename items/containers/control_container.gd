@@ -1,7 +1,6 @@
 extends Control
 ## This is a simple version of a container opens when its container is clicked.
 
-@export var inventory: ArrayInventory
 @export var inventory_menu: Control
 @export var is_open: bool = false:
 	set(value):

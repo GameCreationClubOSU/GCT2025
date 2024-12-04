@@ -6,11 +6,13 @@ signal clicked(event: InputEventMouseButton)
 @export var clickable: bool = true
 @export var _item_texture: TextureRect
 @export var _amount_label: Label
-
-var slot: ItemSlot
+@export var slot: ItemSlot = ItemSlot.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if not is_instance_valid(slot):
+		slot = ItemSlot.new()
+		
 	update_display()
 	
 func _gui_input(event: InputEvent) -> void:

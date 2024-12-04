@@ -14,10 +14,13 @@ signal slot_clicked(event: InputEventMouseButton, slot: ItemSlotDisplay, slot_in
 	get:
 		return _inventory
 	set(value):
-		if is_instance_valid(value):
-			bind_to_inventory(value)
+		if is_node_ready():
+			if is_instance_valid(value):
+				bind_to_inventory(value)
+			else:
+				unbind()
 		else:
-			unbind()
+			_inventory = value
 
 var _inventory: ArrayInventory = null
 var _dragging: bool = false

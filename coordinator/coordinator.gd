@@ -19,9 +19,10 @@ func in_collage() -> bool:
 ## the root node of scene. 
 ## For most nodes, proper usage is [code]MinigameManager.get_root_of(self)[/code]
 ## Returns the global root if running from outside the collage scene.
+## Returns null if node is called outside of any minigames but still inside the Collage.
 func get_root_of(node: Node) -> Node:
 	# This is to allow games to run in their own independent scenes for testing.
-	if in_collage():
+	if not in_collage():
 		return get_tree().root
 	
 	# Normal case	
@@ -29,7 +30,6 @@ func get_root_of(node: Node) -> Node:
 		if miniframe.is_ancestor_of(node):
 			return miniframe.viewport
 			
-	push_error("get_root_of has been called from a node that isn't in a minigame!")
 	return null
 
 ## Registers a miniframe to the manager.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bn87h0cnlci4m"]
+[gd_scene load_steps=16 format=3 uid="uid://bn87h0cnlci4m"]
 
 [ext_resource type="Shader" path="res://collage/background/grid.gdshader" id="1_35pje"]
 [ext_resource type="Script" path="res://collage/collage.gd" id="1_tiu0a"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://bhwy2tsn5yfm3" path="res://items/ui/grid_inventory_menu.tscn" id="6_t6oy5"]
 [ext_resource type="Script" path="res://collage/collage_debug.gd" id="8_ygc3o"]
 [ext_resource type="PackedScene" uid="uid://dp5rt3m1qgpgk" path="res://minigames/locksport/main.tscn" id="9_ci15t"]
+[ext_resource type="Script" path="res://items/inventories/inventory_manager.gd" id="10_m6sj7"]
+[ext_resource type="Script" path="res://items/containers/control_container.gd" id="11_1xkc3"]
+[ext_resource type="Script" path="res://items/inventories/array_inventory.gd" id="13_g4iug"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l484h"]
 shader = ExtResource("1_35pje")
@@ -70,3 +73,25 @@ offset_left = 31.0
 offset_top = 29.0
 offset_right = 331.0
 offset_bottom = 229.0
+
+[node name="InventoryManager" type="Node" parent="."]
+script = ExtResource("10_m6sj7")
+
+[node name="Panel" type="Panel" parent="." node_paths=PackedStringArray("inventory_menu")]
+offset_left = -346.0
+offset_top = 68.0
+offset_right = -306.0
+offset_bottom = 108.0
+script = ExtResource("11_1xkc3")
+inventory_menu = NodePath("GridInventoryMenu")
+
+[node name="GridInventoryMenu" parent="Panel" node_paths=PackedStringArray("inventory") instance=ExtResource("6_t6oy5")]
+offset_left = -219.0
+offset_top = -210.0
+offset_right = 81.0
+offset_bottom = -10.0
+columns = 3
+inventory = NodePath("ArrayInventory")
+
+[node name="ArrayInventory" type="Node" parent="Panel/GridInventoryMenu"]
+script = ExtResource("13_g4iug")
