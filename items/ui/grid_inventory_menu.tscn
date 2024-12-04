@@ -10,9 +10,9 @@ anchors_preset = 0
 offset_right = 300.0
 offset_bottom = 200.0
 script = ExtResource("1_o1n6l")
-_slot_preset = ExtResource("2_tgd7g")
 _slot_container = NodePath("Background/GridContainer")
 _inventory_name_label = NodePath("Background/Name")
+_slot_preset = ExtResource("2_tgd7g")
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 1

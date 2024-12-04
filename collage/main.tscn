@@ -130,9 +130,9 @@ offset_top = -210.0
 offset_right = 81.0
 offset_bottom = -10.0
 columns = 3
-_slot_size = Vector2(72, 72)
 draggable = false
 inventory = NodePath("ArrayInventory")
+_slot_size = Vector2(72, 72)
 
 [node name="ArrayInventory" type="Node" parent="TestContainer/GridInventoryMenu"]
 script = ExtResource("13_g4iug")
