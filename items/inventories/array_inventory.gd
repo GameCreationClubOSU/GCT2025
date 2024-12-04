@@ -24,7 +24,7 @@ var slots: Array[ItemSlot] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	slots.resize(size)
+	resize(size)
 	
 	# Filling in all the descriptors
 	for descriptor in descriptors:
@@ -34,7 +34,7 @@ func _ready() -> void:
 			var slot = slots[descriptor.index]
 			if is_instance_valid(slot.item_type):
 				push_warning("Item descriptor is overwriting items in slot!")
-			slot.item_type = descriptor.item_type
+			slot.item_type = descriptor.type
 			slot.amount = descriptor.amount
 
 
@@ -44,13 +44,12 @@ func resize(new_size: int) -> void:
 		push_error("Cannot set inventory size <= 0!")
 		return
 			
-	var old_size: int = slots.size()
 	slots.resize(new_size)
-	if new_size > old_size:
-		for i in range(old_size, new_size):
+	for i in slots.size():
+		if not is_instance_valid(slots[i]):
 			slots[i] = ItemSlot.new()
-	# If new_size is smaller (i.e. the inventory is shrinking) resize will
-	# remove the old slots. No further action needed.
+			
+	# If the inventory is shrinking resize will remove the old slots. No further action needed.
 
 ## Gets the total amount of items of type [param item_type] in the inventory.
 func amount_of(item_type: ItemType) -> int:

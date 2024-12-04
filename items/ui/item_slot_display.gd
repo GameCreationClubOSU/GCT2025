@@ -3,10 +3,16 @@ extends Control
 
 signal clicked(event: InputEventMouseButton)
 
-@export var clickable: bool = true
+@export var interactable: bool = true
 @export var _item_texture: TextureRect
 @export var _amount_label: Label
-@export var slot: ItemSlot = ItemSlot.new()
+@export var slot: ItemSlot = ItemSlot.new():
+	set(value):
+		if is_instance_valid(slot) and slot.changed.is_connected(update_display):
+			slot.changed.disconnect(update_display)
+		slot = value
+		if is_instance_valid(value):
+			slot.changed.connect(update_display)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,14 +22,15 @@ func _ready() -> void:
 	update_display()
 	
 func _gui_input(event: InputEvent) -> void:
-	if clickable and event is InputEventMouseButton:
+	if interactable:
 		accept_event()
+		Coordinator.alert_slot_interacted(event, slot, self)
 		clicked.emit(event)
 
 func update_display() -> void:
 	var texture: Texture2D = null
 	var amount_text: String = ""
-	tooltip_text = "" # Field of Control.
+	tooltip_text = "" # tooltip_text is a field of Control.
 	
 	if is_instance_valid(slot) and not slot.is_empty():
 		texture = slot.get_texture()

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://subjnfiy5rye"]
+
+[ext_resource type="PackedScene" uid="uid://dlradsyxrqlep" path="res://items/ui/item_slot_display.tscn" id="1_7lxem"]
+[ext_resource type="Script" path="res://items/ui/selection_slot.gd" id="2_5pqfx"]
+
+[node name="SelectionSlot" instance=ExtResource("1_7lxem")]
+self_modulate = Color(1, 1, 1, 0)
+script = ExtResource("2_5pqfx")
+display_offset = Vector2(10, 10)
+interactable = false

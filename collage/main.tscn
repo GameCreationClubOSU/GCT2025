@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bn87h0cnlci4m"]
+[gd_scene load_steps=23 format=3 uid="uid://bn87h0cnlci4m"]
 
 [ext_resource type="Shader" path="res://collage/background/grid.gdshader" id="1_35pje"]
 [ext_resource type="Script" path="res://collage/collage.gd" id="1_tiu0a"]
@@ -9,9 +9,13 @@
 [ext_resource type="PackedScene" uid="uid://bhwy2tsn5yfm3" path="res://items/ui/grid_inventory_menu.tscn" id="6_t6oy5"]
 [ext_resource type="Script" path="res://collage/collage_debug.gd" id="8_ygc3o"]
 [ext_resource type="PackedScene" uid="uid://dp5rt3m1qgpgk" path="res://minigames/locksport/main.tscn" id="9_ci15t"]
-[ext_resource type="Script" path="res://items/inventories/inventory_manager.gd" id="10_m6sj7"]
 [ext_resource type="Script" path="res://items/containers/control_container.gd" id="11_1xkc3"]
+[ext_resource type="PackedScene" uid="uid://subjnfiy5rye" path="res://items/ui/selection_slot.tscn" id="12_527j7"]
+[ext_resource type="Script" path="res://items/inventories/item_descriptor.gd" id="12_n0468"]
 [ext_resource type="Script" path="res://items/inventories/array_inventory.gd" id="13_g4iug"]
+[ext_resource type="Resource" uid="uid://kpkd0k7agsm0" path="res://items/default_items/key/key.tres" id="13_plkd0"]
+[ext_resource type="Resource" uid="uid://tjeiel15um82" path="res://items/default_items/brutus_dragon/brutus_dragon.tres" id="14_l2a5o"]
+[ext_resource type="Resource" uid="uid://u4ig0heqobt6" path="res://items/default_items/judgmental_puppy/judgmental_puppy.tres" id="15_abjog"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l484h"]
 shader = ExtResource("1_35pje")
@@ -28,6 +32,24 @@ colors = PackedColorArray(0, 0.301961, 0.560784, 1, 0, 0.301961, 0.560784, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_gdvj4"]
 gradient = SubResource("Gradient_oc1u4")
 width = 1
+
+[sub_resource type="Resource" id="Resource_06vha"]
+script = ExtResource("12_n0468")
+index = 0
+type = ExtResource("13_plkd0")
+amount = 2
+
+[sub_resource type="Resource" id="Resource_6cu46"]
+script = ExtResource("12_n0468")
+index = 1
+type = ExtResource("14_l2a5o")
+amount = 18
+
+[sub_resource type="Resource" id="Resource_ogyky"]
+script = ExtResource("12_n0468")
+index = 2
+type = ExtResource("15_abjog")
+amount = 16
 
 [node name="Collage" type="Node2D" node_paths=PackedStringArray("camera", "inventory_menu")]
 script = ExtResource("1_tiu0a")
@@ -74,10 +96,11 @@ offset_top = 29.0
 offset_right = 331.0
 offset_bottom = 229.0
 
-[node name="InventoryManager" type="Node" parent="."]
-script = ExtResource("10_m6sj7")
+[node name="SelectionSlot" parent="DetachedUI" instance=ExtResource("12_527j7")]
+top_level = true
+z_index = 200
 
-[node name="Panel" type="Panel" parent="." node_paths=PackedStringArray("inventory_menu")]
+[node name="TestContainer" type="Panel" parent="." node_paths=PackedStringArray("inventory_menu")]
 offset_left = -346.0
 offset_top = 68.0
 offset_right = -306.0
@@ -85,7 +108,7 @@ offset_bottom = 108.0
 script = ExtResource("11_1xkc3")
 inventory_menu = NodePath("GridInventoryMenu")
 
-[node name="GridInventoryMenu" parent="Panel" node_paths=PackedStringArray("inventory") instance=ExtResource("6_t6oy5")]
+[node name="GridInventoryMenu" parent="TestContainer" node_paths=PackedStringArray("inventory") instance=ExtResource("6_t6oy5")]
 offset_left = -219.0
 offset_top = -210.0
 offset_right = 81.0
@@ -93,5 +116,7 @@ offset_bottom = -10.0
 columns = 3
 inventory = NodePath("ArrayInventory")
 
-[node name="ArrayInventory" type="Node" parent="Panel/GridInventoryMenu"]
+[node name="ArrayInventory" type="Node" parent="TestContainer/GridInventoryMenu"]
 script = ExtResource("13_g4iug")
+size = 6
+descriptors = Array[ExtResource("12_n0468")]([SubResource("Resource_06vha"), SubResource("Resource_6cu46"), SubResource("Resource_ogyky")])

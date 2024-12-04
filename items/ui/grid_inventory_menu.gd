@@ -1,7 +1,7 @@
 class_name GridInventoryMenu
 extends Control
 
-signal slot_clicked(event: InputEventMouseButton, slot: ItemSlotDisplay, slot_index: int)
+signal slot_interacted(event: InputEvent, slot: ItemSlotDisplay, slot_index: int)
 
 @export var columns: int = 8
 
@@ -73,8 +73,8 @@ func bind_to_inventory(new_inventory: ArrayInventory) -> void:
 				var new_display: ItemSlotDisplay = _slot_preset.instantiate()
 				new_display.slot = _inventory.slot_at(index)
 				new_display.name = "Slot[%d][%d]" % [row, column]
-				new_display.clicked.connect(func(event: InputEventMouseButton):
-					slot_clicked.emit(event, new_display, index)
+				new_display.clicked.connect(func(event: InputEvent):
+					slot_interacted.emit(event, new_display, index)
 				)
 				_slot_container.add_child(new_display)
 				_slot_displays[index] = new_display
