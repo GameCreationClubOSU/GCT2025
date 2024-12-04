@@ -1,11 +1,16 @@
 class_name ItemSlotDisplay
 extends Control
 
-signal clicked(event: InputEventMouseButton)
+## Fires whenever the slot has been interacted with in some way (i.e. _gui_input)
+signal interacted(event: InputEvent)
 
+## If false, the display can't be interacted with and will never fire the [signal interacted] signal.
 @export var interactable: bool = true
+## The [class TextureRect] that will be used to display the item_texture.
 @export var _item_texture: TextureRect
+## The [class Label] that will be used to display the amount in the slot.
 @export var _amount_label: Label
+# The slot that this display is displaying. If not set, it will be a new empty slot during runtime.
 @export var slot: ItemSlot = ItemSlot.new():
 	set(value):
 		if is_instance_valid(slot) and slot.changed.is_connected(update_display):
@@ -25,8 +30,9 @@ func _gui_input(event: InputEvent) -> void:
 	if interactable:
 		accept_event()
 		Coordinator.alert_slot_interacted(event, slot, self)
-		clicked.emit(event)
-
+		interacted.emit(event)
+		
+# Updates the display's view of its ItemSlot.
 func update_display() -> void:
 	var texture: Texture2D = null
 	var amount_text: String = ""
@@ -38,6 +44,7 @@ func update_display() -> void:
 		amount_text = str(slot.amount) if slot.item_type.max_stack > 1 else ""
 		tooltip_text = slot.item_type.name + "\n" + slot.item_type.description
 		
+	# If the control nodes aren't set, assume that the user wants to not show them. 
 	if is_instance_valid(_item_texture):
 		_item_texture.texture = texture
 		

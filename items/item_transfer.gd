@@ -1,9 +1,9 @@
 class_name ItemTransfer
 extends Object
-
 ## Utility library for player item transfer protocols.
 ## Generally, source will refer to the ItemSlot the player's holding,
 ## and destination will refer to the slot they're clicking on. 
+## See [class SelectionSlot] for examples.
 
 ## Standard left-click behavior.
 ## Transfer from source to destination if both slots contain the same items,

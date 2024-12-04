@@ -31,7 +31,7 @@ func _ready() -> void:
 		if descriptor.index >= size:
 			push_warning("Item descriptor index is out of bounds!")
 		else:
-			var slot = slots[descriptor.index]
+			var slot: ItemSlot = slots[descriptor.index]
 			if is_instance_valid(slot.item_type):
 				push_warning("Item descriptor is overwriting items in slot!")
 			slot.item_type = descriptor.type
@@ -63,9 +63,10 @@ func amount_of(item_type: ItemType) -> int:
 			
 	return sum
 
-## Transfers items from [param provider] to self. 
+## Transfers items from [param provider] to self.
+##
 ## Will transfer a max of [param max_amount] but might transfer less depending
-## on what can be transferred.
+## on what can be transferred. Will prefer to stack with slots with the same item_type first.
 ## Returns the amount of items transferred.
 func transfer_from(provider: ItemSlot, max_amount: int) -> int:
 	# Transferring negative items should get caught by [class ItemSlot] anyway.
@@ -74,12 +75,12 @@ func transfer_from(provider: ItemSlot, max_amount: int) -> int:
 	var amount_transferred: int = 0
 	# mini is min_integer, not synonym for small
 	var transfer_limit: int = mini(max_amount, provider.amount)
-	# Prefer slots with stackable slots first.
+	# Prefer slots with the same item_type first.
 	for slot in slots:
 		if transfer_limit <= 0:
 			break
-		elif slot.stackable_with(provider):
-			var transferred = slot.transfer_from(provider, transfer_limit)
+		elif slot.item_type == provider.item_type:
+			var transferred: int = slot.transfer_from(provider, transfer_limit)
 			transfer_limit -= transferred
 			amount_transferred += transferred
 			
@@ -87,7 +88,7 @@ func transfer_from(provider: ItemSlot, max_amount: int) -> int:
 	for slot in slots:
 		if transfer_limit <= 0:
 			break
-		var transferred = slot.transfer_from(provider, transfer_limit)
+		var transferred: int = slot.transfer_from(provider, transfer_limit)
 		transfer_limit -= transferred
 		amount_transferred += transferred
 	
@@ -120,3 +121,9 @@ func has_slot(slot: ItemSlot) -> bool:
 ## Gets the slot at [param index]
 func slot_at(index: int) -> ItemSlot:
 	return slots[index]
+	
+## Clears all items in inventory.
+func clear() -> void:
+	for slot in slots:
+		slot.clear()
+	

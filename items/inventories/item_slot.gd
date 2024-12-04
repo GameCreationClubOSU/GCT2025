@@ -81,7 +81,7 @@ func get_texture() -> Texture2D:
 ## Will not add more than max_stack of item_type.
 ## If slot is empty, nothing happens.
 ## Returns amount added.
-func add(addend: int):
+func add(addend: int) -> int:
 	if is_empty():
 		return 0
 		
@@ -94,7 +94,7 @@ func add(addend: int):
 ## If the adding item cannot be stacked with the current amount, no items
 ## will be added.
 ## Returns amount added.
-func add_item(type: ItemType, addend: int):
+func add_item(type: ItemType, addend: int) -> int:
 	if not is_instance_valid(type):
 		push_warning("Tried to add invalid item type to ItemSlot!")
 		return 0
