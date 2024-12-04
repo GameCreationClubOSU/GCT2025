@@ -33,6 +33,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("exit_minigame"):
 		focus = null
 		get_viewport().set_input_as_handled()
-	elif event.is_action_pressed("toggle_collage_inventory"):
+	elif event.is_action_pressed("toggle_inventory"):
 		inventory_menu.visible = not inventory_menu.visible
 		get_viewport().set_input_as_handled()
