@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://lakrhf27383e"]
 
 [ext_resource type="Script" path="res://minigames/miniframe/miniframe.gd" id="1_q347j"]
-[ext_resource type="Texture2D" uid="uid://deb4jro1js2bc" path="res://minigames/miniframe/frame.png" id="2_cr4mo"]
+[ext_resource type="Texture2D" uid="uid://deb4jro1js2bc" path="res://common/textures/frame.png" id="2_cr4mo"]
 
 [node name="Miniframe" type="SubViewportContainer"]
 offset_right = 813.0
@@ -23,8 +23,8 @@ render_target_update_mode = 4
 layout_mode = 2
 texture = ExtResource("2_cr4mo")
 draw_center = false
-patch_margin_left = 3
-patch_margin_top = 25
-patch_margin_right = 3
-patch_margin_bottom = 3
+patch_margin_left = 4
+patch_margin_top = 26
+patch_margin_right = 4
+patch_margin_bottom = 4
 metadata/_edit_lock_ = true

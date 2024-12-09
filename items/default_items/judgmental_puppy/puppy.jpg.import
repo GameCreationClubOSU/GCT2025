@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://deb4jro1js2bc"
-path="res://.godot/imported/frame.png-f25fb7b98b8a4793e73ec3030f484d51.ctex"
+uid="uid://dkixy6pj556kk"
+path="res://.godot/imported/puppy.jpg-b59bcb40b3dfd214cffc1ff4274c5f46.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://minigames/miniframe/frame.png"
-dest_files=["res://.godot/imported/frame.png-f25fb7b98b8a4793e73ec3030f484d51.ctex"]
+source_file="res://items/default_items/judgmental_puppy/puppy.jpg"
+dest_files=["res://.godot/imported/puppy.jpg-b59bcb40b3dfd214cffc1ff4274c5f46.ctex"]
 
 [params]
 

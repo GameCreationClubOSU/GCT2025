@@ -58,7 +58,7 @@ func reload_scene() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if not Engine.is_editor_hint():
-		MinigameManager.register_miniframe(self)
+		Coordinator.register_miniframe(self)
 		reload_scene()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
