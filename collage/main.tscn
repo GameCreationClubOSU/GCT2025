@@ -90,10 +90,10 @@ script = ExtResource("5_i2y3i")
 menu_name = "Collage Camera"
 
 [node name="Locksport" parent="." instance=ExtResource("6_jt8y7")]
-offset_left = 128.0
-offset_top = -773.0
-offset_right = 1408.0
-offset_bottom = -53.0
+offset_left = 118.0
+offset_top = -794.0
+offset_right = 1398.0
+offset_bottom = -74.0
 scene = ExtResource("9_ci15t")
 
 [node name="CollageDebug" type="Node" parent="."]
@@ -110,7 +110,6 @@ offset_top = 29.0
 offset_right = 331.0
 offset_bottom = 229.0
 columns = 5
-_slot_size = Vector2(72, 72)
 
 [node name="SelectionSlot" parent="DetachedUI" instance=ExtResource("12_527j7")]
 top_level = true
@@ -132,7 +131,6 @@ offset_bottom = -10.0
 columns = 3
 draggable = false
 inventory = NodePath("ArrayInventory")
-_slot_size = Vector2(72, 72)
 
 [node name="ArrayInventory" type="Node" parent="TestContainer/GridInventoryMenu"]
 script = ExtResource("13_g4iug")

@@ -26,12 +26,13 @@ func in_collage() -> bool:
 	return is_instance_valid(main_node) and main_node is Collage
 
 ## Gets the local minigame root for the node given.
-## For consistency with the rest of Godot, the "root" is the node right above 
-## the root node of scene. 
-## For most nodes, proper usage is [code]MinigameManager.get_root_of(self)[/code]
+## For consistency with the get_root method from [class SceneTree], 
+## the "root" is the node right above the root node of scene. 
+## If the root node of the scene is needed, use [method current_scene] instead
+## For most nodes, proper usage is [code]MinigameManager.get_root(self)[/code]
 ## Returns the global root if running from outside the collage scene.
 ## Returns the global root if called outside of any minigames but still inside the Collage.
-func get_root_of(node: Node) -> Node:
+func get_root(node: Node) -> Node:
 	# This is to allow games to run in their own independent scenes for testing.
 	if not in_collage():
 		return get_tree().root
@@ -40,11 +41,31 @@ func get_root_of(node: Node) -> Node:
 	for miniframe in miniframes:
 		if miniframe.is_ancestor_of(node):
 			return miniframe.viewport
+			
+	get_tree().root
+
+	return get_tree().root
+
+## Gets the scene root of the node given. Meant to replace get_tree().current_scene.
+##
+## Returns the global scene root if running from outside the collage scene.
+## Returns the global scnee root if called outside of any minigames but still inside the Collage.
+func current_scene(node: Node) -> Node:
+	# This is to allow games to run in their own independent scenes for testing.
+	if not in_collage():
+		return get_tree().current_scene
+		
+	# Normal case	
+	for miniframe in miniframes:
+		if miniframe.is_ancestor_of(node):
+			return miniframe.viewport
+			
+	get_tree().root
 
 	return get_tree().root
 	
 func get_inventory_manager(node: Node) -> Node:
-	return inventory_managers[get_root_of(node)]
+	return inventory_managers[get_root(node)]
 
 ## Registers a miniframe to the manager.
 func register_miniframe(miniframe: Miniframe) -> void:
@@ -70,7 +91,7 @@ func alert_slot_interacted(event: InputEvent, slot: ItemSlot, clicked_node: Node
 		push_error("Invalid slot parameter on method alert_slot_interacted")
 		return
 	
-	var root: Node = get_root_of(clicked_node)
+	var root: Node = get_root(clicked_node)
 	slot_interacted.emit(event, slot, root)
 	
 # Called when the node enters the scene tree for the first time.
