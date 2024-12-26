@@ -32,6 +32,15 @@ func get_collage() -> Collage:
 ## Returns true if the main scene is collage scene, false otherwise.
 func in_collage() -> bool:
 	return is_instance_valid(get_collage())
+	
+## Gets the miniframe that is an ancestor of [param node].
+## If [param node] is not a descendant of a miniframe, null will be returned.
+func get_miniframe_of(node: Node) -> Miniframe:
+	for miniframe in miniframes:
+		if miniframe.is_ancestor_of(node):
+			return miniframe
+			
+	return null
 
 ## Gets the local minigame root for the node given.
 ## For consistency with the get_root method from [class SceneTree], 
@@ -46,14 +55,14 @@ func get_root(node: Node) -> Node:
 		return get_tree().root
 	
 	# Normal case	
-	for miniframe in miniframes:
-		if miniframe.is_ancestor_of(node):
-			return miniframe.viewport
-
+	var miniframe = get_miniframe_of(node)
+	if is_instance_valid(miniframe):
+		return miniframe.viewport
 	return get_tree().root
 
 ## Gets the scene root of the node given. Meant to replace get_tree().current_scene.
 ##
+## Normal usage is Coordinator.current_scene(self).
 ## Returns the global scene root if running from outside the collage scene.
 ## Returns the global scnee root if called outside of any minigames but still inside the Collage.
 func current_scene(node: Node) -> Node:
@@ -62,11 +71,28 @@ func current_scene(node: Node) -> Node:
 		return get_tree().current_scene
 		
 	# Normal case	
-	for miniframe in miniframes:
-		if miniframe.is_ancestor_of(node):
-			return miniframe.scene_root
-
+	var miniframe = get_miniframe_of(node)
+	if is_instance_valid(miniframe):
+		return miniframe.scene_root
 	return get_tree().current_scene
+	
+## Reloads the current scene. Meant to replace get_tree().reload_current_scene().
+##
+## Normal usage is Coordinator.reload_current_scene(self).
+func reload_current_scene(node: Node) -> void:
+	if not in_collage():
+		# Reload current scene can return errors.
+		# Might be worth figuring the exact behavior of that.
+		# Until then, not worth the extra complexity.
+		get_tree().reload_current_scene()
+		
+	# Normal case	
+	var miniframe = get_miniframe_of(node)
+	if is_instance_valid(miniframe):
+		miniframe.reload_scene()
+	else:
+		# Node is in collage but not in a minigame.
+		get_tree().reload_current_scene()
 
 ## Registers a miniframe to the manager.
 func register_miniframe(miniframe: Miniframe) -> void:
