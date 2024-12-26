@@ -24,13 +24,6 @@ var miniframes: Array[Miniframe] = []:
 	set(value):
 		push_error("Attempted to set value of miniframes field in Coordinator directly!")
 
-# TODO: Add static typing when Godot 4.4 comes out.
-## Inventory managers. Maps the "root" of an inventory manager to the inventory manager. 
-## Use [method get_root_of] for finding the root.
-var inventory_managers: Dictionary = {}:
-	set(value):
-		push_error("Attempted to set value of inventory_managers field in Coordinator directly!")
-
 ## Returns the Collage node if the main scene is the Collage scene.
 func get_collage() -> Collage:
 	var scene_root = get_tree().current_scene
@@ -78,9 +71,6 @@ func current_scene(node: Node) -> Node:
 	get_tree().root
 
 	return get_tree().root
-	
-func get_inventory_manager(node: Node) -> Node:
-	return inventory_managers[get_root(node)]
 
 ## Registers a miniframe to the manager.
 func register_miniframe(miniframe: Miniframe) -> void:
