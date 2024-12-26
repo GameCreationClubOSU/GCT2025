@@ -1,13 +1,23 @@
 extends Node
 
+## Coordinator acts as a high level manager for a bunch of systems.
+## For minigames, typically it acts as a replacement for SceneTree.
+## Also acts as an event bus for item interactions.
+
 ## Emitted when a minigame was clicked. 
 ## Provides the miniframe object around the minigame that was clicked.
 signal miniframe_clicked(miniframe: Miniframe)
 
 ## Emitted when any slot is interacted with anywhere.
-## Provides the click event, the slot that was clicked
+## Provides the click event, the slot that was clicked, and the main root
+## of slot that was interacted with. Make sure to check that the [param root]
+## is equal to Coordinator.get_root(self) so as to not get events
+## from other minigames.
 signal slot_interacted(event: InputEvent, slot: ItemSlot, root: Node)
 
+## Inventory for the Collage scene.
+## It's stored here because some minigames may want to put something in the
+## collage inventory. 
 @export var inventory: ArrayInventory
 
 var miniframes: Array[Miniframe] = []:
@@ -21,9 +31,14 @@ var inventory_managers: Dictionary = {}:
 	set(value):
 		push_error("Attempted to set value of inventory_managers field in Coordinator directly!")
 
+## Returns the Collage node if the main scene is the Collage scene.
+func get_collage() -> Collage:
+	var scene_root = get_tree().current_scene
+	return scene_root as Collage # The as keyword returns null if the cast fails.
+
+## Returns true if the main scene is collage scene, false otherwise.
 func in_collage() -> bool:
-	var main_node = get_node_or_null("/root/Collage")
-	return is_instance_valid(main_node) and main_node is Collage
+	return is_instance_valid(get_collage())
 
 ## Gets the local minigame root for the node given.
 ## For consistency with the get_root method from [class SceneTree], 

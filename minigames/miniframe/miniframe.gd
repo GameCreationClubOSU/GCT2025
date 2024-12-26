@@ -10,8 +10,8 @@ extends SubViewportContainer
 ## and it should provide enough functionality.
 ##
 ## Something to note while reading through this class:
-## There are two roots. One is the SubViewport (local root) and the other
-## is the root of the instantiated scene (scene root). Local root is the
+## There are two roots. One is the SubViewport (main root) and the other
+## is the root of the instantiated scene (scene root). Main root is the
 ## parent of scene root, don't get that confused.
 
 ## Fires whenever the miniframe is clicked. It passes itself as argument.
@@ -47,7 +47,7 @@ var _frame_rect: NinePatchRect = get_node_or_null("Frame") as NinePatchRect
 ## Null if scene is not instantiated.
 var _scene_root: Node = null
 
-## Easy access to the Subviewport which is acting as the local root of the minigame.
+## Easy access to the Subviewport which is acting as the main root of the minigame.
 ## This is not the scene root, this is the parent of the scene root.
 @onready var viewport: SubViewport = $SubViewport
 
