@@ -49,8 +49,6 @@ func get_root(node: Node) -> Node:
 	for miniframe in miniframes:
 		if miniframe.is_ancestor_of(node):
 			return miniframe.viewport
-			
-	get_tree().root
 
 	return get_tree().root
 
@@ -67,8 +65,6 @@ func current_scene(node: Node) -> Node:
 	for miniframe in miniframes:
 		if miniframe.is_ancestor_of(node):
 			return miniframe.viewport
-			
-	get_tree().root
 
 	return get_tree().root
 
