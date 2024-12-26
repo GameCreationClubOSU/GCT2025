@@ -1,6 +1,7 @@
 class_name SelectionSlot
 extends ItemSlotDisplay
 ## This is an independent slot that acts as the item selector for the player.
+## In simpler terms, it's the item slot that is on the player's cursor.
 ## Handles the click interactions with slots.
 
 ## Display's offset from the mouse position.
@@ -15,8 +16,11 @@ func _process(_delta: float) -> void:
 	# Constantly stick by the user's cursor.
 	global_position = get_global_mouse_position() + display_offset
 
+## This method handles the clicking interactions with other itemslots.
+## Only call this if you need to simulate the player clicking on a slot,
+## otherwise, 
 func on_slot_interacted(event: InputEvent, clicked_slot: ItemSlot, root: Node) -> void:
-	if root != Coordinator.get_root_of(self):
+	if root != Coordinator.get_root(self):
 		# Ignore if the slot clicked is not the same minigame as self.
 		return
 		
