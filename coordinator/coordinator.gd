@@ -66,7 +66,7 @@ func current_scene(node: Node) -> Node:
 		if miniframe.is_ancestor_of(node):
 			return miniframe.viewport
 
-	return get_tree().root
+	return get_tree().current_scene
 
 ## Registers a miniframe to the manager.
 func register_miniframe(miniframe: Miniframe) -> void:
