@@ -64,7 +64,7 @@ func current_scene(node: Node) -> Node:
 	# Normal case	
 	for miniframe in miniframes:
 		if miniframe.is_ancestor_of(node):
-			return miniframe.viewport
+			return miniframe.scene_root
 
 	return get_tree().current_scene
 
