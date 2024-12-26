@@ -90,6 +90,29 @@ func reload_scene() -> void:
 		viewport.add_child(new_child)
 		_scene_root = new_child
 
+## Changes the scene to [param scene] and reloads.
+## Basically the same as [method SceneTree.change_scene_to_packed]
+func change_scene_to_packed(scene: PackedScene) -> Error:
+	if not is_instance_valid(scene):
+		return ERR_INVALID_PARAMETER
+	if not scene.can_instantiate():
+		return ERR_CANT_CREATE
+		
+	self.scene = scene
+	return OK
+	
+## Changes the scene to the scene at the given [param path] and reloads.
+## Basically the same as [method SceneTree.change_scene_to_file]
+func change_scene_to_file(path: String) -> Error:
+	var resource: Resource = load(path)
+	if resource is not PackedScene:
+		return ERR_CANT_OPEN
+	var scene: PackedScene = resource as PackedScene
+	if not scene.can_instantiate():
+		return ERR_CANT_CONNECT
+		
+	return change_scene_to_packed(scene)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if not Engine.is_editor_hint():

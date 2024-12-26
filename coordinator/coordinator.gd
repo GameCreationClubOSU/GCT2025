@@ -94,6 +94,36 @@ func reload_current_scene(node: Node) -> void:
 		# Node is in collage but not in a minigame.
 		get_tree().reload_current_scene()
 
+## Changes the current scene to [param scene]. Meant to replace get_tree().change_scene_to_file().
+##
+## Normal usage is Coordinator.change_scene_to_file(self, scene).
+func change_scene_to_packed(node: Node, scene: PackedScene) -> Error:
+	if not in_collage():
+		return get_tree().change_scene_to_packed(scene)
+		
+	# Normal case
+	var miniframe = get_miniframe_of(node)
+	if is_instance_valid(miniframe):
+		return miniframe.change_scene_to_packed(scene)
+	else:
+		# Node is in collage but not in a minigame.
+		return get_tree().change_scene_to_packed(scene)
+		
+## Changes the current scene to the one given at path. Meant to replace get_tree().change_scene_to_file().
+##
+## Normal usage is Coordinator.change_scene_to_file(self, "res://example.tscn").
+func change_scene_to_file(node: Node, path: String) -> Error:
+	if not in_collage():
+		return get_tree().change_scene_to_file(path)
+		
+	# Normal case
+	var miniframe = get_miniframe_of(node)
+	if is_instance_valid(miniframe):
+		return miniframe.change_scene_to_file(path)
+	else:
+		# Node is in collage but not in a minigame.
+		return get_tree().change_scene_to_file(path)
+		
 ## Registers a miniframe to the manager.
 func register_miniframe(miniframe: Miniframe) -> void:
 	if not is_instance_valid(miniframe):
