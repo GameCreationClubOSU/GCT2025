@@ -63,6 +63,9 @@ var _scene_root: Node = null
 var enabled: bool = false:
 	set(value):
 		enabled = value
+		# Both process mode and update mode need to be changed
+		# If just update mode is changed, the delta in _process accumulates
+		# and can break things in the minigame when it's resumed.
 		viewport.process_mode = PROCESS_MODE_INHERIT if enabled else PROCESS_MODE_DISABLED
 		# TODO: This should probably save the value first. Not every scene needs object picking.
 		viewport.physics_object_picking = enabled
