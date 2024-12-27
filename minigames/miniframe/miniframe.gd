@@ -115,7 +115,6 @@ func adjust_viewport() -> void:
 func reload_scene() -> void:
 	# Remove just the root node.
 	if is_instance_valid(_scene_root):
-		viewport.remove_child(_scene_root)
 		_scene_root.queue_free()
 		
 	if is_instance_valid(scene) and scene.can_instantiate():
