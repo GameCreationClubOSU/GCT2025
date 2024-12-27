@@ -53,9 +53,6 @@ var _frame_rect: NinePatchRect = get_node_or_null("Frame") as NinePatchRect
 ## Reference to the root node of the instantiated scene.
 ## Null if scene is not instantiated.
 var _scene_root: Node = null
-## Mouse mode is saved when the miniframe is disabled so that the collage
-## can have a visible mouse without messing with the minigames.
-var _mouse_mode: Input.MouseMode = Input.MOUSE_MODE_VISIBLE
 
 ## Easy access to the Subviewport which is acting as the main root of the minigame.
 ## This is not the scene root, this is the parent of the scene root.
