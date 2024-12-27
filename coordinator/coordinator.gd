@@ -3,6 +3,15 @@ extends Node
 ## Coordinator acts as a high level manager for a bunch of systems.
 ## For minigames, typically it acts as a replacement for SceneTree.
 ## Also acts as an event bus for item interactions.
+##
+## One of the main ideas behind Coordinator is that you should be able to
+## call the replacement methods (such as current_scene) without any checks.
+## These methods should all work regardless of whether the caller node is in
+## the collage scene or in its own scene. 
+## This way, we can preserve the notion that all scenes should be playable
+## by themselves.
+## There is [method get_collage] and [method is_collage] as fallbacks,
+## but most games shouldn't need to call them. 
 
 ## Emitted when a minigame was clicked. 
 ## Provides the miniframe object around the minigame that was clicked.
