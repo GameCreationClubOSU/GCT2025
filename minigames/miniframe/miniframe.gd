@@ -34,6 +34,13 @@ signal clicked(miniframe: Miniframe)
 ## Disable if the minigame handles resets manually.
 @export var auto_reset: bool = true
 
+@export_category("Viewport")
+@export var disable_3d: bool:
+	get():
+		return viewport.disable_3d
+	set(value):
+		viewport.disable_3d = value
+
 ## Root node of the instantitated minigame scene.
 var scene_root: Node:
 	get():
