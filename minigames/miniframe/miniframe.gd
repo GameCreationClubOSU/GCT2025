@@ -47,17 +47,7 @@ var scene_root: Node:
 		return _scene_root
 	set(value):
 		push_error("Do not set root directly!")
-
-## This reference is used for automatically resizing the frame and not for external use.
-var _frame_rect: NinePatchRect = get_node_or_null("Frame") as NinePatchRect
-## Reference to the root node of the instantiated scene.
-## Null if scene is not instantiated.
-var _scene_root: Node = null
-
-## Easy access to the Subviewport which is acting as the main root of the minigame.
-## This is not the scene root, this is the parent of the scene root.
-@onready var viewport: SubViewport = $SubViewport
-
+		
 ## Mouse mode of the minigame. 
 ## When the minigame is enabled, this mouse mode will be applied.
 var mouse_mode: Input.MouseMode = Input.MOUSE_MODE_VISIBLE:
@@ -88,7 +78,16 @@ var enabled: bool = false:
 			viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
 			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ONCE
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-			
+
+## This reference is used for automatically resizing the frame and not for external use.
+var _frame_rect: NinePatchRect = get_node_or_null("Frame") as NinePatchRect
+## Reference to the root node of the instantiated scene.
+## Null if scene is not instantiated.
+var _scene_root: Node = null
+
+## Easy access to the Subviewport which is acting as the main root of the minigame.
+## This is not the scene root, this is the parent of the scene root.
+@onready var viewport: SubViewport = $SubViewport
 		
 func adjust_frame() -> void:
 	if not is_instance_valid(_frame_rect):
