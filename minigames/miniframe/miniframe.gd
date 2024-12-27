@@ -53,11 +53,23 @@ var _frame_rect: NinePatchRect = get_node_or_null("Frame") as NinePatchRect
 ## Reference to the root node of the instantiated scene.
 ## Null if scene is not instantiated.
 var _scene_root: Node = null
+## Mouse mode is saved when the miniframe is disabled so that the collage
+## can have a visible mouse without messing with the minigames.
+var _mouse_mode: Input.MouseMode = Input.MOUSE_MODE_VISIBLE
 
 ## Easy access to the Subviewport which is acting as the main root of the minigame.
 ## This is not the scene root, this is the parent of the scene root.
 @onready var viewport: SubViewport = $SubViewport
 
+## Mouse mode of the minigame. 
+## When the minigame is enabled, this mouse mode will be applied.
+var mouse_mode: Input.MouseMode = Input.MOUSE_MODE_VISIBLE:
+	set(value):
+		mouse_mode = value
+		if enabled:
+			# If minigame is currently enabled, set immediately.
+			Input.mouse_mode = value
+			
 ## True if the minigame is enabled. 
 ## If it is not enabled, processing will be disabled. 
 var enabled: bool = false:
@@ -72,11 +84,14 @@ var enabled: bool = false:
 		if enabled:
 			viewport.render_target_update_mode = SubViewport.UPDATE_WHEN_VISIBLE
 			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ALWAYS
+			Input.mouse_mode = mouse_mode
 		else:
-			# The once is just there so that the scene updatess once on startup
+			# The once is just there so that the scene updates once on startup
 			# So that the viewports aren't just blank.
 			viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
 			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ONCE
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			
 		
 func adjust_frame() -> void:
 	if not is_instance_valid(_frame_rect):
