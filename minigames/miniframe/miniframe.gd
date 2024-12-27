@@ -35,7 +35,7 @@ signal clicked(miniframe: Miniframe)
 @export var auto_reset: bool = true
 
 @export_category("Viewport")
-@export var disable_3d: bool:
+@export var disable_3d: bool = true:
 	get():
 		return viewport.disable_3d
 	set(value):
@@ -66,6 +66,14 @@ var enabled: bool = false:
 		viewport.process_mode = PROCESS_MODE_INHERIT if enabled else PROCESS_MODE_DISABLED
 		# TODO: This should probably save the value first. Not every scene needs object picking.
 		viewport.physics_object_picking = enabled
+		if enabled:
+			viewport.render_target_update_mode = SubViewport.UPDATE_WHEN_VISIBLE
+			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ALWAYS
+		else:
+			# The once is just there so that the scene updatess once on startup
+			# So that the viewports aren't just blank.
+			viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ONCE
 		
 func adjust_frame() -> void:
 	if not is_instance_valid(_frame_rect):

@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://collage/collage_debug.gd" id="8_ygc3o"]
 [ext_resource type="PackedScene" uid="uid://dp5rt3m1qgpgk" path="res://minigames/locksport/main.tscn" id="9_ci15t"]
 [ext_resource type="Script" path="res://items/containers/control_container.gd" id="11_1xkc3"]
-[ext_resource type="PackedScene" uid="uid://subjnfiy5rye" path="res://items/ui/selection_slot.tscn" id="12_527j7"]
+[ext_resource type="PackedScene" path="res://items/ui/selection_slot.tscn" id="12_527j7"]
 [ext_resource type="Script" path="res://items/inventories/item_descriptor.gd" id="12_n0468"]
 [ext_resource type="Script" path="res://items/inventories/array_inventory.gd" id="13_g4iug"]
 [ext_resource type="Resource" uid="uid://kpkd0k7agsm0" path="res://items/default_items/key/key.tres" id="13_plkd0"]
