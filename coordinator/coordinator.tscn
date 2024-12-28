@@ -10,6 +10,7 @@ inventory = NodePath("Inventory")
 
 [node name="CoordinatorDebug" type="Node" parent="."]
 script = ExtResource("2_eoxqf")
+menu_name = "Coordinator"
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("3_ix7p6")

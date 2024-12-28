@@ -33,6 +33,11 @@ signal clicked(miniframe: Miniframe)
 ## If true, pressing the reset key will automatically reload the scene.
 ## Disable if the minigame handles resets manually.
 @export var auto_reset: bool = true
+@export var frame_name: String = "":
+	set(value):
+		frame_name = value
+		if is_instance_valid(_frame_label):
+			_frame_label.text = frame_name
 
 @export_category("Viewport")
 @export var disable_3d: bool = true:
@@ -40,6 +45,17 @@ signal clicked(miniframe: Miniframe)
 		return viewport.disable_3d
 	set(value):
 		viewport.disable_3d = value
+		
+## References to the needed subobjects of the miniframe.
+## Don't modify unless you're making your own type of miniframe.
+@export_category("Subobjects")
+## Easy access to the Subviewport which is acting as the main root of the minigame.
+## This is not the scene root, this is the parent of the scene root.
+@export var viewport: SubViewport
+## This reference is used for automatically resizing the frame and not for external use.
+@export var _frame_rect: NinePatchRect
+## This label will display the name of the frame.
+@export var _frame_label: Label
 
 ## Root node of the instantitated minigame scene.
 var scene_root: Node:
@@ -78,17 +94,12 @@ var enabled: bool = false:
 			viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
 			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ONCE
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			
 
-## This reference is used for automatically resizing the frame and not for external use.
-var _frame_rect: NinePatchRect = get_node_or_null("Frame") as NinePatchRect
 ## Reference to the root node of the instantiated scene.
 ## Null if scene is not instantiated.
 var _scene_root: Node = null
 
-## Easy access to the Subviewport which is acting as the main root of the minigame.
-## This is not the scene root, this is the parent of the scene root.
-@onready var viewport: SubViewport = $SubViewport
-		
 func adjust_frame() -> void:
 	if not is_instance_valid(_frame_rect):
 		_frame_rect = get_node_or_null("Frame") as NinePatchRect

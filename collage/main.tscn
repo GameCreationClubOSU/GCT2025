@@ -95,6 +95,7 @@ offset_top = -794.0
 offset_right = 1398.0
 offset_bottom = -74.0
 scene = ExtResource("9_ci15t")
+frame_name = "Locksport"
 
 [node name="CollageDebug" type="Node" parent="."]
 script = ExtResource("8_ygc3o")
