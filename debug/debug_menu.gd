@@ -38,6 +38,6 @@ func menu_list(modules: Array[DebugModule]) -> void:
 	if ImGui.Begin("Debug Menus"):
 		for module in modules:
 			enabled = [module.enabled]
-			if ImGui.Checkbox(module.menu_name, enabled):
+			if ImGui.Checkbox(module.menu_name + "##" + str(module.get_path()), enabled):
 				module.enabled = enabled[0]
 		ImGui.End()
