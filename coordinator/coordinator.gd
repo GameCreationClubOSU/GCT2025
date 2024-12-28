@@ -3,6 +3,15 @@ extends Node
 ## Coordinator acts as a high level manager for a bunch of systems.
 ## For minigames, typically it acts as a replacement for SceneTree.
 ## Also acts as an event bus for item interactions.
+##
+## One of the main ideas behind Coordinator is that you should be able to
+## call the replacement methods (such as current_scene) without any checks.
+## These methods should all work regardless of whether the caller node is in
+## the collage scene or in its own scene. 
+## This way, we can preserve the notion that all scenes should be playable
+## by themselves.
+## There is [method get_collage] and [method is_collage] as fallbacks,
+## but most games shouldn't need to call them. 
 
 ## Emitted when a minigame was clicked. 
 ## Provides the miniframe object around the minigame that was clicked.
@@ -124,6 +133,20 @@ func change_scene_to_file(node: Node, path: String) -> Error:
 		# Node is in collage but not in a minigame.
 		return get_tree().change_scene_to_file(path)
 		
+## Replacement for setting Input.mouse_mode.
+## Normal usage is Coordinator.change_mouse_mode(self, Input.MOUSE_MODE_CAPTURED).
+func change_mouse_mode(node: Node, mode: Input.MouseMode) -> void:
+	if not in_collage():
+		Input.mouse_mode = mode
+		
+	# Normal case
+	var miniframe = get_miniframe_of(node)
+	if is_instance_valid(miniframe):
+		miniframe.mouse_mode = mode
+	else:
+		# Node is in collage but not in a minigame.
+		Input.mouse_mode = mode
+		
 ## Registers a miniframe to the manager.
 func register_miniframe(miniframe: Miniframe) -> void:
 	if not is_instance_valid(miniframe):
@@ -150,6 +173,7 @@ func alert_slot_interacted(event: InputEvent, slot: ItemSlot, clicked_node: Node
 	
 	var root: Node = get_root(clicked_node)
 	slot_interacted.emit(event, slot, root)
+	
 	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

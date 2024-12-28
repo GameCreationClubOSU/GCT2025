@@ -34,12 +34,50 @@ signal clicked(miniframe: Miniframe)
 ## Disable if the minigame handles resets manually.
 @export var auto_reset: bool = true
 
+@export_category("Viewport")
+@export var disable_3d: bool = true:
+	get():
+		return viewport.disable_3d
+	set(value):
+		viewport.disable_3d = value
+
 ## Root node of the instantitated minigame scene.
 var scene_root: Node:
 	get():
 		return _scene_root
 	set(value):
 		push_error("Do not set root directly!")
+		
+## Mouse mode of the minigame. 
+## When the minigame is enabled, this mouse mode will be applied.
+var mouse_mode: Input.MouseMode = Input.MOUSE_MODE_VISIBLE:
+	set(value):
+		mouse_mode = value
+		if enabled:
+			# If minigame is currently enabled, set immediately.
+			Input.mouse_mode = value
+			
+## True if the minigame is enabled. 
+## If it is not enabled, processing will be disabled. 
+var enabled: bool = false:
+	set(value):
+		enabled = value
+		# Both process mode and update mode need to be changed
+		# If just update mode is changed, the delta in _process accumulates
+		# and can break things in the minigame when it's resumed.
+		viewport.process_mode = PROCESS_MODE_INHERIT if enabled else PROCESS_MODE_DISABLED
+		# TODO: This should probably save the value first. Not every scene needs object picking.
+		viewport.physics_object_picking = enabled
+		if enabled:
+			viewport.render_target_update_mode = SubViewport.UPDATE_WHEN_VISIBLE
+			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ALWAYS
+			Input.mouse_mode = mouse_mode
+		else:
+			# The once is just there so that the scene updates once on startup
+			# So that the viewports aren't just blank.
+			viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ONCE
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 ## This reference is used for automatically resizing the frame and not for external use.
 var _frame_rect: NinePatchRect = get_node_or_null("Frame") as NinePatchRect
@@ -50,15 +88,6 @@ var _scene_root: Node = null
 ## Easy access to the Subviewport which is acting as the main root of the minigame.
 ## This is not the scene root, this is the parent of the scene root.
 @onready var viewport: SubViewport = $SubViewport
-
-## True if the minigame is enabled. 
-## If it is not enabled, processing will be disabled. 
-var enabled: bool = false:
-	set(value):
-		enabled = value
-		viewport.process_mode = PROCESS_MODE_INHERIT if enabled else PROCESS_MODE_DISABLED
-		# TODO: This should probably save the value first. Not every scene needs object picking.
-		viewport.physics_object_picking = enabled
 		
 func adjust_frame() -> void:
 	if not is_instance_valid(_frame_rect):
@@ -82,7 +111,6 @@ func adjust_viewport() -> void:
 func reload_scene() -> void:
 	# Remove just the root node.
 	if is_instance_valid(_scene_root):
-		viewport.remove_child(_scene_root)
 		_scene_root.queue_free()
 		
 	if is_instance_valid(scene) and scene.can_instantiate():
