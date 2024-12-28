@@ -1,13 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://lakrhf27383e"]
 
 [ext_resource type="Script" path="res://minigames/miniframe/miniframe.gd" id="1_q347j"]
-[ext_resource type="Texture2D" uid="uid://deb4jro1js2bc" path="res://common/textures/frame.png" id="2_cr4mo"]
+[ext_resource type="Texture2D" uid="uid://i07bxaaqjuxu" path="res://minigames/miniframe/frame.png" id="2_i7jjm"]
 
-[node name="Miniframe" type="SubViewportContainer"]
+[node name="Miniframe" type="SubViewportContainer" node_paths=PackedStringArray("viewport", "_frame_rect", "_frame_label")]
 offset_right = 813.0
 offset_bottom = 464.0
 stretch = true
 script = ExtResource("1_q347j")
+frame_name = null
+viewport = NodePath("SubViewport")
+_frame_rect = NodePath("Frame")
+_frame_label = NodePath("Frame/FrameLabel")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 process_mode = 4
@@ -21,10 +25,18 @@ render_target_update_mode = 4
 
 [node name="Frame" type="NinePatchRect" parent="."]
 layout_mode = 2
-texture = ExtResource("2_cr4mo")
+texture = ExtResource("2_i7jjm")
 draw_center = false
-patch_margin_left = 4
-patch_margin_top = 26
-patch_margin_right = 4
-patch_margin_bottom = 4
+patch_margin_left = 8
+patch_margin_top = 33
+patch_margin_right = 16
+patch_margin_bottom = 16
 metadata/_edit_lock_ = true
+
+[node name="FrameLabel" type="Label" parent="Frame"]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 48.0
+offset_bottom = 27.0
+text = "Placeholder"
