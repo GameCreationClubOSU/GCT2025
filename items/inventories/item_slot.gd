@@ -55,6 +55,9 @@ extends Resource
 ## If true, slot will allow items to be inserted
 ## Only blocks transfer_from. Does not block other methods.
 @export var block_transfer_out: bool = false
+## If true, the ItemSlot will not change item_type even when empty.
+## Use this if there is a slot that should only be able to take one ItemType.
+@export var filtered: bool = false
 
 ## Internal backing field for item_type. Do not manipulate directly unless you
 ## know what you're doing!
@@ -83,7 +86,12 @@ func is_full() -> bool:
 ## Gets the texture of the item_type.
 ## If slot is empty, then this method will return null.
 func get_texture() -> Texture2D:
-	return item_type.texture if not is_empty() else null
+	## If the item is filtered, return the texture still
+	## to communicate what the filter ItemType is.
+	if not is_empty() or (is_instance_valid(_item_type) and filtered):
+		return _item_type.texture
+	else:
+		return null
 	
 ## Adds [param addend] to the existing stack. 
 ## Use a negative [param addend] to remove items.
@@ -107,20 +115,22 @@ func add_item(type: ItemType, addend: int) -> int:
 	if not is_instance_valid(type):
 		push_warning("Tried to add invalid item type to ItemSlot!")
 		return 0
-	if not is_empty() and _item_type != type: # Conflicting types
-		return 0
 		
-	if is_empty():
+	# Filtered slots should not change item types
+	if is_empty() and not filtered:
 		_item_type = type
 		 # If _item_type is invalid, slot counts as empty but _amount isn't necessarily 0
 		_amount = 0
 	
-	# Can't just use [method add] because that method has an empty check.
-	# This method can add items to an empty ItemSlot
-	var amount_before: int = _amount
-	_amount = clampi(_amount + addend, 0, _item_type.max_stack)
-	emit_changed()
-	return _amount - amount_before
+	if _item_type == type:
+		# Can't just use [method add] because that method has an empty check.
+		# This method can add items to an empty ItemSlot
+		var amount_before: int = _amount
+		_amount = clampi(_amount + addend, 0, _item_type.max_stack)
+		emit_changed()
+		return _amount - amount_before
+	else:
+		return 0
 	
 ## Moves items from [param other] onto self. Returns the amount transferred.
 ##
@@ -144,7 +154,7 @@ func transfer_from(other: ItemSlot, max_amount: int) -> int:
 		return 0
 	
 	var transferred := 0
-	if (is_empty()):
+	if (is_empty() and not filtered):
 		# If more slot specific data is added, this might need to be changed
 		_item_type = other._item_type 
 		# If _item_type is set to null, ItemSlot is "empty", 
@@ -166,7 +176,8 @@ func transfer_from(other: ItemSlot, max_amount: int) -> int:
 	emit_changed()
 	return transferred
 	
-## Replaces the item_stack with the parameters
+## Replaces the item_stack with the parameters.
+## This method largely bypasses all the block and filter checks.
 func replace(new_type: ItemType, new_amount: int) -> void:
 	if not is_instance_valid(new_type):
 		push_error("Attempted to replace ItemSlot's items with invalid type!")
@@ -184,13 +195,14 @@ func transfer_all_from(other: ItemSlot) -> int:
 	return 0
 	
 ## Returns true if [param other] has items that are stackable with this slot.
-## If either slot is empty, will return true. 
-## Is commutative, i.e. self.stackable_with(other) == other.stackable(self
 func stackable_with(other: ItemSlot):
-	return _item_type == other._item_type or is_empty() or other.is_empty()
+	return _item_type == other._item_type or (is_empty() and not filtered)
 	
 ## Swaps items with [param other]
 func swap(other: ItemSlot) -> void:
+	if filtered and other._item_type != _item_type:
+		return
+	
 	# I miss C#
 	# Probably the only place that C# is less verbose.
 	var temp_type: ItemType = other._item_type
