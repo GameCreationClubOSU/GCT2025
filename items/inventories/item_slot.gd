@@ -51,13 +51,22 @@ extends Resource
 
 ## If true, slot block transfers into the slot.
 ## Only blocks transfer_from. Does not block other methods.
-@export var block_transfer_in: bool = false
+@export var block_transfer_in: bool = false:
+	set(value):
+		block_transfer_in = value
+		emit_changed()
 ## If true, slot will allow items to be inserted
 ## Only blocks transfer_from. Does not block other methods.
-@export var block_transfer_out: bool = false
+@export var block_transfer_out: bool = false:
+	set(value):
+		block_transfer_out = value
+		emit_changed()
 ## If true, the ItemSlot will not change item_type even when empty.
 ## Use this if there is a slot that should only be able to take one ItemType.
-@export var filtered: bool = false
+@export var filtered: bool = false:
+	set(value):
+		filtered = value
+		emit_changed()
 
 ## Internal backing field for item_type. Do not manipulate directly unless you
 ## know what you're doing!
