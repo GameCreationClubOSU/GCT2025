@@ -39,6 +39,7 @@ amount = 4
 block_transfer_in = true
 block_transfer_out = false
 filtered = false
+slot_capacity = -1
 
 [sub_resource type="Resource" id="Resource_srp4f"]
 script = ExtResource("13_5xum0")
@@ -47,14 +48,16 @@ amount = 16
 block_transfer_in = false
 block_transfer_out = false
 filtered = true
+slot_capacity = -1
 
 [sub_resource type="Resource" id="Resource_vyl0g"]
 script = ExtResource("13_5xum0")
 item_type = ExtResource("15_abjog")
-amount = 5
+amount = 0
 block_transfer_in = false
 block_transfer_out = true
 filtered = false
+slot_capacity = 1
 
 [node name="Collage" type="Node2D" node_paths=PackedStringArray("camera", "inventory_menu", "selection_slot")]
 script = ExtResource("1_tiu0a")
