@@ -31,10 +31,9 @@ signal scene_reloaded()
 ## Does not reload scene during runtime when changed.
 @export var scene: PackedScene:
 	set(value):
-		# @export variables call the setter before viewport is loaded
-		# Await ready to make sure that viewport isn't null.
 		scene = value
 		if Engine.is_editor_hint():
+			# Await ready to make sure that viewport isn't null.
 			if not is_node_ready():
 				await ready
 			reload_scene()
