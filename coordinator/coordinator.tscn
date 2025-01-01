@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://3uyaj3f23uvt"]
+[gd_scene load_steps=5 format=3 uid="uid://3uyaj3f23uvt"]
 
 [ext_resource type="Script" path="res://coordinator/coordinator.gd" id="1_j8w8t"]
 [ext_resource type="Script" path="res://coordinator/coordinator_debug.gd" id="2_eoxqf"]
 [ext_resource type="Script" path="res://items/inventories/array_inventory.gd" id="3_ix7p6"]
+[ext_resource type="Script" path="res://items/inventories/item_slot.gd" id="4_onyfw"]
 
 [node name="Coordinator" type="Node" node_paths=PackedStringArray("inventory")]
 script = ExtResource("1_j8w8t")
@@ -14,5 +15,5 @@ menu_name = "Coordinator"
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("3_ix7p6")
-size = 20
 inventory_name = "Collage Inventory"
+slots = Array[ExtResource("4_onyfw")]([null, null, null, null, null, null])

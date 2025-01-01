@@ -28,13 +28,13 @@ float grid(float width, vec2 uv) {
 	//COLOR = vec4((drawWidth + lineAA).x * 5.0, 0.0, 0.0, 1.0);
     grid2 *= clamp(width / drawWidth, 0.0, 1.0);
     grid2 = mix(grid2, vec2(width), clamp(uvDeriv * 2.0 - 1.0, 0.0, 1.0));
-	
+
 	return mix(grid2.x, 1.0, grid2.y);
 }
 
 void fragment() {
 	vec2 uv0 = world_position / grid0_size;
 	vec2 uv1 = world_position / grid1_size;
-	
+
 	COLOR = mix(COLOR, line_color, max(grid(line0_width, uv0), grid(line1_width, uv1)));
 }

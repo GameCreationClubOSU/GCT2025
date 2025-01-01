@@ -10,7 +10,7 @@ signal interacted(event: InputEvent)
 @export var _item_texture: TextureRect
 ## The [class Label] that will be used to display the amount in the slot.
 @export var _amount_label: Label
-# The slot that this display is displaying. If not set, it will be a new empty slot during runtime.
+## The slot that this display is displaying.
 @export var slot: ItemSlot = ItemSlot.new():
 	set(value):
 		if is_instance_valid(slot) and slot.changed.is_connected(update_display):
@@ -36,17 +36,24 @@ func _gui_input(event: InputEvent) -> void:
 func update_display() -> void:
 	var texture: Texture2D = null
 	var amount_text: String = ""
+	var opacity = 1
 	tooltip_text = "" # tooltip_text is a field of Control.
 	
-	if is_instance_valid(slot) and not slot.is_empty():
+	if is_instance_valid(slot):
 		texture = slot.get_texture()
 		# If the max stack is only one, just show the icon and not the number.
-		amount_text = str(slot.amount) if slot.item_type.max_stack > 1 else ""
-		tooltip_text = slot.item_type.name + "\n" + slot.item_type.description
+		amount_text = str(slot.amount) if slot.amount > 1 else ""
+		if not slot.is_empty() or slot.filtered:
+			tooltip_text = slot.item_type.name + "\n" + slot.item_type.description
+		if slot.filtered and slot.is_empty():
+			# Filtered empty slots should be translucent to communicate
+			# that they are empty and to communicate the filter.
+			opacity = 0.5 
 		
 	# If the control nodes aren't set, assume that the user wants to not show them. 
 	if is_instance_valid(_item_texture):
 		_item_texture.texture = texture
+		_item_texture.self_modulate = Color(1, 1, 1, opacity)
 		
 	if is_instance_valid(_amount_label):
 		_amount_label.text = amount_text
