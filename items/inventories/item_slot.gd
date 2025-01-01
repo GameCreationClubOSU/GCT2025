@@ -49,6 +49,13 @@ extends Resource
 			
 		emit_changed()
 
+## If true, slot block transfers into the slot.
+## Only blocks transfer_from. Does not block other methods.
+@export var block_transfer_in: bool = false
+## If true, slot will allow items to be inserted
+## Only blocks transfer_from. Does not block other methods.
+@export var block_transfer_out: bool = false
+
 ## Internal backing field for item_type. Do not manipulate directly unless you
 ## know what you're doing!
 var _item_type: ItemType = null
@@ -125,6 +132,10 @@ func transfer_from(other: ItemSlot, max_amount: int) -> int:
 	
 	# Guard clauses. These won't change the object 
 	# so they don't need to emit_changed and can return directly.
+	if (block_transfer_in):
+		return 0
+	if (other.block_transfer_out):
+		return 0
 	if (other.is_empty()):
 		return 0
 	if (max_amount <= 0):
@@ -166,7 +177,7 @@ func replace(new_type: ItemType, new_amount: int) -> void:
 	
 ## Moves as many items as possible from [param other] onto self. 
 ## Returns the amount transferred. 
-func transfer_all(other: ItemSlot) -> int:
+func transfer_all_from(other: ItemSlot) -> int:
 	if is_instance_valid(other._item_type):
 		return transfer_from(other, other._item_type.max_stack)
 	

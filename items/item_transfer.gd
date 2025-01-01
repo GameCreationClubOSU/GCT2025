@@ -10,8 +10,11 @@ extends Object
 ## swap otherwise.
 static func standard_transfer(source: ItemSlot, destination: ItemSlot):
 	if not source.is_empty() and destination.stackable_with(source):
-		destination.transfer_all(source)
-	else:
+		destination.transfer_all_from(source)
+	elif source.is_empty():
+		source.transfer_all_from(destination)
+	elif not (source.block_transfer_in or source.block_transfer_out 
+			or destination.block_transfer_in or destination.block_transfer_out):
 		destination.swap(source)
 		
 ## Standard right-click behavior.
@@ -22,5 +25,6 @@ static func alternate_transfer(source: ItemSlot, destination: ItemSlot):
 	else:
 		if destination.stackable_with(source):
 			destination.transfer_from(source, 1)
-		else:
+		elif not (source.block_transfer_in or source.block_transfer_out 
+			or destination.block_transfer_in or destination.block_transfer_out):
 			destination.swap(source)
