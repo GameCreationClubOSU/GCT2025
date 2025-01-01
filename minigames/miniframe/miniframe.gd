@@ -16,11 +16,19 @@ extends SubViewportContainer
 
 ## Fires whenever the miniframe is clicked. It passes itself as argument.
 signal clicked(miniframe: Miniframe)
+## Fires whenever the enabled property changes. 
+signal enabled_changed()
+## Fires whenever the mouse mode changes.
+signal mouse_mode_changed()
+## Fires whenever the scene is reloaded.
+signal scene_reloaded()
 
 ## Scale of the scene inside the viewport.
 ## Adjusting the scale of the container has a similar effect, but this value won't distort the frame.
 @export_range(0.01, 10) var viewport_scale: float = 1
 ## Scene that will be rendered inside the viewport.
+## Reloads the scene when changed in editor for preview.
+## Does not reload scene during runtime when changed.
 @export var scene: PackedScene:
 	set(value):
 		# @export variables call the setter before viewport is loaded
@@ -28,7 +36,8 @@ signal clicked(miniframe: Miniframe)
 		if not is_node_ready():
 			await ready
 		scene = value
-		reload_scene()
+		if Engine.is_editor_hint():
+			reload_scene()
 		
 ## If true, pressing the reset key will automatically reload the scene.
 ## Disable if the minigame handles resets manually.
@@ -68,15 +77,22 @@ var scene_root: Node:
 ## When the minigame is enabled, this mouse mode will be applied.
 var mouse_mode: Input.MouseMode = Input.MOUSE_MODE_VISIBLE:
 	set(value):
+		if value == mouse_mode:
+			return
+			
 		mouse_mode = value
 		if enabled:
 			# If minigame is currently enabled, set immediately.
 			Input.mouse_mode = value
+		mouse_mode_changed.emit()
 			
 ## True if the minigame is enabled. 
 ## If it is not enabled, processing will be disabled. 
 var enabled: bool = false:
 	set(value):
+		if value == enabled:
+			return
+		
 		enabled = value
 		# Both process mode and update mode need to be changed
 		# If just update mode is changed, the delta in _process accumulates
@@ -94,6 +110,7 @@ var enabled: bool = false:
 			viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
 			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ONCE
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		enabled_changed.emit()
 			
 
 ## Reference to the root node of the instantiated scene.
@@ -128,6 +145,8 @@ func reload_scene() -> void:
 		var new_child: Node = scene.instantiate()
 		viewport.add_child(new_child)
 		_scene_root = new_child
+	
+	scene_reloaded.emit()
 
 ## Changes the scene to [param scene] and reloads.
 ## Basically the same as [method SceneTree.change_scene_to_packed]
@@ -138,6 +157,7 @@ func change_scene_to_packed(scene: PackedScene) -> Error:
 		return ERR_CANT_CREATE
 		
 	self.scene = scene
+	reload_scene()
 	return OK
 	
 ## Changes the scene to the scene at the given [param path] and reloads.
