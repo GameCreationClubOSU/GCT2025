@@ -4,52 +4,32 @@ extends Node
 ## Use existing methods wherever possible. If not, the underlying array is
 ## available as [member slots]. 
 
-@export var size: int = 5:
+var size: int:
+	get():
+		return slots.size()
 	set(value):
-		if value <= 0:
-			push_error("Cannot set inventory size <= 0!")
-			return
-		if is_node_ready():
-			resize(value)
-			
-		size = value
+		push_error("Tried to set size directly! Use the resize method instead.")
 
-## Desciptors for all the items that should be placed in here at runtime.
-## Adding anything to this after runtime does nothing.
-@export var descriptors: Array[ItemDescriptor] = []
 ## Display name of the inventory.
 @export var inventory_name: String = ""
 
-var slots: Array[ItemSlot] = []
+@export var slots: Array[ItemSlot] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	resize(size)
-	
-	# Filling in all the descriptors
-	for descriptor in descriptors:
-		if descriptor.index >= size:
-			push_warning("Item descriptor index is out of bounds!")
-		else:
-			var slot: ItemSlot = slots[descriptor.index]
-			if is_instance_valid(slot.item_type):
-				push_warning("Item descriptor is overwriting items in slot!")
-			slot.item_type = descriptor.type
-			slot.amount = descriptor.amount
+	_fill_blanks()
 
-
-## Resizes the inventory.
+## Resizes the inventory. Also fills in nulls in the slots array with
+## blank ItemSlots
 func resize(new_size: int) -> void:
 	if new_size <= 0:
 		push_error("Cannot set inventory size <= 0!")
 		return
 			
 	slots.resize(new_size)
-	for i in slots.size():
-		if not is_instance_valid(slots[i]):
-			slots[i] = ItemSlot.new()
-			
+	_fill_blanks()
 	# If the inventory is shrinking resize will remove the old slots. No further action needed.
+
 
 ## Gets the total amount of items of type [param item_type] in the inventory.
 func amount_of(item_type: ItemType) -> int:
@@ -126,4 +106,10 @@ func slot_at(index: int) -> ItemSlot:
 func clear() -> void:
 	for slot in slots:
 		slot.clear()
-	
+
+## Fills in nulls in the slots array with blank ItemSlots.
+## Should never be needed outside of the class.
+func _fill_blanks() -> void:
+	for i in slots.size():
+		if not is_instance_valid(slots[i]):
+			slots[i] = ItemSlot.new()

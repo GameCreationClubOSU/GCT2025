@@ -1,3 +1,4 @@
+@tool
 class_name ItemSlot
 extends Resource
 ## A unit of inventory storage.
@@ -14,9 +15,24 @@ extends Resource
 ## General guarantees are as follows:
 ## - Amount is always >= 0
 ## - If either _item_type is null or _amount == 0, the ItemSlot is considered empty.
-## - Empty slots have amount == 0 and item_type == null. 
 ## - Amount should never exceed the max_stack in item_type.
 ## - Changes to slot should emit a changed signal.
+
+# Order matters here. It's important that Godot sets item_type first
+# and not amount. Otherwise the internal checks will clamp amount to 0.
+
+## The type of item in the slot. Emptying out the slot will reset this to null.
+## Avoid setting this directly.
+@export var item_type: ItemType:
+	get:
+		return _item_type
+	set(value):
+		_item_type = value
+		# Max stack of new item_type might be lower than the old one.
+		if (_amount > 0 and is_instance_valid(_item_type)):
+			_amount = clampi(_amount, 0, _item_type.max_stack)
+		
+		emit_changed()
 
 ## The amount of items in the slot.
 ## Prefer [method add] and [method add_item] over setting this directly.
@@ -27,32 +43,18 @@ extends Resource
 		if is_instance_valid(_item_type):
 			_amount = clampi(value, 0, _item_type.max_stack)
 		else:
+			if value > 0:
+				push_warning("Attempted to set item amount while item_type is invalid!")
 			_amount = 0
 			
-		if _amount <= 0:
-			_item_type = null
-			
-		emit_changed()
-			
-## The type of item in the slot. Emptying out the slot will reset this to null.
-## Avoid setting this directly.
-@export var item_type: ItemType:
-	get:
-		return _item_type if _amount > 0 else null
-	set(value):
-		_item_type = value
-		# Max stack of new item_type might be lower than the old one.
-		if (_amount > 0 and is_instance_valid(_item_type)):
-			_amount = clampi(_amount, 0, _item_type.max_stack)
-		
 		emit_changed()
 
-## Internal backing field for amount. Do not manipulate directly unless you
-## know what you're doing!
-var _amount: int = 0
 ## Internal backing field for item_type. Do not manipulate directly unless you
 ## know what you're doing!
 var _item_type: ItemType = null
+## Internal backing field for amount. Do not manipulate directly unless you
+## know what you're doing!
+var _amount: int = 0
 
 func _init(new_item_type: ItemType = null, new_amount: int = 0) -> void:
 	if is_instance_valid(new_item_type):
@@ -72,9 +74,9 @@ func is_full() -> bool:
 	return is_instance_valid(_item_type) and amount >= _item_type.max_stack 
 	
 ## Gets the texture of the item_type.
-## If item_type is null, then this method will return null.
+## If slot is empty, then this method will return null.
 func get_texture() -> Texture2D:
-	return item_type.texture if is_instance_valid(item_type) else null
+	return item_type.texture if not is_empty() else null
 	
 ## Adds [param addend] to the existing stack. 
 ## Use a negative [param addend] to remove items.

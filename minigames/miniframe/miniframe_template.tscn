@@ -8,7 +8,6 @@ offset_right = 813.0
 offset_bottom = 464.0
 stretch = true
 script = ExtResource("1_q347j")
-frame_name = null
 viewport = NodePath("SubViewport")
 _frame_rect = NodePath("Frame")
 _frame_label = NodePath("Frame/FrameLabel")

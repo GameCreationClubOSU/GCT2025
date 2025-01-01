@@ -10,7 +10,7 @@ signal interacted(event: InputEvent)
 @export var _item_texture: TextureRect
 ## The [class Label] that will be used to display the amount in the slot.
 @export var _amount_label: Label
-# The slot that this display is displaying. If not set, it will be a new empty slot during runtime.
+## The slot that this display is displaying.
 @export var slot: ItemSlot = ItemSlot.new():
 	set(value):
 		if is_instance_valid(slot) and slot.changed.is_connected(update_display):
