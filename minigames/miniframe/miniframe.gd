@@ -33,10 +33,10 @@ signal scene_reloaded()
 	set(value):
 		# @export variables call the setter before viewport is loaded
 		# Await ready to make sure that viewport isn't null.
-		if not is_node_ready():
-			await ready
 		scene = value
 		if Engine.is_editor_hint():
+			if not is_node_ready():
+				await ready
 			reload_scene()
 		
 ## If true, pressing the reset key will automatically reload the scene.
