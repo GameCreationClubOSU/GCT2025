@@ -3,28 +3,51 @@ class_name MineTile
 
 signal revealed
 
-@export var cover: BaseButton
+@export var cover: Control
 @export var mine: Control
 @export var number: Label
+@export var flag: Control
 
 @export var adjacent_mines: int = 0
 @export var is_mine: bool = false
+
+var flagged: bool = false:
+	set(value):
+		flagged = value
+		flag.visible = value
+var is_revealed: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	mine.visible = false
 	number.visible = false
-	cover.pressed.connect(reveal)
+	flag.visible = false
+	cover.gui_input.connect(_on_press)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+	
+func _on_press(event: InputEvent):
+	if event is InputEventMouseButton and event.is_released():
+		var mouse_event: InputEventMouseButton = event
+		if mouse_event.button_index == MOUSE_BUTTON_LEFT:
+			reveal()
+		elif mouse_event.button_index == MOUSE_BUTTON_RIGHT:
+			flagged = !flagged
 
 func reveal() -> void:
+	if is_revealed:
+		return 
+	elif flagged:
+		return
+	
+	is_revealed = true
 	cover.visible = false
 	if is_mine:
 		mine.visible = true
 	elif adjacent_mines > 0:
 		number.text = str(adjacent_mines)
 		number.visible = true
-		
+	
+	revealed.emit()
