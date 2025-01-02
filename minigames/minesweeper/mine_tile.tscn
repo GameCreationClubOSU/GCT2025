@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://ctoicerhnvy71"]
+
+[ext_resource type="Script" path="res://minigames/minesweeper/mine_tile.gd" id="1_jq566"]
+
+[sub_resource type="Gradient" id="Gradient_0otql"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_07chk"]
+gradient = SubResource("Gradient_0otql")
+
+[sub_resource type="Gradient" id="Gradient_kotix"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_aeu4i"]
+gradient = SubResource("Gradient_kotix")
+
+[node name="MineTile" type="Control" node_paths=PackedStringArray("cover", "mine", "number")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 64.0
+script = ExtResource("1_jq566")
+cover = NodePath("Cover")
+mine = NodePath("Mine")
+number = NodePath("Label")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.25, 0.25, 0.25, 1)
+
+[node name="Mine" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_07chk")
+
+[node name="Cover" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = SubResource("GradientTexture2D_aeu4i")
+
+[node name="Label" type="Label" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 66
+text = "8"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://brappp8x1w5x0"]
+
+[ext_resource type="Script" path="res://minigames/minesweeper/minefield.gd" id="1_2xuuq"]
+[ext_resource type="PackedScene" uid="uid://ctoicerhnvy71" path="res://minigames/minesweeper/mine_tile.tscn" id="2_qsrff"]
+
+[node name="Minesweeper" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 3
+script = ExtResource("1_2xuuq")
+tile_preset = ExtResource("2_qsrff")
+rows = 4
