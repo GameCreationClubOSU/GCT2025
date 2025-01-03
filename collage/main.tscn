@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://collage/collage_camera_debug.gd" id="5_i2y3i"]
 [ext_resource type="PackedScene" uid="uid://lakrhf27383e" path="res://minigames/miniframe/miniframe_template.tscn" id="6_jt8y7"]
 [ext_resource type="PackedScene" uid="uid://bhwy2tsn5yfm3" path="res://items/ui/grid_inventory_menu.tscn" id="6_t6oy5"]
-[ext_resource type="PackedScene" uid="uid://brappp8x1w5x0" path="res://minigames/minesweeper/minesweeper.tscn" id="8_b4it4"]
+[ext_resource type="PackedScene" uid="uid://brappp8x1w5x0" path="res://minigames/mine_detector/mine_detector.tscn" id="8_b4it4"]
 [ext_resource type="Script" path="res://collage/collage_debug.gd" id="8_ygc3o"]
 [ext_resource type="PackedScene" uid="uid://dp5rt3m1qgpgk" path="res://minigames/locksport/main.tscn" id="9_ci15t"]
 [ext_resource type="Script" path="res://items/containers/control_container.gd" id="11_1xkc3"]
@@ -101,7 +101,7 @@ offset_right = -260.0
 offset_bottom = 928.0
 scene = ExtResource("8_b4it4")
 auto_reset = false
-frame_name = " "
+frame_name = "Mine Detector"
 
 [node name="CollageDebug" type="Node" parent="."]
 script = ExtResource("8_ygc3o")

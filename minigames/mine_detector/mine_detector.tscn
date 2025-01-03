@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://brappp8x1w5x0"]
 
-[ext_resource type="Script" path="res://minigames/minesweeper/minefield.gd" id="1_2xuuq"]
-[ext_resource type="Script" path="res://minigames/minesweeper/minesweeper.gd" id="1_o0n4u"]
-[ext_resource type="PackedScene" uid="uid://ctoicerhnvy71" path="res://minigames/minesweeper/mine_tile.tscn" id="2_qsrff"]
-[ext_resource type="Texture2D" uid="uid://7w4dc1wqivj5" path="res://minigames/minesweeper/background.svg" id="3_rddp1"]
+[ext_resource type="Script" path="res://minigames/mine_detector/minefield.gd" id="1_2xuuq"]
+[ext_resource type="Script" path="res://minigames/mine_detector/mine_detector.gd" id="1_o0n4u"]
+[ext_resource type="PackedScene" uid="uid://ctoicerhnvy71" path="res://minigames/mine_detector/mine_tile.tscn" id="2_qsrff"]
+[ext_resource type="Texture2D" uid="uid://7w4dc1wqivj5" path="res://minigames/mine_detector/background.svg" id="3_rddp1"]
 [ext_resource type="FontFile" uid="uid://boa6hr4ylv5j7" path="res://common/fonts/segment7/segment_7_standard.otf" id="4_koqe5"]
-[ext_resource type="Texture2D" uid="uid://dmrex6o7rqfms" path="res://minigames/minesweeper/tile_cover.svg" id="6_o4px2"]
+[ext_resource type="Texture2D" uid="uid://dmrex6o7rqfms" path="res://minigames/mine_detector/tile_cover.svg" id="6_o4px2"]
 
 [node name="Minesweeper" type="Control" node_paths=PackedStringArray("flag_counter", "timer", "minefield", "reset_button")]
 layout_mode = 3
@@ -79,6 +79,7 @@ offset_left = -140.0
 offset_top = 48.0
 offset_right = -44.0
 offset_bottom = 104.0
+grow_horizontal = 0
 theme_override_colors/font_color = Color(0.35, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_koqe5")
 theme_override_font_sizes/font_size = 51

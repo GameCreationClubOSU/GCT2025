@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqlnx3vtwcxvt"
-path="res://.godot/imported/flag.png-76fe4f8e8ac0a6fb28768250b0397ea5.ctex"
+uid="uid://7w4dc1wqivj5"
+path="res://.godot/imported/background.svg-9a9342a1b2bb604a269cabc23e38f23b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://minigames/minesweeper/flag.png"
-dest_files=["res://.godot/imported/flag.png-76fe4f8e8ac0a6fb28768250b0397ea5.ctex"]
+source_file="res://minigames/mine_detector/background.svg"
+dest_files=["res://.godot/imported/background.svg-9a9342a1b2bb604a269cabc23e38f23b.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7dnptxhuosce"
-path="res://.godot/imported/mine.png-f0f9e5dd602350f39d1eb379ba44674a.ctex"
+uid="uid://b5p5v0f8gk8dd"
+path="res://.godot/imported/tile_background.png-a0319e1834a0ce8caeb88eb9932c7959.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://minigames/minesweeper/mine.png"
-dest_files=["res://.godot/imported/mine.png-f0f9e5dd602350f39d1eb379ba44674a.ctex"]
+source_file="res://minigames/mine_detector/tile_background.png"
+dest_files=["res://.godot/imported/tile_background.png-a0319e1834a0ce8caeb88eb9932c7959.ctex"]
 
 [params]
 
