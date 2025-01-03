@@ -52,24 +52,28 @@ func get_neighbors(i: int) -> Array[int]:
 	return neighbors
 
 func generate() -> void:
+	for tile in tiles:
+		tile.queue_free()
 	tiles.clear()
+	
 	for row in rows:
 		for column in columns:
+			var index := row * columns + column
 			var new_tile: MineTile = tile_preset.instantiate()
 			add_child(new_tile)
-			new_tile.revealed.connect(_on_reveal.bind(row * columns + column))
-			new_tile.flagged_changed.connect(_on_flagged_changed.bind(row * columns + column))
+			new_tile.revealed.connect(_on_reveal.bind(index))
+			new_tile.flagged_changed.connect(_on_flagged_changed.bind(index))
 			tiles.append(new_tile)
 			
 	for i in mine_count:
-		var mine_index = _random.randi_range(0, tiles.size() - 1)
+		var mine_index: = _random.randi_range(0, tiles.size() - 1)
 		while tiles[mine_index].is_mine:
 			mine_index = _random.randi_range(0, tiles.size() - 1)
 			
 		tiles[mine_index].is_mine = true
 		
 	for i in tiles.size():
-		var adjacent_mines = 0
+		var adjacent_mines: = 0
 		for neighbor_index in get_neighbors(i):
 			if tiles[neighbor_index].is_mine:
 				adjacent_mines += 1

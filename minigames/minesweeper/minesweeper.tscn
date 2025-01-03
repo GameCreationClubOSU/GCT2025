@@ -1,12 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://brappp8x1w5x0"]
+[gd_scene load_steps=7 format=3 uid="uid://brappp8x1w5x0"]
 
 [ext_resource type="Script" path="res://minigames/minesweeper/minefield.gd" id="1_2xuuq"]
 [ext_resource type="Script" path="res://minigames/minesweeper/minesweeper.gd" id="1_o0n4u"]
 [ext_resource type="PackedScene" uid="uid://ctoicerhnvy71" path="res://minigames/minesweeper/mine_tile.tscn" id="2_qsrff"]
 [ext_resource type="Texture2D" uid="uid://7w4dc1wqivj5" path="res://minigames/minesweeper/background.svg" id="3_rddp1"]
 [ext_resource type="FontFile" uid="uid://boa6hr4ylv5j7" path="res://common/fonts/segment7/segment_7_standard.otf" id="4_koqe5"]
+[ext_resource type="Texture2D" uid="uid://dmrex6o7rqfms" path="res://minigames/minesweeper/tile_cover.svg" id="6_o4px2"]
 
-[node name="Minesweeper" type="Control" node_paths=PackedStringArray("flag_counter", "timer", "minefield")]
+[node name="Minesweeper" type="Control" node_paths=PackedStringArray("flag_counter", "timer", "minefield", "reset_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +18,7 @@ script = ExtResource("1_o0n4u")
 flag_counter = NodePath("FlagCounterBackground/FlagCounter")
 timer = NodePath("TimerBackground/Timer")
 minefield = NodePath("GridContainer")
+reset_button = NodePath("ResetButton")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 0
@@ -38,6 +40,7 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 32
 script = ExtResource("1_2xuuq")
+mine_count = 100
 tile_preset = ExtResource("2_qsrff")
 rows = 16
 
@@ -90,3 +93,16 @@ text = "000
 "
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[node name="ResetButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_top = 39.0
+offset_right = 32.0
+offset_bottom = 103.0
+grow_horizontal = 2
+texture_normal = ExtResource("6_o4px2")
+stretch_mode = 0
