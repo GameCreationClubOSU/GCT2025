@@ -2,6 +2,7 @@ extends Control
 class_name MineTile
 
 signal revealed
+signal flagged_changed
 
 ## These are close-ish to the orginal minesweeper colors
 ## Many of the colors were changed for contrast reasons
@@ -21,6 +22,8 @@ static var colors: Array[Color] = [
 @export var mine: Control
 @export var number: Label
 @export var flag: Control
+@export var loss: Control
+@export var enabled: bool = true
 
 var adjacent_mines: int = 0
 var is_mine: bool = false
@@ -29,6 +32,7 @@ var flagged: bool = false:
 		if not is_revealed:
 			flagged = value
 			flag.visible = value
+			flagged_changed.emit()
 var is_revealed: bool = false
 var label_settings = []
 
@@ -38,10 +42,14 @@ func _ready() -> void:
 	number.visible = false
 	flag.visible = false
 	cover.gui_input.connect(_on_press)
+	loss.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
+	
+func set_as_loss() -> void:
+	loss.visible = true
 	
 func _on_press(event: InputEvent):
 	if event is InputEventMouseButton and event.is_released():
@@ -53,6 +61,8 @@ func _on_press(event: InputEvent):
 				flagged = !flagged
 
 func reveal() -> void:
+	if not enabled:
+		return
 	if is_revealed:
 		return 
 	elif flagged:

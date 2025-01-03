@@ -1,4 +1,9 @@
 extends GridContainer
+class_name Minefield
+
+enum State {WON, LOST, GAMING}
+
+signal flag_count_changed
 
 @export var mine_count = 10
 @export var tile_preset: PackedScene
@@ -6,12 +11,15 @@ extends GridContainer
 # Use the columns field of grid container for columns
 
 var tiles: Array[MineTile] = []
-
 var _random: RandomNumberGenerator
+var _revealed_tiles: int = 0
+var flags_remaining = 0
+var game_state: State = State.GAMING
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_random = RandomNumberGenerator.new()
+	flags_remaining = mine_count
 	generate()
 
 
@@ -50,6 +58,7 @@ func generate() -> void:
 			var new_tile: MineTile = tile_preset.instantiate()
 			add_child(new_tile)
 			new_tile.revealed.connect(_on_reveal.bind(row * columns + column))
+			new_tile.flagged_changed.connect(_on_flagged_changed.bind(row * columns + column))
 			tiles.append(new_tile)
 			
 	for i in mine_count:
@@ -67,9 +76,39 @@ func generate() -> void:
 			
 		tiles[i].adjacent_mines = adjacent_mines
 		
+	game_state = State.GAMING
+	_revealed_tiles = 0
+	
+func reveal_mines():
+	for tile in tiles:
+		if tile.is_mine:
+			tile.reveal()
+			
+func disable_tiles():
+	for tile in tiles:
+		tile.enabled = false
+		
+func _on_flagged_changed(index: int) -> void:
+	var tile: MineTile = tiles[index]
+	if tile.flagged:
+		flags_remaining -= 1
+	else:
+		flags_remaining += 1
+	flag_count_changed.emit()
+		
 func _on_reveal(index: int) -> void:
 	var tile: MineTile = tiles[index]
-	if tile.adjacent_mines == 0 and not tile.is_mine:
+	_revealed_tiles += 1
+	if tile.is_mine and game_state == State.GAMING:
+		game_state = State.LOST
+		tile.set_as_loss()
+		reveal_mines()
+		disable_tiles()
+	elif _revealed_tiles >= rows * columns - mine_count:
+		game_state = State.WON
+		reveal_mines()
+		disable_tiles()
+	elif tile.adjacent_mines == 0 and not tile.is_mine:
 		for neighbor_index in get_neighbors(index):
 			var neighbor: MineTile = tiles[neighbor_index]
 			neighbor.reveal()

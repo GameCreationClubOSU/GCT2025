@@ -11,7 +11,7 @@
 font = ExtResource("5_q75eh")
 font_size = 22
 
-[node name="MineTile" type="Control" node_paths=PackedStringArray("cover", "mine", "number", "flag")]
+[node name="MineTile" type="Control" node_paths=PackedStringArray("cover", "mine", "number", "flag", "loss")]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 3
 anchors_preset = 0
@@ -22,6 +22,7 @@ cover = NodePath("Cover")
 mine = NodePath("Mine")
 number = NodePath("Number")
 flag = NodePath("Flag")
+loss = NodePath("Loss")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -31,6 +32,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_qo4fi")
+
+[node name="Loss" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.22, 0.22, 1)
 
 [node name="Mine" type="TextureRect" parent="."]
 layout_mode = 1
