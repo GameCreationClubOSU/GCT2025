@@ -9,11 +9,9 @@
 
 [node name="Minesweeper" type="Control" node_paths=PackedStringArray("flag_counter", "timer", "minefield", "reset_button")]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 1088.0
+offset_bottom = 688.0
 script = ExtResource("1_o0n4u")
 flag_counter = NodePath("FlagCounterBackground/FlagCounter")
 timer = NodePath("TimerBackground/Timer")
@@ -21,9 +19,12 @@ minefield = NodePath("GridContainer")
 reset_button = NodePath("ResetButton")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
-layout_mode = 0
-offset_right = 1088.0
-offset_bottom = 688.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("3_rddp1")
 patch_margin_left = 144
 patch_margin_top = 144
@@ -40,7 +41,7 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 32
 script = ExtResource("1_2xuuq")
-mine_count = 100
+mine_count = 80
 tile_preset = ExtResource("2_qsrff")
 rows = 16
 
@@ -70,10 +71,13 @@ horizontal_alignment = 1
 vertical_alignment = 2
 
 [node name="TimerBackground" type="Label" parent="."]
-layout_mode = 0
-offset_left = 948.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -140.0
 offset_top = 48.0
-offset_right = 1044.0
+offset_right = -44.0
 offset_bottom = 104.0
 theme_override_colors/font_color = Color(0.35, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_koqe5")
