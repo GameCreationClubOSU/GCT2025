@@ -29,12 +29,15 @@ var adjacent_mines: int = 0
 var is_mine: bool = false
 var flagged: bool = false:
 	set(value):
-		if not is_revealed:
+		if not is_revealed and enabled:
 			flagged = value
 			flag.visible = value
 			flagged_changed.emit()
 var is_revealed: bool = false
 var label_settings = []
+
+## This value is used for the button.
+var _pressed_time: float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -52,13 +55,22 @@ func set_as_loss() -> void:
 	loss.visible = true
 	
 func _on_press(event: InputEvent):
-	if event is InputEventMouseButton and event.is_released():
-		var mouse_event: InputEventMouseButton = event
-		if get_global_rect().has_point(mouse_event.global_position):
-			if mouse_event.button_index == MOUSE_BUTTON_LEFT:
-				reveal()
-			elif mouse_event.button_index == MOUSE_BUTTON_RIGHT:
-				flagged = !flagged
+	if event is not InputEventMouseButton:
+		return 
+		
+	var mouse_event: InputEventMouseButton = event as InputEventMouseButton
+	if mouse_event.is_pressed():
+		if mouse_event.button_index == MOUSE_BUTTON_LEFT:
+			_pressed_time = Time.get_unix_time_from_system()
+		elif mouse_event.button_index == MOUSE_BUTTON_RIGHT:
+			flagged = !flagged
+	elif mouse_event.is_released() and mouse_event.button_index == MOUSE_BUTTON_LEFT:
+		# If the player holds for some time, there's a good chance they want to 
+		# not actually reveal the tile.
+		var time_elapsed := Time.get_unix_time_from_system() - _pressed_time
+		if time_elapsed <= 0.1 or get_global_rect().has_point(mouse_event.global_position):
+			reveal()
+	
 
 func reveal() -> void:
 	if not enabled:
