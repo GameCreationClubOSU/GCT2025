@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://brappp8x1w5x0"]
+[gd_scene load_steps=4 format=3 uid="uid://brappp8x1w5x0"]
 
 [ext_resource type="Script" path="res://minigames/minesweeper/minefield.gd" id="1_2xuuq"]
 [ext_resource type="PackedScene" uid="uid://ctoicerhnvy71" path="res://minigames/minesweeper/mine_tile.tscn" id="2_qsrff"]
+[ext_resource type="Texture2D" uid="uid://7w4dc1wqivj5" path="res://minigames/minesweeper/background.svg" id="3_rddp1"]
 
 [node name="Minesweeper" type="Control"]
 layout_mode = 3
@@ -11,14 +12,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 1088.0
+offset_bottom = 688.0
+texture = ExtResource("3_rddp1")
+patch_margin_left = 32
+patch_margin_top = 144
+patch_margin_right = 32
+patch_margin_bottom = 32
+
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 144.0
+offset_right = -96.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
-columns = 12
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 32
 script = ExtResource("1_2xuuq")
 tile_preset = ExtResource("2_qsrff")
-rows = 6
+rows = 16

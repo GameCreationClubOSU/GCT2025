@@ -13,8 +13,9 @@ signal revealed
 
 var flagged: bool = false:
 	set(value):
-		flagged = value
-		flag.visible = value
+		if not is_revealed:
+			flagged = value
+			flag.visible = value
 var is_revealed: bool = false
 
 # Called when the node enters the scene tree for the first time.
