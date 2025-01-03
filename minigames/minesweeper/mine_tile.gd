@@ -46,10 +46,11 @@ func _process(_delta: float) -> void:
 func _on_press(event: InputEvent):
 	if event is InputEventMouseButton and event.is_released():
 		var mouse_event: InputEventMouseButton = event
-		if mouse_event.button_index == MOUSE_BUTTON_LEFT:
-			reveal()
-		elif mouse_event.button_index == MOUSE_BUTTON_RIGHT:
-			flagged = !flagged
+		if get_global_rect().has_point(mouse_event.global_position):
+			if mouse_event.button_index == MOUSE_BUTTON_LEFT:
+				reveal()
+			elif mouse_event.button_index == MOUSE_BUTTON_RIGHT:
+				flagged = !flagged
 
 func reveal() -> void:
 	if is_revealed:
