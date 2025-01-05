@@ -1,10 +1,16 @@
 extends GridContainer
 class_name Minefield
 
+## This class is responsible for handling the all the mine tiles.
+## It generates the minefield and assigns values to the individual tiles.
+## Also handles the game state and win/loss conditions.
+
 enum State {WON, LOST, GAMING}
 
+## Is emitted when the flag count changes
 signal flag_count_changed
 
+## Total amount of mines in the minefield.
 @export var mine_count = 10
 @export var tile_preset: PackedScene
 @export var rows: int = 1

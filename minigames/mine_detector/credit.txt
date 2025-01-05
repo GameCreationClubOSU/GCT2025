@@ -1,0 +1,10 @@
+This game was made by John Li.
+
+Asset attributions:
+	
+John Li:
+- background.svg
+- flag.png
+- mine.png
+- tile_background.png
+- tile_cover.svg
