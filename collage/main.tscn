@@ -94,7 +94,7 @@ offset_bottom = -74.0
 scene = ExtResource("9_ci15t")
 frame_name = "Locksport"
 
-[node name="Minesweeper" parent="." instance=ExtResource("6_jt8y7")]
+[node name="Minedetector" parent="." instance=ExtResource("6_jt8y7")]
 offset_left = -1348.0
 offset_top = 240.0
 offset_right = -260.0
