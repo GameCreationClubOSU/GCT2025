@@ -1,0 +1,113 @@
+[gd_scene load_steps=7 format=3 uid="uid://brappp8x1w5x0"]
+
+[ext_resource type="Script" path="res://minigames/mine_detector/minefield.gd" id="1_2xuuq"]
+[ext_resource type="Script" path="res://minigames/mine_detector/mine_detector.gd" id="1_o0n4u"]
+[ext_resource type="PackedScene" uid="uid://ctoicerhnvy71" path="res://minigames/mine_detector/mine_tile.tscn" id="2_qsrff"]
+[ext_resource type="Texture2D" uid="uid://7w4dc1wqivj5" path="res://minigames/mine_detector/background.svg" id="3_rddp1"]
+[ext_resource type="FontFile" uid="uid://boa6hr4ylv5j7" path="res://common/fonts/segment7/segment_7_standard.otf" id="4_koqe5"]
+[ext_resource type="Texture2D" uid="uid://dmrex6o7rqfms" path="res://minigames/mine_detector/tile_cover.svg" id="6_o4px2"]
+
+[node name="Minesweeper" type="Control" node_paths=PackedStringArray("flag_counter", "timer", "minefield", "reset_button")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1088.0
+offset_bottom = 688.0
+script = ExtResource("1_o0n4u")
+flag_counter = NodePath("FlagCounterBackground/FlagCounter")
+timer = NodePath("TimerBackground/Timer")
+minefield = NodePath("GridContainer")
+reset_button = NodePath("ResetButton")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_rddp1")
+patch_margin_left = 144
+patch_margin_top = 144
+patch_margin_right = 144
+patch_margin_bottom = 32
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+offset_left = 32.0
+offset_top = 144.0
+offset_right = 1056.0
+offset_bottom = 656.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 32
+script = ExtResource("1_2xuuq")
+mine_count = 80
+tile_preset = ExtResource("2_qsrff")
+rows = 16
+
+[node name="FlagCounterBackground" type="Label" parent="."]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 48.0
+offset_right = 140.0
+offset_bottom = 104.0
+theme_override_colors/font_color = Color(0.35, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_koqe5")
+theme_override_font_sizes/font_size = 51
+text = "888"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="FlagCounter" type="Label" parent="FlagCounterBackground"]
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_koqe5")
+theme_override_font_sizes/font_size = 51
+text = "000
+"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="TimerBackground" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -140.0
+offset_top = 48.0
+offset_right = -44.0
+offset_bottom = 104.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.35, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_koqe5")
+theme_override_font_sizes/font_size = 51
+text = "888"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Timer" type="Label" parent="TimerBackground"]
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_koqe5")
+theme_override_font_sizes/font_size = 51
+text = "000
+"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ResetButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_top = 39.0
+offset_right = 32.0
+offset_bottom = 103.0
+grow_horizontal = 2
+texture_normal = ExtResource("6_o4px2")
+stretch_mode = 0

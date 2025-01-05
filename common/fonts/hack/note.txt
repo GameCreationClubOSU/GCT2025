@@ -1,0 +1,3 @@
+This font was originally found on fontlibrary.org (https://fontlibrary.org/en/font/hack).
+The files in the folder were downloaded from https://github.com/source-foundry/Hack
+The license was not included in the download. The license.txt file is directly copied from LICENSE.md on the GitHub page.
