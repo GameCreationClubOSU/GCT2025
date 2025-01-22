@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqnki2071j2j7"]
+
+[ext_resource type="Script" path="res://minigames/snake/game_over_menu.gd" id="1_2wlsm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_46jrp"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jub61"]
+bg_color = Color(0.0279, 0.262983, 0.31, 1)
+
+[node name="GameOverMenu" type="CanvasLayer"]
+script = ExtResource("1_2wlsm")
+
+[node name="GameOverPanel2" type="Panel" parent="."]
+offset_left = 366.0
+offset_top = 410.0
+offset_right = 662.0
+offset_bottom = 618.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_46jrp")
+metadata/_edit_group_ = true
+
+[node name="GameOverPanel" type="Panel" parent="GameOverPanel2"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = -10.0
+offset_right = 287.0
+offset_bottom = 198.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jub61")
+
+[node name="ResultLabel" type="Label" parent="."]
+offset_left = 354.0
+offset_top = 400.0
+offset_right = 652.0
+offset_bottom = 492.0
+theme_override_font_sizes/font_size = 40
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_group_ = true
+
+[node name="RestartButton" type="Button" parent="."]
+offset_left = 452.0
+offset_top = 506.0
+offset_right = 565.0
+offset_bottom = 556.0
+theme_override_font_sizes/font_size = 30
+text = "Restart"
+metadata/_edit_group_ = true
+
+[connection signal="button_down" from="RestartButton" to="." method="_on_restart_button_button_down"]
+[connection signal="pressed" from="RestartButton" to="." method="_on_restart_button_pressed"]
