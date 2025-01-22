@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bn87h0cnlci4m"]
+[gd_scene load_steps=24 format=3 uid="uid://bn87h0cnlci4m"]
 
 [ext_resource type="Shader" path="res://collage/background/grid.gdshader" id="1_35pje"]
 [ext_resource type="Script" path="res://collage/collage.gd" id="1_tiu0a"]
@@ -11,11 +11,12 @@
 [ext_resource type="Script" path="res://collage/collage_debug.gd" id="8_ygc3o"]
 [ext_resource type="PackedScene" uid="uid://dp5rt3m1qgpgk" path="res://minigames/locksport/main.tscn" id="9_ci15t"]
 [ext_resource type="Script" path="res://items/containers/control_container.gd" id="11_1xkc3"]
-[ext_resource type="PackedScene" path="res://items/ui/selection_slot.tscn" id="12_527j7"]
+[ext_resource type="PackedScene" uid="uid://subjnfiy5rye" path="res://items/ui/selection_slot.tscn" id="12_527j7"]
 [ext_resource type="Script" path="res://items/inventories/item_slot.gd" id="13_5xum0"]
 [ext_resource type="Script" path="res://items/inventories/array_inventory.gd" id="13_g4iug"]
 [ext_resource type="Resource" uid="uid://tjeiel15um82" path="res://items/default_items/brutus_dragon/brutus_dragon.tres" id="14_ghplj"]
 [ext_resource type="Resource" uid="uid://u4ig0heqobt6" path="res://items/default_items/judgmental_puppy/judgmental_puppy.tres" id="15_abjog"]
+[ext_resource type="PackedScene" uid="uid://cpv4jj300u7v4" path="res://minigames/snake/snake_main.tscn" id="17_teq1s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l484h"]
 shader = ExtResource("1_35pje")
@@ -142,3 +143,10 @@ inventory = NodePath("ArrayInventory")
 [node name="ArrayInventory" type="Node" parent="TestContainer/GridInventoryMenu"]
 script = ExtResource("13_g4iug")
 slots = Array[ExtResource("13_5xum0")]([SubResource("Resource_wfylo"), SubResource("Resource_srp4f"), SubResource("Resource_vyl0g")])
+
+[node name="Miniframe" parent="." instance=ExtResource("6_jt8y7")]
+offset_left = 777.0
+offset_top = 547.0
+offset_right = 1779.0
+offset_bottom = 1597.0
+scene = ExtResource("17_teq1s")
