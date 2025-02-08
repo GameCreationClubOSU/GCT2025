@@ -1,0 +1,106 @@
+[gd_scene load_steps=16 format=3 uid="uid://c5crb4p7umgu4"]
+
+[ext_resource type="Script" path="res://minigames/rogue_bubble/rogue_bubble_level.gd" id="1_814ol"]
+[ext_resource type="PackedScene" uid="uid://mbck75nwwvag" path="res://minigames/rogue_bubble/player/player.tscn" id="2_57a8p"]
+[ext_resource type="PackedScene" uid="uid://bwb1gj7y825ak" path="res://minigames/rogue_bubble/enemies/pin/pin.tscn" id="2_vm4lo"]
+[ext_resource type="Script" path="res://minigames/rogue_bubble/upgrades/bubble_upgrade.gd" id="4_r2w0k"]
+[ext_resource type="Texture2D" uid="uid://cp5chfffgxxhh" path="res://minigames/rogue_bubble/upgrades/speed/wingfoot.png" id="5_d5gge"]
+[ext_resource type="Script" path="res://minigames/rogue_bubble/upgrades/upgrade_display.gd" id="5_ip6uo"]
+[ext_resource type="Resource" uid="uid://cswaad04ok2bo" path="res://minigames/rogue_bubble/upgrades/speed/speed_upgrade.tres" id="5_kmgjb"]
+[ext_resource type="Resource" uid="uid://u4w3fdhuy5vf" path="res://minigames/rogue_bubble/upgrades/health_potion/health_potion.tres" id="6_j1mbq"]
+[ext_resource type="Resource" uid="uid://cttssh3pbldtr" path="res://minigames/rogue_bubble/upgrades/health_increase/health_increase.tres" id="7_cc2ds"]
+[ext_resource type="Resource" uid="uid://dbxwecwwimqp4" path="res://minigames/rogue_bubble/upgrades/dice/dice.tres" id="8_1cdqq"]
+[ext_resource type="Shader" path="res://common/shaders/grid.gdshader" id="9_kinhd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xmk8a"]
+shader = ExtResource("9_kinhd")
+shader_parameter/line_color = Color(0.1456, 0.256187, 0.26, 1)
+shader_parameter/line0_width = 0.022
+shader_parameter/line1_width = 0.005
+shader_parameter/grid0_size = 16.0
+shader_parameter/grid1_size = 256.0
+
+[sub_resource type="Gradient" id="Gradient_d2173"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0.301961, 0.560784, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_754tp"]
+gradient = SubResource("Gradient_d2173")
+width = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_510ve"]
+font_size = 24
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("label", "enemies", "player")]
+texture_filter = 1
+script = ExtResource("1_814ol")
+round_duration = 6.0
+label = NodePath("CanvasLayer/Label")
+enemies = NodePath("Enemies")
+enemy_presets = Array[PackedScene]([ExtResource("2_vm4lo")])
+player = NodePath("Bubble")
+
+[node name="Bubble" parent="." instance=ExtResource("2_57a8p")]
+speed = 100.0
+upgrade_pool = Array[ExtResource("4_r2w0k")]([ExtResource("5_kmgjb"), ExtResource("6_j1mbq"), ExtResource("7_cc2ds"), ExtResource("8_1cdqq")])
+
+[node name="Sprite2D2" type="Sprite2D" parent="Bubble"]
+z_index = -1155
+material = SubResource("ShaderMaterial_xmk8a")
+position = Vector2(18, -8)
+scale = Vector2(2000, 2000)
+texture = SubResource("GradientTexture1D_754tp")
+
+[node name="Camera2D2" type="Camera2D" parent="Bubble"]
+zoom = Vector2(2, 2)
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_right = 79.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "PLACEHOLDER"
+label_settings = SubResource("LabelSettings_510ve")
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -49.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ScrollContainer/MarginContainer" node_paths=PackedStringArray("player", "upgrade_preset")]
+layout_mode = 2
+theme_override_constants/separation = 1
+script = ExtResource("5_ip6uo")
+player = NodePath("../../../../Bubble")
+upgrade_preset = NodePath("Preset")
+
+[node name="Preset" type="Panel" parent="CanvasLayer/ScrollContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="CanvasLayer/ScrollContainer/MarginContainer/VBoxContainer/Preset"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 34.0
+offset_bottom = 34.0
+texture = ExtResource("5_d5gge")
+expand_mode = 1

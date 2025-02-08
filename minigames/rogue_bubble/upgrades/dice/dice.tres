@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://dbxwecwwimqp4"]
+
+[ext_resource type="Script" path="res://minigames/rogue_bubble/upgrades/dice/dice.gd" id="1_8oije"]
+[ext_resource type="Texture2D" uid="uid://5vtmn3soft21" path="res://minigames/rogue_bubble/upgrades/dice/dice.png" id="1_gcu0t"]
+
+[resource]
+script = ExtResource("1_8oije")
+upgrade_name = "Dice of Fate"
+icon = ExtResource("1_gcu0t")
+description = "Whenever the player is hit, the dice can either: nullify the damage, increase the damage, reduce the damage, do nothing, or introduce a wobble to the player's movement."

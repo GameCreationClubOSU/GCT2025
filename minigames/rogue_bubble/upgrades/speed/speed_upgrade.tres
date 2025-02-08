@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cswaad04ok2bo"]
+
+[ext_resource type="Script" path="res://minigames/rogue_bubble/upgrades/speed/speed_upgrade.gd" id="1_d3usm"]
+[ext_resource type="Texture2D" uid="uid://cp5chfffgxxhh" path="res://minigames/rogue_bubble/upgrades/speed/wingfoot.png" id="1_hcdqm"]
+
+[resource]
+script = ExtResource("1_d3usm")
+speed_multiplier = 1.2
+upgrade_name = "Speed Upgrade"
+icon = ExtResource("1_hcdqm")
+description = "20% boost to movement speed. Maximum of 7."

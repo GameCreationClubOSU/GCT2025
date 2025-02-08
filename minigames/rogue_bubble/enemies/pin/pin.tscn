@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwb1gj7y825ak"]
+
+[ext_resource type="Script" path="res://minigames/rogue_bubble/enemies/pin/pin.gd" id="1_5a6jf"]
+[ext_resource type="Texture2D" uid="uid://kwpw0r18qov6" path="res://minigames/rogue_bubble/enemies/pin/pin.png" id="2_55tbj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_snext"]
+size = Vector2(5, 18)
+
+[node name="Pin" type="AnimatableBody2D" node_paths=PackedStringArray("sprite")]
+collision_layer = 2
+sync_to_physics = false
+script = ExtResource("1_5a6jf")
+speed = 200.0
+sprite = NodePath("Pin")
+
+[node name="Pin" type="Sprite2D" parent="."]
+texture = ExtResource("2_55tbj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_snext")
