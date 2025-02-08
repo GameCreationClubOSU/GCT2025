@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cttssh3pbldtr"]
+
+[ext_resource type="Texture2D" uid="uid://cpguofi75nad7" path="res://minigames/rogue_bubble/upgrades/health_increase/health_increase.png" id="1_6xd1s"]
+[ext_resource type="Script" path="res://minigames/rogue_bubble/upgrades/health_increase/health_increase.gd" id="1_kk4g1"]
+
+[resource]
+script = ExtResource("1_kk4g1")
+health_increase = 1
+upgrade_name = "Health Increase"
+icon = ExtResource("1_6xd1s")
+description = "Increases health and max health by 1"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://u4w3fdhuy5vf"]
+
+[ext_resource type="Script" path="res://minigames/rogue_bubble/upgrades/health_potion/health_potion.gd" id="1_407tb"]
+[ext_resource type="Texture2D" uid="uid://btt8bvyuq0b6h" path="res://minigames/rogue_bubble/upgrades/health_potion/health_potion.png" id="1_hb4ok"]
+
+[resource]
+script = ExtResource("1_407tb")
+restore_amount = 2
+upgrade_name = "Health Potion"
+icon = ExtResource("1_hb4ok")
+description = "Restore 2 health, up to the player's max health"
