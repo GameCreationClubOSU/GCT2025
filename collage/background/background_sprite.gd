@@ -4,9 +4,7 @@ extends Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# Reset the position at runtime otherwise the background sprite can be 
-	# outside the visible rect of the game camera.
-	position = Vector2(0, 0)
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
