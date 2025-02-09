@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdhcs300urskj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_obwdd"]
+bg_color = Color(0.144022, 0.648083, 0.875533, 1)
+
+[node name="Hud" type="CanvasLayer"]
+
+[node name="ScorePanel" type="Panel" parent="."]
+offset_right = 1000.0
+offset_bottom = 50.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_obwdd")
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_right = 1000.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 30
+text = "Score: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
