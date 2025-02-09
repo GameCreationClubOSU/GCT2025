@@ -1,8 +1,8 @@
 [gd_scene load_steps=24 format=3 uid="uid://bn87h0cnlci4m"]
 
-[ext_resource type="Shader" path="res://collage/background/grid.gdshader" id="1_35pje"]
 [ext_resource type="Script" path="res://collage/collage.gd" id="1_tiu0a"]
 [ext_resource type="Script" path="res://collage/collage_camera.gd" id="2_4ys4d"]
+[ext_resource type="Shader" path="res://collage/background/background_grid.gdshader" id="3_tpvmy"]
 [ext_resource type="Script" path="res://collage/background/background_sprite.gd" id="4_73gsi"]
 [ext_resource type="Script" path="res://collage/collage_camera_debug.gd" id="5_i2y3i"]
 [ext_resource type="PackedScene" uid="uid://lakrhf27383e" path="res://minigames/miniframe/miniframe_template.tscn" id="6_jt8y7"]
@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://collage/collage_debug.gd" id="8_ygc3o"]
 [ext_resource type="PackedScene" uid="uid://dp5rt3m1qgpgk" path="res://minigames/locksport/main.tscn" id="9_ci15t"]
 [ext_resource type="Script" path="res://items/containers/control_container.gd" id="11_1xkc3"]
-[ext_resource type="PackedScene" uid="uid://subjnfiy5rye" path="res://items/ui/selection_slot.tscn" id="12_527j7"]
+[ext_resource type="PackedScene" path="res://items/ui/selection_slot.tscn" id="12_527j7"]
 [ext_resource type="Script" path="res://items/inventories/item_slot.gd" id="13_5xum0"]
 [ext_resource type="Script" path="res://items/inventories/array_inventory.gd" id="13_g4iug"]
 [ext_resource type="Resource" uid="uid://tjeiel15um82" path="res://items/default_items/brutus_dragon/brutus_dragon.tres" id="14_ghplj"]
@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://cpv4jj300u7v4" path="res://minigames/snake/snake_main.tscn" id="17_teq1s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l484h"]
-shader = ExtResource("1_35pje")
+shader = ExtResource("3_tpvmy")
 shader_parameter/line_color = Color(0.4648, 0.659573, 0.83, 1)
 shader_parameter/line0_width = 0.022
 shader_parameter/line1_width = 0.01
@@ -78,7 +78,6 @@ metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="Camera"]
 material = SubResource("ShaderMaterial_l484h")
-scale = Vector2(2000, 2000)
 texture = SubResource("GradientTexture1D_gdvj4")
 script = ExtResource("4_73gsi")
 metadata/_edit_lock_ = true
