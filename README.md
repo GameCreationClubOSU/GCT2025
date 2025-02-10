@@ -1,7 +1,13 @@
 # Game Creation Together
-Hi and welcome to the Game Creation Together project! This is a collaborative game development project managed by the Game Creation Club at The Ohio State University. This project is currently using Godot 4.3.
+Hi and welcome to the Game Creation Together project! This is a collaborative game development project managed by the Game Creation Club at The Ohio State University.
+
+This project is currently using Godot 4.3 and purely GDScript. You'll see C# as part of the languages of the project, but that's as part of an addon and won't be included in the final build. Don't use C# if you'd like to contribute.
 
 If you'd like to play the project, we'll have an itch.io page up soon.
 
-If you'd like to contribute to the project, please see the [Getting Started](https://github.com/GameCreationClubOSU/GCT2025/wiki/Getting-Started) page the [Submissions](https://github.com/GameCreationClubOSU/GCT2025/wiki/Submissions) page on our wiki. If you are a programmer, you'll also want to take a quick look at the [Scripting for GCT](https://github.com/GameCreationClubOSU/GCT2025/wiki/Scripting-for-GCT) page and the [Understanding the Project](https://github.com/GameCreationClubOSU/GCT2025/wiki/Understanding-the-Project) page.
+If you'd like to contribute to the project, please see [our wiki](https://github.com/GameCreationClubOSU/GCT2025/wiki). It'll have instructions on installation, contribution, and submission.
 
+## Getting Started
+If you're already familiar with all the tools, here's a quick rundown:
+
+You will need Godot 4.3. Both .NET and standard Godot will work, we are working in purely GDScript. Fork and clone the repo or download the project as a zip file. You should be able to import it into Godot from there. 
