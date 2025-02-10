@@ -1,0 +1,4 @@
+This game was made by Alex Russo.
+
+Assets and scripts from this tutorial:
+https://www.youtube.com/watch?v=DlRP-UBR-2A&ab_channel=CodingWithRuss 
