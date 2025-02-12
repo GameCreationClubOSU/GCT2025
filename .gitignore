@@ -14,3 +14,5 @@ export_presets.cfg
 
 # This specific file likes to pop in and out for some reason. Adding to .gitignore for now.
 addons/imgui-godot/bin/~libimgui-godot-native.windows.debug.x86_64.dll
+
+exports/*
