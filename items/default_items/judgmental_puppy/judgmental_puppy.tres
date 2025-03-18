@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemType" load_steps=3 format=3 uid="uid://u4ig0heqobt6"]
 
-[ext_resource type="Script" path="res://items/item_type.gd" id="1_ii3lj"]
+[ext_resource type="Script" uid="uid://ch3j3ysxu6yfs" path="res://items/item_type.gd" id="1_ii3lj"]
 [ext_resource type="Texture2D" uid="uid://dkixy6pj556kk" path="res://items/default_items/judgmental_puppy/puppy.jpg" id="2_r0wbu"]
 
 [resource]

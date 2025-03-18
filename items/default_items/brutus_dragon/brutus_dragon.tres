@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ItemType" load_steps=3 format=3 uid="uid://tjeiel15um82"]
 
-[ext_resource type="Script" path="res://items/item_type.gd" id="1_xclt4"]
+[ext_resource type="Script" uid="uid://ch3j3ysxu6yfs" path="res://items/item_type.gd" id="1_xclt4"]
 [ext_resource type="Texture2D" uid="uid://d245fhvcilt4" path="res://items/default_items/brutus_dragon/brutus_dragon.png" id="2_rk8q7"]
 
 [resource]

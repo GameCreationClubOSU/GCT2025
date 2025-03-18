@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqnki2071j2j7"]
 
-[ext_resource type="Script" path="res://minigames/snake/game_over_menu.gd" id="1_2wlsm"]
+[ext_resource type="Script" uid="uid://b3uqep42vvy84" path="res://minigames/snake/game_over_menu.gd" id="1_2wlsm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_46jrp"]
 bg_color = Color(0.2, 0.2, 0.2, 1)

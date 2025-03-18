@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dlradsyxrqlep"]
 
-[ext_resource type="Script" path="res://items/ui/item_slot_display.gd" id="1_5a4k7"]
+[ext_resource type="Script" uid="uid://dhjtrqwaxw7os" path="res://items/ui/item_slot_display.gd" id="1_5a4k7"]
 [ext_resource type="Texture2D" uid="uid://d245fhvcilt4" path="res://items/default_items/brutus_dragon/brutus_dragon.png" id="2_hjhei"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uay1m"]

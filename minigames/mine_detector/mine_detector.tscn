@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://brappp8x1w5x0"]
 
-[ext_resource type="Script" path="res://minigames/mine_detector/minefield.gd" id="1_2xuuq"]
-[ext_resource type="Script" path="res://minigames/mine_detector/mine_detector.gd" id="1_o0n4u"]
+[ext_resource type="Script" uid="uid://ill7pc4xlbab" path="res://minigames/mine_detector/minefield.gd" id="1_2xuuq"]
+[ext_resource type="Script" uid="uid://i1rvbic22n8n" path="res://minigames/mine_detector/mine_detector.gd" id="1_o0n4u"]
 [ext_resource type="PackedScene" uid="uid://ctoicerhnvy71" path="res://minigames/mine_detector/mine_tile.tscn" id="2_qsrff"]
 [ext_resource type="Texture2D" uid="uid://7w4dc1wqivj5" path="res://minigames/mine_detector/background.svg" id="3_rddp1"]
 [ext_resource type="FontFile" uid="uid://boa6hr4ylv5j7" path="res://common/fonts/segment7/segment_7_standard.otf" id="4_koqe5"]

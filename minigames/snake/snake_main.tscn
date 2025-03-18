@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cpv4jj300u7v4"]
 
-[ext_resource type="Script" path="res://minigames/snake/snake_main.gd" id="1_gkc33"]
+[ext_resource type="Script" uid="uid://cmipci8v670v2" path="res://minigames/snake/snake_main.gd" id="1_gkc33"]
 [ext_resource type="PackedScene" uid="uid://hldorl38lxby" path="res://minigames/snake/snake_segment.tscn" id="2_ec4ff"]
 [ext_resource type="Texture2D" uid="uid://4a363g7tv06x" path="res://minigames/snake/bg.png" id="2_m37hx"]
 [ext_resource type="PackedScene" uid="uid://cdhcs300urskj" path="res://minigames/snake/snake_hud.tscn" id="3_fhnf1"]
