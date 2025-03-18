@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://lakrhf27383e"]
 
-[ext_resource type="Script" path="res://minigames/miniframe/miniframe.gd" id="1_q347j"]
+[ext_resource type="Script" uid="uid://byqhg8b8p15fn" path="res://minigames/miniframe/miniframe.gd" id="1_q347j"]
 [ext_resource type="Texture2D" uid="uid://i07bxaaqjuxu" path="res://minigames/miniframe/frame.png" id="2_i7jjm"]
 
 [node name="Miniframe" type="SubViewportContainer" node_paths=PackedStringArray("viewport", "_frame_rect", "_frame_label")]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dp5rt3m1qgpgk"]
 
-[ext_resource type="Script" path="res://minigames/locksport/lock_plug.gd" id="1_n1h8i"]
-[ext_resource type="Script" path="res://minigames/locksport/pick.gd" id="2_ojqgl"]
+[ext_resource type="Script" uid="uid://cbgdy2rjyie3o" path="res://minigames/locksport/lock_plug.gd" id="1_n1h8i"]
+[ext_resource type="Script" uid="uid://b1iqrx1t2h3r4" path="res://minigames/locksport/pick.gd" id="2_ojqgl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wvpdd"]
 size = Vector2(32, 120)
